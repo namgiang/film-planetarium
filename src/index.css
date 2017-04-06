@@ -1,5 +1,7 @@
 body {
+  background: black; 
+  color: white;
   margin: 0;
-  padding: 0;
+  padding: 3vh 4vw;
   font-family: sans-serif;
 }
