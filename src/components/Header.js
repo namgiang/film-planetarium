@@ -4,7 +4,7 @@ import './Header.css';
 import Range from 'rc-slider/lib/Range';
 import 'rc-slider/assets/index.css';
 
-import logo from '../logo.svg';
+import logo from '../../public/img/logo.svg';
 
 class Header extends Component {
   render() {
@@ -16,7 +16,6 @@ class Header extends Component {
   		    <label>2000</label>
   		  </div>
   		  <div className="logo">
-  		    <img src={logo} alt="logo"/>
   		  </div>
   		</div>
   	)

@@ -11,6 +11,19 @@
   font-size: large;
 }
 
+.visuals {
+	display: flex;
+	height: 80vh;
+}
+
+.visuals .left {
+	flex: 2;
+}
+
+.visuals .right {
+	flex: 1;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
