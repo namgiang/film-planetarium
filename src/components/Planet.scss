@@ -1,3 +1,5 @@
+@import "../../public/stylesheets/shared.scss";
+
 .planet {
 	height: 100%;
 	position: relative;
@@ -14,11 +16,11 @@
 }
 
 .blue {
-	border: 1px solid #BBDEFB;
+	border: 1px solid $blue;
 }
 
 .pink {
-  border: 1px solid #F8BBD0;	
+  border: 1px solid $pink;	
 }
 
 .circle-1 {
@@ -60,4 +62,105 @@
 	height: 10vh;
 	width: 10vh;
 	top: 35vh;
+	border: 2px solid gray;
+	border-radius: 50%;
+}
+
+/// Mixin to place items on a circle
+/// @author Hugo Giraudel
+/// @author Ana Tudor
+/// @param {Integer} $item-count - Number of items on the circle
+/// @param {Length} $circle-size - Large circle size
+/// @param {Length} $item-size - Single item size
+@mixin on-circle($item-count, $circle-size, $item-size) {
+  position: absolute;
+  margin: auto;
+	left: 0;
+	right: 0;
+  width:  $circle-size;
+  height: $circle-size;
+  padding: 0;
+  border-radius: 50%; 
+  list-style: none;
+  top: (80vh - $circle-size) / 2;    
+  
+  > * {
+    display: block;
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    width:  $item-size;
+    height: $item-size;
+    margin: -($item-size / 2);
+  
+    $angle: (360 / $item-count);
+    $rot: random(500);
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: 
+          rotate($rot * 1deg) 
+          translate($circle-size / 2) 
+          rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}
+
+.circle-container {
+	&[class*='-5'] {
+		@include on-circle($item-count: 1, $circle-size: 75vh, $item-size: 5vh);
+	}
+
+	&[class*='-4'] {
+		@include on-circle($item-count: 1, $circle-size: 60vh, $item-size: 5vh);
+	}
+
+	&[class*='-3'] {
+		@include on-circle($item-count: 1, $circle-size: 45vh, $item-size: 5vh);
+	}
+
+	&[class*='-2'] {
+		@include on-circle($item-count: 1, $circle-size: 30vh, $item-size: 5vh);
+	}
+
+	&[class*='-1'] {
+		@include on-circle($item-count: 1, $circle-size: 15vh, $item-size: 5vh);
+	}
+
+	&[class*='blue'] {
+		border: solid 1px $blue;
+
+		div {
+			background-color: $blue;
+			box-shadow: 0 0 .3vw $blue;
+		}
+	}
+
+	&[class*='pink'] {
+		border: solid 1px $pink;
+
+		div {
+			background-color: $pink;
+			box-shadow: 0 0 .4vw $pink;
+		}
+	}
+
+  margin: auto;
+  border: solid 1px $blue;
+  
+  div { 
+    width: 5vh;
+    height: 5vh; 
+    border-radius: 50%;
+    /*filter: grayscale(100%);*/    
+    transition: .15s;
+    
+    &:hover,
+    &:active {
+      filter: grayscale(0);
+    }
+  }
 }

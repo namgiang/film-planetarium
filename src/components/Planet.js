@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
 import './Planet.css';
+import { getDirectorImage } from '../services/images.js';
 
 class Planet extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
-		const img = "/img/directors/james_cameron.png";
+		const director = this.props.director;
+		const img = (director) ? getDirectorImage(director.label) : '';
 		return (
 			<div className='planet'>
-			  <div className='circle circle-5 blue center'>
-				</div>
-			  <div className='circle circle-4 pink center'>
-				</div>
-			  <div className='circle circle-3 pink center'>
-				</div>
-				<div className='circle circle-2 blue center'>
-				</div>
-				<img src={img} className='director-img center' />
+			  <ul className='circle-container -5 blue'>
+				  <li><div></div></li>				  
+				</ul>
+				<ul className='circle-container -4 pink'>
+				  <li><div></div></li>				  
+				</ul>
+				<ul className='circle-container -3 blue'>
+				  <li><div></div></li>				  
+				</ul>
+				<ul className='circle-container -2 blue'>
+				  <li><div></div></li>				  
+				</ul>
+			  <img src={img} className='director-img center' />
 			</div>	
 		);
 	}

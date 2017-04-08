@@ -1,8 +1,8 @@
 import Papa from 'papaparse';
 
-export function parse(fileName: string) {
+export function parse(file: string) {
 	return new Promise((resolve, reject) => {
-		Papa.parse('http://localhost:3000/data/' + fileName + '.csv', {
+		Papa.parse(file, {
 			download: true,
 			header: true,
 			complete: function(results) {

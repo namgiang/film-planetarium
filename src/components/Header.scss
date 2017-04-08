@@ -1,3 +1,5 @@
+@import "../../public/stylesheets/shared.scss";
+
 .header {
 	align-items: center;
   display: flex;
@@ -5,12 +7,14 @@
 }
 
 .filters {
-	flex: 2;
+	align-items: center;
+	flex: 1;
 	display: flex;
+	justify-content: center;
 }
 
-.filters > .rc-slider {
-	flex: 8;
+.filters > .range-container {
+	flex: 3;
 }
 
 .filters > label {
@@ -26,15 +30,35 @@
 	float: right;
 }
 
-.rc-slider-handle {
-  background-color: #FFCA28 !important;
-	width: 1.5vh !important;
-	height: 3vh !important;
-	border-radius: 0 !important;
-	border: solid 1px #FFCA28 !important;
-	margin-top: -1vh !important;
+.rc-slider {
+	height: 5vh !important;
+	width: 70% !important;
+	padding: 0 !important;
+
+	.rc-slider-handle {
+	  background-color: $yellow !important;
+		width: 1.5vh !important;
+		height: 5vh !important;
+		border-radius: 0 !important;
+		border: solid 1px $yellow !important;
+		margin-top: 0 !important;
+	}
+
+	.rc-slider-rail {
+		height: 5vh !important;
+	}
+
+	.rc-slider-track {
+		background-color: $light-yellow !important;
+		height: 5vh !important;
+	}
 }
 
-.rc-slider-track {
-	background-color: #FFCA28 !important;
+.rc-slider-tooltip-arrow {
+	border-top-color: $very-light-yellow !important;
+}
+
+.rc-slider-tooltip-inner {
+	color: black !important;
+	background-color: $very-light-yellow !important;
 }

@@ -1,52 +1,47 @@
 import React, { Component } from 'react';
 import './App.css';
-import { parse } from '../services/parser';
 import '../../node_modules/grommet-css';
 
 import Header from './Header';
 import Planet from './Planet';
 
+import { DIRECTORS } from '../data/directors';
+import { MOVIES } from '../data/movies';
+
 class App extends Component {
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
-		let moviesParseResult = parse("movies");
-		let directorsParseResult = parse("directors");
-		this.parsePromise(moviesParseResult, "movies");
-		this.parsePromise(directorsParseResult, "directors");
+		this.state = {
+			movies: [],
+			directors: [],
+			director: null
+		};
 	}
 
-	parsePromise(parseResult: any, type: string): void {
-		let appInstance = this;
-		parseResult.then(
-			function(val) {
-				appInstance.loadData(val.data, type);				
-			}
-		).catch ((err) => {
-			console.log(err);
+	componentDidMount() {
+		this.setState({
+			director: this.getDirector("Woody Allen")
+		});
+		this.setState({
+			movies: this.getDirectorMovies("Woody Allen")
 		});
 	}
 
-	loadData(data, type): void {
-		switch (type) {
-			case "movies":
-				this.setState({movies: data});				
-				break;
-		  case "directors":
-		    this.setState({directors: data});
-		    console.log(this.getDirectors());
-		    break;
-		  default:
-		    break;	
-		}		
+	getDirectorMovies(directorName: string) {
+		return MOVIES.filter(
+			function(movie) {
+			  return (movie.director) ? movie.director.includes(directorName) : false;
+		  }
+		);
 	}
 
-	getDirectorMovies(directorName): void {
-		return this.state.movies.filter(function(movie) { return (movie.director !== undefined) ? movie.director.includes(directorName) : false });
-	}
-
-	getDirectors(): Array<any> {
-		return this.state.directors;
+	getDirector(name: string): any {
+		let directors = DIRECTORS.filter(
+			function(director) { 
+			  return (director.name === name);
+		});
+		return directors[0];
 	}
 
   render() {
@@ -55,7 +50,7 @@ class App extends Component {
         <Header />
         <div className="visuals">	
           <section className="left">
-            <Planet />
+            <Planet director={this.state.director} />
           </section>
           <section className="right">
 
