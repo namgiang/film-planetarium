@@ -1,0 +1,160 @@
+@import "../themes/variables.scss";
+@import "../themes/shared.scss";
+
+/// Mixin to place items on a circle
+/// @author Hugo Giraudel
+/// @author Ana Tudor
+/// @param {Integer} $item-count - Number of items on the circle
+/// @param {Length} $circle-size - Large circle size
+/// @param {Length} $item-size - Single item size
+@mixin on-circle($circle-size, $item-size) {
+  position: absolute;
+  margin: auto;
+	left: 0;
+	right: 0;
+  width:  $circle-size;
+  height: $circle-size;
+  padding: 0;
+  border-radius: 50%; 
+  list-style: none;
+  top: (90vh - $circle-size) / 2;
+
+  @for $i from 1 through 30 {
+    &.count-#{$i} {
+      @include on-circle-dots($item-count: $i, $circle-size: $circle-size, $item-size: $item-size);
+    }
+  }
+      
+}
+
+@mixin on-circle-dots($item-count, $circle-size, $item-size) {
+  > li {
+    display: block;
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    width:  $item-size;
+    height: $item-size;
+    margin: -($item-size / 2);
+  
+    $angle: (360 / $item-count);
+    $rot: random(300);
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: 
+          rotate($rot * 1deg) 
+          translate($circle-size / 2) 
+          rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}
+
+.circle-container {
+  margin: auto;
+  animation: easing 2s ease-in-out; 
+
+  @for $i from 0 through 4 {
+    &.size-#{$i} {
+      $unit: 15vh;
+      @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
+    }
+  }
+
+	&.size-5 {
+    @include on-circle($circle-size: 85vh, $item-size: 3vh);
+  }
+
+	&[class*='blue'] {
+		border: solid .01vw $blue;
+	}
+
+	&[class*='pink'] {
+		border: solid .01vw $pink;
+	}
+
+  &[class*='gray'] {
+    border: solid .01vw $alto;
+  }
+
+  li {
+    animation: easing 2s ease-in-out; 
+  }
+  
+  div { 
+    width: 3vh;
+    height: 3vh; 
+    border-radius: 50%;
+    /*filter: grayscale(100%);*/    
+    transition: .15s;
+    
+    &:hover,
+    &:active {
+      cursor: pointer;
+
+      .actor-tooltip {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      border: 3px solid white;
+    }
+
+    &[class*='blue'] {
+      background-color: $blue;
+
+      .actor-tooltip {
+        background-color: $blue;
+      }
+    }
+
+    &[class*='pink'] {
+      background-color: $pink;
+
+      .actor-tooltip {
+        background-color: $pink;
+      }
+    }
+
+    &[class*='gray'] {
+      background-color: $alto;
+
+      .actor-tooltip {
+        background-color: $alto;
+      }
+    }
+  }
+
+  span {
+    background: black;
+    // border-radius: 50%; 
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: -4vh;
+    font-size: .8vw;
+    line-height: 1vw !important;
+    // width: 5vw !important;
+    z-index: 100 !important;
+
+    &.actor-tooltip {
+      color: black;
+      border-radius: 1vw;
+      margin-top: -6vh;
+      margin-left: 0;
+      padding: 1vh .5vw;
+      opacity: 0;
+      z-index: 200 !important;
+    }
+
+    &:hover,
+    &:active {
+      cursor: pointer;
+    }
+  }
+
+}
+

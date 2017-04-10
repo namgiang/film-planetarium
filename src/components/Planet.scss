@@ -1,4 +1,4 @@
-@import "../../public/stylesheets/shared.scss";
+@import "../themes/variables.scss";
 
 .planet {
 	height: 100%;
@@ -15,152 +15,37 @@
 	right: 0;
 }
 
-.blue {
-	border: 1px solid $blue;
-}
-
-.pink {
-  border: 1px solid $pink;	
-}
-
-.circle-1 {
-	border-radius: 7.5vh;
-	width: 15vh;
-	height: 15vh;	
-	top: 32.5vh;
-}
-
-.circle-2 {
-	border-radius: 15vh;
-	width: 30vh;
-	height: 30vh;	
-	top: 25vh;
-}
-
-.circle-3 {
-  border-radius: 22.5vh;
-	width: 45vh;
-	height: 45vh;	
-	top: 17.5vh;
-}
-
-.circle-4 {
-  border-radius: 30vh;
-	width: 60vh;
-	height: 60vh;	
-	top: 10vh;
-}
-
-.circle-5 {
-  border-radius: 37.5vh;
-	width: 75vh;
-	height: 75vh;	
-	top: 2.5vh;
-}
-
+.times,
+.times-container, 
 .director-img {
 	height: 10vh;
 	width: 10vh;
-	top: 35vh;
-	border: 2px solid gray;
+	top: 40vh;
 	border-radius: 50%;
+	// z-index: 10;
 }
 
-/// Mixin to place items on a circle
-/// @author Hugo Giraudel
-/// @author Ana Tudor
-/// @param {Integer} $item-count - Number of items on the circle
-/// @param {Length} $circle-size - Large circle size
-/// @param {Length} $item-size - Single item size
-@mixin on-circle($item-count, $circle-size, $item-size) {
-  position: absolute;
-  margin: auto;
-	left: 0;
-	right: 0;
-  width:  $circle-size;
-  height: $circle-size;
-  padding: 0;
-  border-radius: 50%; 
-  list-style: none;
-  top: (80vh - $circle-size) / 2;    
-  
-  > * {
-    display: block;
-    position: absolute;
-    top:  50%;
-    left: 50%;
-    width:  $item-size;
-    height: $item-size;
-    margin: -($item-size / 2);
-  
-    $angle: (360 / $item-count);
-    $rot: random(500);
-
-    @for $i from 1 through $item-count {
-      &:nth-of-type(#{$i}) {
-        transform: 
-          rotate($rot * 1deg) 
-          translate($circle-size / 2) 
-          rotate($rot * -1deg);
-      }
-
-      $rot: $rot + $angle;
-    }
-  }
+.director-img:hover {
+	cursor: pointer;;
 }
 
-.circle-container {
-	&[class*='-5'] {
-		@include on-circle($item-count: 1, $circle-size: 75vh, $item-size: 5vh);
+.times-container {
+	background-color: black;
+	opacity: .5;
+}
+
+.times {
+	color: white;
+	font-weight: 600;
+	height: 8vh;
+	width: 8vh;
+	top: 42vh;
+
+	.number {
+		font-size: 1.5vw;
 	}
 
-	&[class*='-4'] {
-		@include on-circle($item-count: 1, $circle-size: 60vh, $item-size: 5vh);
+	.small-text {
+		font-size: 1.1vw !important;
 	}
-
-	&[class*='-3'] {
-		@include on-circle($item-count: 1, $circle-size: 45vh, $item-size: 5vh);
-	}
-
-	&[class*='-2'] {
-		@include on-circle($item-count: 1, $circle-size: 30vh, $item-size: 5vh);
-	}
-
-	&[class*='-1'] {
-		@include on-circle($item-count: 1, $circle-size: 15vh, $item-size: 5vh);
-	}
-
-	&[class*='blue'] {
-		border: solid 1px $blue;
-
-		div {
-			background-color: $blue;
-			box-shadow: 0 0 .3vw $blue;
-		}
-	}
-
-	&[class*='pink'] {
-		border: solid 1px $pink;
-
-		div {
-			background-color: $pink;
-			box-shadow: 0 0 .4vw $pink;
-		}
-	}
-
-  margin: auto;
-  border: solid 1px $blue;
-  
-  div { 
-    width: 5vh;
-    height: 5vh; 
-    border-radius: 50%;
-    /*filter: grayscale(100%);*/    
-    transition: .15s;
-    
-    &:hover,
-    &:active {
-      filter: grayscale(0);
-    }
-  }
 }

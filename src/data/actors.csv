@@ -1,4 +1,4 @@
-"Name","Gender"
+"name","gender"
 "Monica Vitti","F"
 "Giulietta Masina","F"
 "Marcello Mastroianni","M"
@@ -28,7 +28,8 @@
 "Emmanuelle Seigner","F"
 "Woody Allen","M"
 "Mia Farrow","F"
-"Diane Keaton","F"
+"Diane Keaton","F",
+"Dianne Wiest","F"
 "Scarlett Johansson","F"
 "Stephanie Roth Haberle","F"
 "Louise Lasser","F"

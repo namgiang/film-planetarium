@@ -17,11 +17,12 @@
 }
 
 .visuals .left {
-	flex: 1;
+	width: 46vw;
 }
 
 .visuals .right {
-	flex: 1;
+	width: 46vw;
+	text-align: left;
 }
 
 @keyframes App-logo-spin {

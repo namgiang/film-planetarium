@@ -1,0 +1,70 @@
+@import "../themes/shared.scss";
+
+.movies-container {
+	padding: 2vh 2vw 0 5vw;
+
+	.movies-summary {
+		margin-left: .2vw;
+	}
+
+	.poster-container {
+		animation: easing 1s ease-in-out;
+		border: 0 !important;
+		width: 5vw;
+		height: 7vw;
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		margin: .2vw;
+
+		img {
+			animation: easing 1s ease-in-out;
+		  width: 5vw;
+		  height: 7vw;
+	  }
+
+	  span {
+	  	position: relative;
+	  	font-size: .8vw;
+	  	top: 1.8vw;
+	  	width: 5vw;
+		  height: 7vw;
+	  }
+
+	  .overlay {
+	  	background-color: black; 
+	  	position: relative;
+	  	top: -7.4vw;
+	  	height: 7.2vw;
+	  	opacity: .8;
+	  	width: 5.4vw;
+
+	  	&.no-poster {
+	  		top: -5.6vh;
+	  	}
+	  }
+	}
+
+	.movie-tooltip {
+		max-height: 50vh;
+		width: 20vw;
+
+		.title {
+			font-size: 1.5vw;
+			margin-bottom: 1vh !important;
+		}
+
+		.title, 
+		.year {
+			margin-bottom: 1vh;
+		}
+
+
+		.year,
+		.actors,
+		.plot {
+			font-size: 1vw;
+		}
+	}	
+}
+
