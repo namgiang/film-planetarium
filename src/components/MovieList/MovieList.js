@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './MovieList.css';
 import ReactTooltip from 'react-tooltip';
 
-import ImageService from '../services/images.js';
-import MoviesService from '../services/movies.js';
-const imdb = require('imdb-api');
+import MoviesService from '../../services/movies.js';
 
 class MovieList extends Component {
 	constructor(props) {
@@ -30,7 +28,7 @@ class MovieList extends Component {
 		});
 	}
 
-	render () {
+	render () {	  
 		const movies = this.props.movies ? this.props.movies : [];
 		const urls = this.props.imageUrls;
 		const actorMovies = this.props.actorMovies;
@@ -50,7 +48,7 @@ class MovieList extends Component {
 		   			 onMouseOver={() => this.onMovieMouseOver(movie)}
 		   			 onMouseOut={() => this.onMovieMouseOut(movie)} >
 		   	  {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
-			                        : (<img src={urls[i]} />)}
+			                         : (<img src={urls[i]} alt={movie.title}/>)}
 			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
 			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
 	 		  </div>
@@ -60,16 +58,24 @@ class MovieList extends Component {
 		let hoveredMovie = this.state.hoveredMovie;
 		return (urls !== []) ? (
 			<div className="movies-container">
-			  <p className="movies-summary">{currentActor ? <span>{currentActor.name} starred in {actorMovies.length}/</span> : '' }{ movies.length } movies directed by {directorName}</p>
+			  <p className="movies-summary">
+			    {currentActor ? <span>
+			    									<label className="highlighted">{currentActor.name}</label> starred in <label>{actorMovies.length}/</label>
+			    								</span> 
+			    						  : '' }
+			    <label>{ movies.length }</label> movies directed by <label>{directorName}</label>
+			  </p>
 				{ elements }
-				{ this.state.movieHovered && (<ReactTooltip id={this.state.hoveredMovieID}
-																										className="movie-tooltip"
-																										place="left" >
-															  				<p className="title">{hoveredMovie.title}</p>
-															  				<p className="year">{hoveredMovie.year}</p>
-															  				<p className="actors">Starred: {hoveredMovie.actors}</p>
-															  				<p className="plot">{hoveredMovie.plot}</p>
-																			</ReactTooltip>)}
+				{ this.state.movieHovered && 
+					(<ReactTooltip id={this.state.hoveredMovieID}
+					 							 className="movie-tooltip"
+												 place="left" >
+		  				<p className="title">{hoveredMovie.title}</p>
+			 				<p className="year">{hoveredMovie.year}</p>
+			 				<p className="actors">Starred: {hoveredMovie.actors}</p>
+			 				<p className="plot">{hoveredMovie.plot}</p>
+			     </ReactTooltip>)
+			   }
 			</div>			
 		) : (<div></div>);
 	}

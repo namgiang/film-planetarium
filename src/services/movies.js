@@ -39,7 +39,7 @@ MoviesService.getFrequentActors = function(directorName: string, range: Array<nu
 	
 	// filter only actors who collaborated with the director at least 2 times
 	let frequentActors = collaborators.filter(function(collaborator){
-		return collaborator.times > 2;
+		return collaborator.times >= 3;
 	});
 
 	// sort the list in the decreasing order of collaborating times
@@ -48,7 +48,7 @@ MoviesService.getFrequentActors = function(directorName: string, range: Array<nu
 	});
 };
 
-MoviesService.getActorCircleList = function(directorName: string, range: Array<number>){
+MoviesService.getActorCircleList = function(directorName: string, range: Array<number>, mini: boolean){
 	let frequentActors = MoviesService.getFrequentActors(directorName, range);
 	let size = 0;
 	let actorList = frequentActors.map((item, key) => {
@@ -57,8 +57,9 @@ MoviesService.getActorCircleList = function(directorName: string, range: Array<n
 		} 
 		let itemCount = key - size + 1;
 		let actor = ACTORS.find(function(actor) {return actor.name === item.name});
-		let color = (actor) ? ((actor.gender === 'M') ? 'blue' : 'pink') : 'gray'
-		let className = 'circle-container size-' + size + ' count-' + itemCount;
+		let color = (actor) ? ((actor.gender === 'M') ? 'blue' : 'pink') : 'gray';
+		let sizePrefix = (mini) ? 'size-mini-' : 'size-';
+		let className = 'circle-container ' + sizePrefix + size + ' count-' + itemCount;
 		return {className: className, color: color, actors: [{name: item.name, color: color, times: item.times}], itemCount: itemCount}
 	});
 
@@ -118,14 +119,6 @@ MoviesService.checkMovieIsInArray = (movie, array) => {
 
 function inRange(year, range) {
 	return year >= range[0] && year <= range[1];
-}
-
-function removeItemInArray(item, array) {
-
-	const index = array.indexOf(item);
-	if (index > -1) {
-    array.splice(index, 1);
-  }
 }
 
 export default MoviesService;

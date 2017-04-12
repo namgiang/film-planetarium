@@ -254,5 +254,10 @@ export const ACTORS = [
   {
     "name": "Lucia Bosé",
     "gender": "F"
+  },
+  {
+    "name": "Charles Durning",
+    "gender": "F"
   }
+  
 ];

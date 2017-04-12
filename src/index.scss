@@ -1,9 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500|Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500|Source+Sans+Pro|Rubik+Mono+One|Rajdhani');
 body {
   background: black; 
   color: white;
-  font-family: "Work Sans", Arial, sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 1vw;
   margin: 0;
   padding: 2vh 4vw;
+}
+
+::-webkit-scrollbar { 
+  display: none; 
+}
+
+@media screen and (max-aspect-ratio: 3/2) { 
+	body {
+		font-size: 4vw;
+	}
 }

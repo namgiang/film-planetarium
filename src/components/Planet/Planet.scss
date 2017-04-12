@@ -1,4 +1,4 @@
-@import "../themes/variables.scss";
+@import "../../themes/variables.scss";
 
 .planet {
 	height: 100%;
@@ -25,6 +25,14 @@
 	// z-index: 10;
 }
 
+.mini-director-img {
+	border-radius: 50%;
+	height: 3vw;
+	width: 3vw;
+	top: 5.1vw;
+}
+
+.mini-director-img,
 .director-img:hover {
 	cursor: pointer;;
 }
@@ -39,13 +47,23 @@
 	font-weight: 600;
 	height: 8vh;
 	width: 8vh;
-	top: 42vh;
+	top: 41.5vh;
 
-	.number {
-		font-size: 1.5vw;
-	}
+	span {
+		font-size: .8vw;
 
-	.small-text {
-		font-size: 1.1vw !important;
+		label {
+			font-size: 1.5vw !important;
+		}
+	}	
+}
+
+@media screen and (max-aspect-ratio: 3/2) { 
+  .times,
+	.times-container, 
+	.director-img {
+		height: 8vh;
+		width: 8vh;
+		top: 41vh;
 	}
 }
