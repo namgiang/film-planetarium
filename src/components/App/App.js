@@ -30,6 +30,7 @@ class App extends Component {
 		};
 		this.handleRangeChange = this.handleRangeChange.bind(this);
 		this.handleDirectorChange = this.handleDirectorChange.bind(this);
+		this.handleActorChange = this.handleActorChange.bind(this);
 	}
 
 	handleRangeChange(value) {
@@ -67,6 +68,14 @@ class App extends Component {
 				showAll: false
 			});	
 		}		
+	}
+
+	handleActorChange(actor) {
+		const actorMovies = MoviesService.getMovies(this.state.director, this.state.range, actor.name);
+		this.setState({
+			currentActor: actor,
+			actorMovies: actorMovies
+		});
 	}
 
 	onActorClicked = (actor) => {
@@ -131,7 +140,7 @@ class App extends Component {
 		        <section className="left">
 		          <Planet director={this.state.director} 
 		           				actorCircleList={this.state.actorCircleList}
-		           				onActorClicked={this.onActorClicked}
+		           				onActorClicked={this.handleActorChange }
 		           				onDirectorClicked={this.handleDirectorChange} />
 		          <div className="legend-1">
 		          	<div></div><span>Actor</span>

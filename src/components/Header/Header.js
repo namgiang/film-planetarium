@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './Header.css';
 import logo from '../../assets/img/planet-orbit.svg';
-import planet1 from '../../assets/img/planet-1.svg';
 
+import About from '../About/About';
 import {Handle, Range} from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
-
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 
@@ -60,6 +59,11 @@ class Header extends Component {
   }
 
   render() {
+    if (this.state.aboutOpened) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
     const aboutClassName = (this.state.aboutOpened) ? 'about opened' : 'about';
     const director = this.state.currentDirector;
     let directorName = 'All directors';
@@ -68,19 +72,8 @@ class Header extends Component {
     } 
   	return (
   		<div className="header">
-        { !this.state.firstOpen &&
-          <div className={aboutClassName}>
-            <p>FILM PLANETARIUM</p>
-            <p>A visualization of the relationship between directors and their collaborated actors/actresses.</p>
-            <p>Designed by Nam Giang and Francesco Vitale.</p>
-            <p>Developed by Nam Giang.</p>
-            <div className="planet-img-container"><img src={planet1} alt="planet-1" /></div>
-          </div>
-        } 
+        { !this.state.firstOpen && <About aboutClassName={aboutClassName} /> } 
   		  <div className="left">
-  		    <label className="period">
-            Period: {this.state.minYear}-{this.state.maxYear}
-          </label>
           <label className="min-year">
             {this.state.minYear}
           </label>

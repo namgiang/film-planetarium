@@ -80,6 +80,10 @@
 		margin-left: 0 !important;
 	}
 
+	.rc-slider-handle-2 {
+		margin-left: -1vw !important;
+	}
+
 	.rc-slider-rail {
 		background-color: $boulder !important;
 		height: 6vh !important;
@@ -192,7 +196,7 @@
 
 		img {
 			position: relative;
-			top: 60vh;
+			top: 65vh;
 			left: -5vw;
 			width: 5vw;
 			-webkit-animation: Floatingx 3s ease-in-out infinite alternate;
@@ -311,6 +315,10 @@
 		
 		.rc-slider-handle {
 			width: 5vw !important;
+
+			&.rc-slider-handle-2 {
+				margin-left: -5vw !important;
+			}
 		}
 	}
 
@@ -324,27 +332,6 @@
 		top: 1.3vh !important;
 		width: 8vw !important;
 	}
-
-	.about {	
-		p {
-			&:first-of-type {
-				font-size: 10vw;
-				font-weight: 300 !important;
-				margin-bottom: 2vh;				
-			}
-
-			&:nth-of-type(2) {
-				font-size: 5vw !important;
-				margin-bottom: 8vh;
-			}
-
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				font-size: 5vw; 
-			}
-		}
-	}
-
 }
 
 @media screen and (max-width: 44.9375em) {

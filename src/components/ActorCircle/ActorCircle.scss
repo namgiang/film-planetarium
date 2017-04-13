@@ -72,7 +72,7 @@
 
 .circle-container {
   margin: auto;
-  animation: easing 1s ease-in-out; 
+  animation: easing .5s ease-in-out; 
 
   @for $i from 0 through 4 {
     &.size-#{$i} {

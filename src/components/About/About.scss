@@ -1,0 +1,127 @@
+.about {
+	animation: easing .3s ease-in-out alternate; 
+	background-color: black;
+	color: white;
+	font-size: 1.6vw;
+	height: 100vh;
+	left: 0;
+	padding: 20vh 4vw;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 92vw;	
+	opacity: 0;
+	overflow-y: hidden;
+	transition: opacity .3s ease-in-out;
+	z-index: 0;
+
+	&.opened {
+		opacity: 1;
+		z-index: 1000;
+	}
+
+	p {
+		&:first-of-type {
+			font-family: 'Rubik Mono One', sans-serif;
+			font-size: 5vw;
+			font-weight: 800;
+			margin-bottom: 0;
+		}
+
+		&:nth-of-type(2) {
+			margin-bottom: 8vh;
+		}
+
+		&:nth-of-type(3),
+		&:nth-of-type(4) {
+			font-size: 1.3vw;
+			margin: .6vh 0; 
+		}
+	}
+
+	.planet-img-container {
+		-webkit-animation: Moving 20s linear 1s infinite alternate;
+		-moz-animation: Moving 20s linear 1s infinite alternate;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 5vw;
+		height: 5vw;		
+
+		img {
+			position: relative;
+			top: 65vh;
+			left: -5vw;
+			width: 5vw;
+			-webkit-animation: Floatingx 3s ease-in-out infinite alternate;
+			-moz-animation: Floating 3s infinite ease-in-out;
+
+			&:hover {
+				-webkit-animation: FloatingFastx 1s ease-in-out infinite alternate;
+				-moz-animation: FloatingFast 1s infinite ease-in-out;
+			}
+		}
+	}	
+
+	@-webkit-keyframes Floatingx {
+		from {-webkit-transform:translate(0, 0px);}
+		65% {-webkit-transform:translate(0, 15px);}
+		to {-webkit-transform: translate(0, -0px);    }    
+	}
+
+	@-moz-keyframes Floating {
+		from {-moz-transform:translate(0, 0px);}
+		65% {-moz-transform:translate(0, 15px);}
+		to {-moz-transform: translate(0, -0px);}    
+	}
+
+	@-webkit-keyframes FloatingFastx {
+		from {-webkit-transform:translate(0, 0px);}
+		65% {-webkit-transform:translate(0, 30px);}
+		to {-webkit-transform: translate(0, -15px);    }    
+	}
+
+	@-moz-keyframes FloatingFast {
+		from {-moz-transform:translate(0, 0px);}
+		65% {-moz-transform:translate(0, 30px);}
+		to {-moz-transform: translate(0, -15px);}    
+	}
+
+	@-webkit-keyframes Moving {
+		from { -webkit-transform: translate(0, 0);}
+		20% { -webkit-transform: translate(20vw, 0);}
+		50% { -webkit-transform: translate(50vw, 0);}
+		to { -webkit-transform: translate(105vw, 0);}    
+	}
+
+	@-moz-keyframes Moving {
+		from { -moz-transform: translate(0, 0);}
+		20% { -moz-transform: translate(20vw, 0);}
+		50% { -moz-transform: translate(50vw, 0);}
+		to { -moz-transform: translate(105vw, 0);}    
+	}
+
+}
+
+@media screen and (max-aspect-ratio: 3/2) { 
+	.about {	
+		p {
+			&:first-of-type {
+				font-size: 10vw;
+				font-weight: 300 !important;
+				margin-bottom: 2vh;				
+			}
+
+			&:nth-of-type(2) {
+				font-size: 5vw !important;
+				margin-bottom: 8vh;
+			}
+
+			&:nth-of-type(3),
+			&:nth-of-type(4) {
+				font-size: 5vw; 
+			}
+		}
+	}
+
+}
