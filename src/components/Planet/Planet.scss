@@ -67,6 +67,18 @@
 		top: 41vh;
 	}
 
+	.times {
+		top: 42vh !important;
+		
+		span {
+			font-size: 3.6vw !important;
+
+			label {
+				font-size: 4.8vw !important;
+			}
+		}	
+	}
+
 	.mini-director-img {
 	  border-radius: 50%;
 	  height: 12vw;

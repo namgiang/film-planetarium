@@ -18,9 +18,9 @@ MoviesService.getFrequentActors = function(directorName: string, range: Array<nu
 		for (let i in actors) {
 			let actorName = actors[i];
 			if (actorName !== 'N/A') {
-				let item = collaborators.find(function(item) {
+				let item = collaborators.filter(function(item) {
 				  return item.name === actorName;
-			  });
+			  })[0];
 
 			  if (item === undefined) {
 			  	collaborators.push({ name: actorName,	times: 1 });
@@ -56,7 +56,8 @@ MoviesService.getActorCircleList = function(directorName: string, range: Array<n
 		  size++;		  
 		} 
 		let itemCount = key - size + 1;
-		let actor = ACTORS.find(function(actor) {return actor.name === item.name});
+		let actors = ACTORS.filter(function(actor) {return actor.name === item.name});
+		let actor = (actors.length > 0) ? actors[0] : null;
 		let color = (actor) ? ((actor.gender === 'M') ? 'blue' : 'pink') : 'gray';
 		let sizePrefix = (mini) ? 'size-mini-' : 'size-';
 		let className = 'circle-container ' + sizePrefix + size + ' count-' + itemCount;
@@ -103,9 +104,9 @@ MoviesService.getMovies = (director, range, actorName) => {
 }
 
 MoviesService.getDirector = (directorName) => {
-	return DIRECTORS.find(function(director) { 
+	return DIRECTORS.filter(function(director){ 
 	  return (director.name === directorName);
-	});
+	})[0];
 }
 
 MoviesService.checkMovieIsInArray = (movie, array) => {

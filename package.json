@@ -11,14 +11,15 @@
     "rc-tooltip": "^3.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-tap-event-plugin": "^2.0.1",
-    "react-tappable": "^0.8.4",
-    "react-tooltip": "^3.2.10"
+    "react-redux": "^5.0.4",
+    "react-tooltip": "^3.2.10",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "redux-devtools": "^3.3.2"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",

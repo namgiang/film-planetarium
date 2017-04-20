@@ -89,81 +89,95 @@ class App extends Component {
 	async fetchImageUrls(movies) {
 		let imageUrls = [];
 		if (movies) {
-		  for (let i in movies) {
+			for (let i in movies) {
 				imdb.getById(movies[i].imdbID).then((res) => {
 					imageUrls.push(res.poster);
-		     	this.setState({imageUrls: imageUrls});
-		    });
-		  }		  
+					this.setState({imageUrls: imageUrls});
+				});
+			}		  
 		}
 	}
 
-  render() {
-  	let directorDomList = [];
-  	if (this.state.showAll) {
-  		const emptyArray = [];
-  		directorDomList = DIRECTORS.map((director, index) => {
-  			return (
-  				<div key={'mini-director-' + director.label}>
-  				  <div className="planet-container">
-        	 	  <Planet director={director}
-  				  				imageUrls={emptyArray}
-  					  			actorMovies={emptyArray}
-  						  		mini={true}
-  						  		range={this.state.range}
-  						  		onDirectorClicked={this.handleDirectorChange} />
-  					</div>
-  				  <p className="mini-director-name">{director.name}</p>
-  				</div>
-  			)
-  		});
-  	}
+	render() {
+		return (
+			<div className="App">
+			    <Header onRangeChanged={this.handleRangeChange} 
+			            onDirectorChanged={this.handleDirectorChange} />
+			    { !this.state.showAll && this.renderOneDirector() }
+			    { this.state.showAll && this.renderAllDirectors() }
+			</div>
+		);
+	}
 
-  	let columnsDom; // boolean checking if the screen width/height is less than 1.5	
-		if ((window.innerWidth / window.innerHeight) <= 1.5 ) {
-			columnsDom = directorDomList;
-		} else {
-			columnsDom = (<Columns responsive={false}
-  						  			 size='small'
-  						  			 justify='between'
-  						  			 maxCount={6}>
-        	      			{directorDomList}
-        	          </Columns>);
-		}		
+	renderOneDirector() {
+		return (
+			<div className="visuals">	
+			  <section className="left">
+			      <Planet director={this.state.director} 
+			              actorCircleList={this.state.actorCircleList}
+			              onActorClicked={this.handleActorChange }
+			              onDirectorClicked={this.handleDirectorChange} />
+			      <div className="legend-1">
+			         <div></div><span>Actor</span>
+			      </div>
+			      <div className="legend-2">
+			         <div></div><span>Actress</span>
+			      </div>
+			  </section>
+			  <section className="right">
+			      <MovieList movies={this.state.movies}
+			                 imageUrls={this.state.imageUrls} 
+			                 actorMovies={this.state.actorMovies} 
+			                 currentActor={this.state.currentActor}
+			                 director={this.state.director} />
+			  </section>
+			</div>
+		);
+	}
 
-    return (
-    	<div className="App">
-	      <Header onRangeChanged={this.handleRangeChange} 
-	      				onDirectorChanged={this.handleDirectorChange} />
-	      { !this.state.showAll && 
-	      	<div className="visuals">	
-		        <section className="left">
-		          <Planet director={this.state.director} 
-		           				actorCircleList={this.state.actorCircleList}
-		           				onActorClicked={this.handleActorChange }
-		           				onDirectorClicked={this.handleDirectorChange} />
-		          <div className="legend-1">
-		          	<div></div><span>Actor</span>
-		          </div>
-		          <div className="legend-2">
-		          	<div></div><span>Actress</span>
-		          </div>
-		        </section>
-		        <section className="right">
-		          <MovieList movies={this.state.movies}
-		          					 imageUrls={this.state.imageUrls} 
-		          					 actorMovies={this.state.actorMovies} 
-		          					 currentActor={this.state.currentActor}
-		          					 director={this.state.director} />
-	          </section>
-        	</div> }
-        	{ this.state.showAll &&
-        	  <div className="all-directors-container">
-        	   	{columnsDom}
-        		</div>}
-      </div>
-    );
-  }
+	renderAllDirectors() {
+		let directorDomList = [];
+		if (this.state.showAll) {
+            const emptyArray = [];
+            directorDomList = DIRECTORS.map((director, index) => {
+                return (
+                    <div key={'mini-director-' + director.label}>
+                        <div className="planet-container">
+                            <Planet director={director}
+                                    imageUrls={emptyArray}
+                                    actorMovies={emptyArray}
+                                    mini={true}
+                                    range={this.state.range}
+                                    onDirectorClicked={this.handleDirectorChange} />
+                        </div>
+                        <p className="mini-director-name">
+                            {director.name}
+                        </p>
+                   </div>
+               )
+           });
+        }
+        
+        let columnsDom; 
+
+        if ((window.innerWidth / window.innerHeight) <= 1.5 ) {
+            columnsDom = directorDomList;
+        } else {
+            columnsDom = (
+                <Columns responsive={false}
+                         size='small'
+                         justify='between'
+                         maxCount={6}>
+                    { directorDomList }
+                </Columns>
+            );
+        }
+        return (
+            <div className="all-directors-container">
+                {columnsDom}
+            </div>
+        );
+    }
 }
 
 export default App;

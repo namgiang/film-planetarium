@@ -14,6 +14,18 @@ class MovieList extends Component {
 		}
 	}
 
+	render () {	  
+		const urls = this.props.imageUrls;
+		
+		return (urls !== []) ? (
+			<div className="movies-container">
+			    { this.renderMovieSummary() }
+				{ this.renderPosters() }
+				{ this.state.movieHovered && this.renderMovieDescription() }
+			</div>			
+		) : (<div></div>);
+	}
+
 	onMovieMouseOver = (movie) => {
 		this.setState({
 			movieHovered: true,
@@ -28,56 +40,65 @@ class MovieList extends Component {
 		});
 	}
 
-	render () {	  
+	renderMovieSummary() {
+		const movies = this.props.movies ? this.props.movies : [];
+		const currentActor = this.props.currentActor;
+		const directorName = (this.props.director) ? this.props.director.name : '';
+		return (
+			<p className="movies-summary">
+			    { currentActor ? 
+                    (
+                        <span>
+			    	        <label className="highlighted">{currentActor.name}</label> starred in <label>{this.props.actorMovies.length}/</label>
+					    </span>
+                    ) : <span></span> 
+                }
+			    <label>{ movies.length }</label> movies directed by <label>{directorName}</label>
+			</p>
+		);
+	}
+
+	renderPosters() {
 		const movies = this.props.movies ? this.props.movies : [];
 		const urls = this.props.imageUrls;
 		const actorMovies = this.props.actorMovies;
-		const currentActor = this.props.currentActor;
-		const directorName = (this.props.director) ? this.props.director.name : '';
-		let elements = [];
+		let posters = [];
 		for (let i in urls) {
 			let movie = movies[i];
 			let isActorMovie = false;
 			if (actorMovies.length > 0) {
 				isActorMovie = MoviesService.checkMovieIsInArray(movie, actorMovies);	
 			}			
-		  let el = (
-		   	<div key={movie.imdbID}
+		    let el = (
+		   	    <div key={movie.imdbID}
 		   			 className="poster-container"
 		   			 data-tip data-for={movie.imdbID}
 		   			 onMouseOver={() => this.onMovieMouseOver(movie)}
 		   			 onMouseOut={() => this.onMovieMouseOut(movie)} >
-		   	  {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
-			                         : (<img src={urls[i]} alt={movie.title}/>)}
-			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
-			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
-	 		  </div>
-    	);
-		  elements.push(el);
+		   	        {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
+			                             : (<img src={urls[i]} alt={movie.title}/>)}
+    			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
+    			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
+	 		    </div>
+    	    );
+		    posters.push(el);
 		}
-		let hoveredMovie = this.state.hoveredMovie;
-		return (urls !== []) ? (
-			<div className="movies-container">
-			  <p className="movies-summary">
-			    {currentActor ? <span>
-			    									<label className="highlighted">{currentActor.name}</label> starred in <label>{actorMovies.length}/</label>
-			    								</span> 
-			    						  : '' }
-			    <label>{ movies.length }</label> movies directed by <label>{directorName}</label>
-			  </p>
-				{ elements }
-				{ this.state.movieHovered && 
-					(<ReactTooltip id={this.state.hoveredMovieID}
-					 							 className="movie-tooltip"
-												 place="left" >
-		  				<p className="title">{hoveredMovie.title}</p>
-			 				<p className="year">{hoveredMovie.year}</p>
-			 				<p className="actors">Starred: {hoveredMovie.actors}</p>
-			 				<p className="plot">{hoveredMovie.plot}</p>
-			     </ReactTooltip>)
-			   }
-			</div>			
-		) : (<div></div>);
+		return posters;
+	}
+
+	renderMovieDescription() {
+		const hoveredMovie = this.state.hoveredMovie;
+		
+		return (
+		    <ReactTooltip id={this.state.hoveredMovieID}
+		  	     		  className="movie-tooltip"
+						  place="left" >
+		        <p className="title">{hoveredMovie.title}</p>
+			 	<p className="year">{hoveredMovie.year}</p>
+			 	<p className="actors">Starred: {hoveredMovie.actors}</p>
+			 	<p className="plot">{hoveredMovie.plot}</p>
+			</ReactTooltip>
+	    );
 	}
 }
 

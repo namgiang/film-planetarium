@@ -8,234 +8,231 @@
 /// @param {Length} $circle-size - Large circle size
 /// @param {Length} $item-size - Single item size
 @mixin on-circle($circle-size, $item-size) {
-  position: absolute;
-  margin: auto;
-	left: 0;
-	right: 0;
-  width:  $circle-size;
-  height: $circle-size;
-  padding: 0;
-  border-radius: 50%; 
-  list-style: none;
-  top: (90vh - $circle-size) / 2;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width:  $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%; 
+    list-style: none;
+    top: (90vh - $circle-size) / 2;
 
-  @for $i from 1 through 30 {
-    &.count-#{$i} {
-      @include on-circle-dots($item-count: $i, $circle-size: $circle-size, $item-size: $item-size);
-    }
-  }      
+    @for $i from 1 through 30 {
+        &.count-#{$i} {
+            @include on-circle-dots($item-count: $i, $circle-size: $circle-size, $item-size: $item-size);
+        }
+    }      
 }
 
 @mixin on-circle-mini($circle-size, $item-size) {
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  width:  $circle-size;
-  height: $circle-size;
-  padding: 0;
-  border-radius: 50%; 
-  list-style: none;
-  top: (13vw - $circle-size) / 2;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width:  $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%; 
+    list-style: none;
+    top: (13vw - $circle-size) / 2;
 
-  > li {
-    display: none;
-  } 
-      
+    > li {
+        display: none;
+    }
 }
 
 @mixin on-circle-dots($item-count, $circle-size, $item-size) {
-  > li {
-    display: block;
-    position: absolute;
-    top:  50%;
-    left: 50%;
-    width:  $item-size;
-    height: $item-size;
-    margin: -($item-size / 2);
-  
-    $angle: (360 / $item-count);
-    $rot: random(300);
+    > li {
+        display: block;
+        position: absolute;
+        top:  50%;
+        left: 50%;
+        width:  $item-size;
+        height: $item-size;
+        margin: -($item-size / 2);
 
-    @for $i from 1 through $item-count {
-      &:nth-of-type(#{$i}) {
-        transform: 
-          rotate($rot * 1deg) 
-          translate($circle-size / 2) 
-          rotate($rot * -1deg);
-      }
+        $angle: (360 / $item-count);
+        $rot: random(300);
 
-      $rot: $rot + $angle;
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: 
+                rotate($rot * 1deg) 
+                translate($circle-size / 2) 
+                rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
     }
-  }
 }
 
 .circle-container {
-  margin: auto;
-  animation: easing .5s ease-in-out; 
+    margin: auto;
+    animation: easing .5s ease-in-out; 
 
-  @for $i from 0 through 4 {
-    &.size-#{$i} {
-      $unit: 15vh;
-      @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
+    @for $i from 0 through 4 {
+        &.size-#{$i} {
+            $unit: 15vh;
+            @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
 
-      div { 
-        width: 3vh;
-        height: 3vh; 
-      }
+            div { 
+                width: 3vh;
+                height: 3vh; 
+            }
+        }
+
+        &.size-mini-#{$i} {
+            $unit: 4vw;
+            @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
+
+            div { 
+                width: 0;
+                height: 0; 
+            }
+            span {
+                display: none;
+            }
+        }
     }
 
-    &.size-mini-#{$i} {
-      $unit: 4vw;
-      @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
-
-      div { 
-        width: 0;
-        height: 0; 
-      }
-      span {
-        display: none;
-      }
-    }
-  }
-
-	&.size-5 {
-    @include on-circle($circle-size: 85vh, $item-size: 3vh);
-  }
-
-	&[class*='blue'] {
-		border: solid 2px $blue;
-	}
-
-	&[class*='pink'] {
-		border: solid 2px $pink;
-	}
-
-  &[class*='gray'] {
-    border: solid 2px $alto;
-  }
-
-  li {
-    animation: easing 1s ease-in-out; 
-  }
-  
-  div { 
-   
-    border-radius: 50%;
-    /*filter: grayscale(100%);*/    
-    transition: .15s;
-    
-    &:hover,
-    &:active {
-      cursor: pointer;
-
-      .actor-tooltip {
-        opacity: 1;
-      }
-    }
-
-    &:active,
-    &.selected {
-      border: 3px solid white;
+    &.size-5 {
+        @include on-circle($circle-size: 85vh, $item-size: 3vh);
     }
 
     &[class*='blue'] {
-      background-color: $blue;
-
-      .actor-tooltip {
-        background-color: $blue;
-      }
+        border: solid 2px $blue;
     }
 
     &[class*='pink'] {
-      background-color: $pink;
-
-      .actor-tooltip {
-        background-color: $pink;
-      }
+        border: solid 2px $pink;
     }
 
     &[class*='gray'] {
-      background-color: $alto;
-
-      .actor-tooltip {
-        background-color: $alto;
-      }
-    }
-  }
-
-  span {
-    background: black;
-    position: absolute;
-    margin-top: 1vh;
-    margin-left: -4vh;
-    font-size: .8vw;
-    line-height: 1vw !important;
-    z-index: 100 !important;
-
-    &.actor-tooltip {
-      color: black;
-      border-radius: 1vw;
-      margin-top: -6vh;
-      margin-left: 0;
-      padding: 1vh .5vw;
-      opacity: 0;
-      z-index: 200 !important;
+        border: solid 2px $alto;
     }
 
-    &:hover,
-    &:active {
-      cursor: pointer;
+    li {
+        animation: easing 1s ease-in-out; 
     }
-  }
 
+    div { 
+        border-radius: 50%;
+        transition: .15s;
+        
+        &:hover,
+        &:active {
+            cursor: pointer;
+
+            .actor-tooltip {
+                opacity: 1;
+            }
+        }
+
+        &:active,
+        &.selected {
+            border: 3px solid white;
+        }
+
+        &[class*='blue'] {
+            background-color: $blue;
+
+            .actor-tooltip {
+                background-color: $blue;
+            }
+        }
+
+        &[class*='pink'] {
+            background-color: $pink;
+
+            .actor-tooltip {
+                background-color: $pink;
+            }
+        }
+
+        &[class*='gray'] {
+            background-color: $alto;
+
+           .actor-tooltip {
+                background-color: $alto;
+            }
+        }
+    }
+
+    span {
+        background: black;
+        position: absolute;
+        margin-top: 1vh;
+        margin-left: -4vh;
+        font-size: .8vw;
+        line-height: 1vw !important;
+        z-index: 100 !important;
+
+        &.actor-tooltip {
+            color: black;
+            border-radius: 1vw;
+            margin-top: -6vh;
+            margin-left: 0;
+            padding: 1vh .5vw;
+            opacity: 0;
+            z-index: 200 !important;
+        }
+
+        &:hover,
+        &:active {
+            cursor: pointer;
+        }
+    }
 }
 
 @media screen and (max-aspect-ratio: 3/2) { 
-  .circle-container {
-    @for $i from 0 through 4 {
-      &.size-#{$i} {
-        $unit: 12vh;
-        @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
-      }
+    .circle-container {
+        @for $i from 0 through 4 {
+            &.size-#{$i} {
+                $unit: 12vh;
+                @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
+            }
 
-      &.size-mini-#{$i} {
-        $unit: 18vw;
-        @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
+            &.size-mini-#{$i} {
+                $unit: 18vw;
+                @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-        div { 
-          width: 0;
-          height: 0; 
+                div { 
+                    width: 0;
+                    height: 0; 
+                }
+                
+                span {
+                  display: none;
+                }
+            }
         }
-        span {
-          display: none;
-        }
-      }
-    }
 
-    .actor-name {
-      font-size: 4vw !important;
-      line-height: 6vw !important;  
+        .actor-name {
+            font-size: 4vw !important;
+            line-height: 6vw !important;  
+        }
     }
-  }
 
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (max-aspect-ratio: 3/2) {
-  .circle-container {
-    @for $i from 0 through 4 {
-      &.size-mini-#{$i} {
-        $unit: 10vw;
-        @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
+    .circle-container {
+        @for $i from 0 through 4 {
+            &.size-mini-#{$i} {
+                $unit: 10vw;
+                @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-        div { 
-          width: 0;
-          height: 0; 
+                div { 
+                  width: 0;
+                  height: 0; 
+                }
+                span {
+                  display: none;
+                }
+            }
         }
-        span {
-          display: none;
-        }
-      }
     }
-  }
 }
