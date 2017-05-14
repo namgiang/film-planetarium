@@ -5,6 +5,7 @@
 	align-items: center;
 	display: flex;
 	height: 6vh;
+	margin-top: 2vh;
 	text-align: left;
 
 	.left {
@@ -46,20 +47,6 @@
 			margin-left: 5.2vw;
 		}    
 	}
-
-	.logo {
-		height: 6vh;
-		position: absolute;
-		right: 7.5vw;
-		top: 2vh;
-		width: 6vh;
-		z-index: 2000;
-
-		&:hover {
-			cursor: pointer;
-		} 
-	}
-
 }
 
 .rc-slider {
@@ -324,13 +311,6 @@
 
 	.rc-slider-tooltip-inner {
 		font-size: 4vw !important;
-	}
-
-	.logo {
-		height: 8vw !important;
-		right: 7vw !important;
-		top: 1.3vh !important;
-		width: 8vw !important;
 	}
 }
 

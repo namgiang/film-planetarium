@@ -3,6 +3,7 @@ import './MovieList.css';
 import ReactTooltip from 'react-tooltip';
 
 import MoviesService from '../../services/movies.js';
+const imdb = require('imdb-api');
 
 class MovieList extends Component {
 	constructor(props) {
@@ -10,14 +11,33 @@ class MovieList extends Component {
 		this.state = {
 			movieHovered: false,
 			hoveredMovie: '',
-			movie: null
+			movie: null, 
+			imageUrls: []
+		}
+	}
+
+	async fetchImageUrls(movies) {
+		let imageUrls = [];
+		if (movies) {
+			for (let i in movies) {
+				imdb.getById(movies[i].imdbID).then((res) => {
+					imageUrls.push(res.poster);
+					this.setState({imageUrls: imageUrls});
+				});
+			}		  
+		}
+	}
+
+	componentDidMount(): void {
+		if (this.props.movies) {
+			this.fetchImageUrls(this.props.movies);
 		}
 	}
 
 	render () {	  
-		const urls = this.props.imageUrls;
+		// const urls = this.props.imageUrls;
 		
-		return (urls !== []) ? (
+		return (this.state.imageUrls !== []) ? (
 			<div className="movies-container">
 			    { this.renderMovieSummary() }
 				{ this.renderPosters() }
@@ -60,7 +80,7 @@ class MovieList extends Component {
 
 	renderPosters() {
 		const movies = this.props.movies ? this.props.movies : [];
-		const urls = this.props.imageUrls;
+		const urls = this.state.imageUrls;
 		const actorMovies = this.props.actorMovies;
 		let posters = [];
 		for (let i in urls) {
@@ -68,20 +88,23 @@ class MovieList extends Component {
 			let isActorMovie = false;
 			if (actorMovies.length > 0) {
 				isActorMovie = MoviesService.checkMovieIsInArray(movie, actorMovies);	
+			}
+			if (movie) {
+				let el = (
+			   	    <div key={movie.imdbID}
+			   			 className="poster-container"
+			   			 data-tip data-for={movie.imdbID}
+			   			 onMouseOver={() => this.onMovieMouseOver(movie)}
+			   			 onMouseOut={() => this.onMovieMouseOut(movie)} >
+			   	        {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
+				                             : (<img src={urls[i]} alt={movie.title}/>)}
+	    			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
+	    			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
+		 		    </div>
+	    	    );
+			    posters.push(el);	
 			}			
-		    let el = (
-		   	    <div key={movie.imdbID}
-		   			 className="poster-container"
-		   			 data-tip data-for={movie.imdbID}
-		   			 onMouseOver={() => this.onMovieMouseOver(movie)}
-		   			 onMouseOut={() => this.onMovieMouseOut(movie)} >
-		   	        {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
-			                             : (<img src={urls[i]} alt={movie.title}/>)}
-    			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
-    			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
-	 		    </div>
-    	    );
-		    posters.push(el);
+		    
 		}
 		return posters;
 	}

@@ -109,6 +109,12 @@ MoviesService.getDirector = (directorName) => {
 	})[0];
 }
 
+MoviesService.getDirectorByLabel = (directorLabel) => {
+	return DIRECTORS.filter(function(director){ 
+	  return (director.label === directorLabel);
+	})[0];
+}
+
 MoviesService.checkMovieIsInArray = (movie, array) => {
 	for (let i in array) {
 		if (array.filter((item) => { return item.imdbID === movie.imdbID }).length > 0) {

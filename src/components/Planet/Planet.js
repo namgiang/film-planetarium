@@ -33,6 +33,9 @@ class Planet extends Component {
 
 	onDirectorClicked = () => {
 		this.props.onDirectorClicked(this.props.director);
+        this.setState({
+            actorClicked: null
+        });
 	}
 
 	render() {	
@@ -56,7 +59,8 @@ class Planet extends Component {
         return (
             <img src={img} 
                  className={directorClass}
-                 onClick={() => this.onDirectorClicked()} />
+                 onClick={() => this.onDirectorClicked()}
+                 alt={director.label} />
         );
      }
 
