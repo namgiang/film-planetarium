@@ -11,7 +11,6 @@ class MovieList extends Component {
 		this.state = {
 			movieHovered: false,
 			hoveredMovie: '',
-			movie: null, 
 			imageUrls: []
 		}
 	}

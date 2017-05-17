@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Planet.css';
 
 import ImageService from '../../services/images.js';
@@ -10,17 +11,12 @@ class Planet extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			movies: [], 
 			times: 0,
-			actorHovered: false,
-			actorClicked: null
+			actorHovered: false
 		};
 	}
 
 	onActorClicked = (actor) => {
-		this.setState({
-			actorClicked: actor
-		});
 		this.props.onActorClicked(actor);
 	}
 
@@ -33,9 +29,7 @@ class Planet extends Component {
 
 	onDirectorClicked = () => {
 		this.props.onDirectorClicked(this.props.director);
-        this.setState({
-            actorClicked: null
-        });
+        this.props.onActorClicked(null);
 	}
 
 	render() {	
@@ -76,7 +70,7 @@ class Planet extends Component {
                              actors={item.actors}
                              onActorClicked={this.onActorClicked}
                              onActorHovered={this.onActorHovered}
-                             actorClicked={this.state.actorClicked} />
+                             actorClicked={this.props.currentActor} />
             );
         } else {
             // for single director View
@@ -87,7 +81,7 @@ class Planet extends Component {
                              actors={item.actors}
                              onActorClicked={this.onActorClicked}
                              onActorHovered={this.onActorHovered}
-                             actorClicked={this.state.actorClicked} />
+                             actorClicked={this.props.currentActor} />
             );
         }
 
@@ -109,4 +103,10 @@ class Planet extends Component {
     }
 }
 
-export default Planet;
+function mapStateToProps(state) {
+    return {
+        currentActor: state.filmApp.movies.currentActor
+    };
+}
+
+export default connect(mapStateToProps)(Planet);

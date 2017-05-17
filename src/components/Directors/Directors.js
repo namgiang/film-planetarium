@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Directors.css';
+import { Link } from 'react-router-dom';
 
+import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 import Columns from 'grommet/components/Columns';
 
@@ -13,18 +15,20 @@ class Directors extends Component {
         const emptyArray = [];
         const directorDomList = DIRECTORS.map((director, index) => {
             return (
-                <div key={'mini-director-' + director.label}>
-                    <div className="planet-container">
-                        <Planet director={director}
-                                imageUrls={emptyArray}
-                                actorMovies={emptyArray}
-                                mini={true}
-                                range={this.props.range} />
+                <Link to={`/director/${director.label}`} >
+                    <div key={'mini-director-' + director.label}>
+                        <div className="planet-container">
+                            <Planet director={director}
+                                    imageUrls={emptyArray}
+                                    actorMovies={emptyArray}
+                                    mini={true}
+                                    range={this.props.range} />
+                        </div>
+                        <p className="mini-director-name">
+                            {director.name}
+                        </p>
                     </div>
-                    <p className="mini-director-name">
-                        {director.name}
-                    </p>
-                </div>
+                </Link>
             )
         });
         
@@ -43,9 +47,12 @@ class Directors extends Component {
             );
         }
         return (
+            <div>
+                <Header />
                 <div className="all-directors-container">
                     {columnsDom}
                 </div>
+            </div>
         );
     }
 }

@@ -1,30 +1,27 @@
 import { combineReducers } from 'redux';
-import { CHANGE_RANGE, SET_DIRECTOR } from '../services/actions';
+import { CHANGE_RANGE, SET_DIRECTOR, SET_CURRENT_ACTOR } from '../services/actions';
 
 const initialState = {
   range: [1955, 2010],
-  director: null
+  currentActor: null
 };
 
 function movies(state = initialState , action) {
-  console.log('{2}');
-  console.log(state);
-	switch (action.type) {
+  switch (action.type) {
     case CHANGE_RANGE:
       return {
         range: action.range,
-        director: state.director
+        currentActor: state.currentActor
       };
-    case SET_DIRECTOR:
+    case SET_CURRENT_ACTOR:
       return {
         range: state.range,
-        director: action.director
-      };
+        currentActor: action.currentActor
+    };
     default:
       return state;
   }
 }
-
 
 const filmApp = combineReducers({
   movies

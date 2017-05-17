@@ -16,21 +16,19 @@ import {
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { changeRange, setDirector } from '../../services/actions';
+import { changeRange, setCurrentActor } from '../../services/actions';
 
 let createHandlers = function(dispatch) {
   let onRangeChanged = function(range) {
-    console.log(range);
     dispatch(changeRange(range));
   };
-  let onDirectorChanged = function(director) {
-    console.log(director);
-    dispatch(setDirector(director));
+  let onCurrentActorChanged = function(actor) {
+    dispatch(setCurrentActor(actor));
   };
 
   return {
     onRangeChanged,
-    onDirectorChanged
+    onCurrentActorChanged
   };
 }
 
@@ -69,12 +67,10 @@ class Header extends Component {
     	this.setState({
     		currentDirector: value
     	});
-        this.handlers.onDirectorChanged(value);
+        this.handlers.onCurrentActorChanged(null);
     }
 
     renderRange(): void {
-        console.log('{1}');
-        console.log(this.props);
     	return (
         	<div className="left">
             	<label className="min-year">
@@ -110,14 +106,10 @@ class Header extends Component {
     }
 
     renderMenu(): void {
-        if (this.props.match) {
-            console.log(this.props.match);
-        }
-        console.log('{3}');
-        console.log(this.props);
     	let directorName = 'All directors';
-    	if (this.props.director !== undefined && this.props.director !== null) {
-    		directorName = this.props.director.name
+        const currentDirector = this.props.currentDirector;
+    	if (currentDirector !== undefined && currentDirector !== null) {
+    		directorName = currentDirector.name
     	} 
     	return (
         	<Menu responsive={true}
@@ -151,10 +143,8 @@ class Header extends Component {
   }
 
 function mapStateToProps(state) {
-    console.log(state.filmApp.movies);
     return {
-        range: state.filmApp.movies.range,
-        director: state.filmApp.movies.director
+        range: state.filmApp.movies.range
     };
 }
 

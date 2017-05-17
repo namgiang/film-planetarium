@@ -116,11 +116,13 @@ MoviesService.getDirectorByLabel = (directorLabel) => {
 }
 
 MoviesService.checkMovieIsInArray = (movie, array) => {
-	for (let i in array) {
-		if (array.filter((item) => { return item.imdbID === movie.imdbID }).length > 0) {
-			return true;
-		}
-	}
+	if (movie != undefined) {
+		for (let i in array) {
+			if (array.filter((item) => { return item.imdbID === movie.imdbID }).length > 0) {
+				return true;
+			}
+	    }	
+	}	
 	return false;
 }
 

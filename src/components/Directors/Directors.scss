@@ -9,6 +9,11 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 @media screen and (max-aspect-ratio: 3/2) { 
   .all-directors-container {
     margin-top: 16vh;

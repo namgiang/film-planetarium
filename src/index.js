@@ -46,7 +46,6 @@ ReactDOM.render(
 	    <div>
 	    <ConnectedRouter history={history}>
 		   <div className="App">
-			    <Header />
 			    <Switch>
 				    <Route exact path="/" component={Directors}/>
 					<Route path="/directors" component={Directors} />

@@ -4,22 +4,31 @@ import { connect } from 'react-redux';
 import './Director.css';
 import '../../../node_modules/grommet-css';
 
+import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 import MovieList from '../MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
+import { setCurrentActor } from '../../services/actions';
+
+const createHandlers = function(dispatch) {
+  const onCurrentActorChanged = function(actor) {
+    dispatch(setCurrentActor(actor));
+  };
+
+  return {
+    onCurrentActorChanged
+  };
+}
 
 
 class Director extends Component {
 
 	constructor(props: any) {
-		super(props);
-		this.state = {
-			currentActor: null
-		};
-		
+		super(props);		
 		this.handleDirectorChange = this.handleDirectorChange.bind(this);
 		this.handleActorChange = this.handleActorChange.bind(this);
+		this.handlers = createHandlers(this.props.dispatch);
 	}
 
 	getCurrentDirector() {
@@ -27,15 +36,11 @@ class Director extends Component {
 	}
 
 	handleDirectorChange(value) {
-	    this.setState({
-			currentActor: null,
-		});					
+		this.handlers.onCurrentActorChanged(null);					
 	}
 
 	handleActorChange(actor) {
-		this.setState({
-			currentActor: actor
-		});
+		this.handlers.onCurrentActorChanged(actor);
 	}
 
 	render() {
@@ -44,6 +49,7 @@ class Director extends Component {
 		
 		return (
 			<div>
+			    <Header currentDirector={currentDirector} />
 			    { this.renderDirector(currentDirector) }
 			</div>
 		);
@@ -53,8 +59,8 @@ class Director extends Component {
 		const actorCircleList = MoviesService.getActorCircleList(currentDirector.name, this.props.range, false);
 		const movies = MoviesService.getMovies(currentDirector, this.props.range, null);
 		let actorMovies;
-		if (this.state.currentActor) {
-			actorMovies = MoviesService.getMovies(currentDirector, this.props.range, this.state.currentActor.name);	
+		if (this.props.currentActor) {
+			actorMovies = MoviesService.getMovies(currentDirector, this.props.range, this.props.currentActor.name);	
 		} else {
 			actorMovies = [];
 		}
@@ -76,7 +82,7 @@ class Director extends Component {
 			  <section className="right">
 			      <MovieList movies={movies}
 			                 actorMovies={actorMovies} 
-			                 currentActor={this.state.currentActor}
+			                 currentActor={this.props.currentActor}
 			                 director={currentDirector} />
 			  </section>
 			</div>
@@ -86,7 +92,8 @@ class Director extends Component {
 
 function mapStateToProps(state) {
   return {
-    range: state.filmApp.movies.range
+    range: state.filmApp.movies.range,
+    currentActor: state.filmApp.movies.currentActor
   };
 }
 
