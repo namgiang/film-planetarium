@@ -1,4 +1,6 @@
 .all-directors-container {
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 4vh;
   width: 92vw;
 
@@ -17,10 +19,9 @@ a {
 @media screen and (max-aspect-ratio: 3/2) { 
   .all-directors-container {
     margin-top: 16vh;
-    width: 92vw;
 
     .planet-container {
-      width: 100%;
+      width: 92vw;
       padding-bottom: 14vh;
       padding-top: 10vh;  
     }

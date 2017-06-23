@@ -19,10 +19,12 @@ class MovieList extends Component {
 		let imageUrls = [];
 		if (movies) {
 			for (let i in movies) {
-				imdb.getById(movies[i].imdbID).then((res) => {
+				imdb.getById(movies[i].imdbID, {apiKey: '8bb183ed'})
+				.then((res) => {
 					imageUrls.push(res.poster);
 					this.setState({imageUrls: imageUrls});
-				});
+				})
+				.catch(error => console.log(error));
 			}		  
 		}
 	}
@@ -31,18 +33,6 @@ class MovieList extends Component {
 		if (this.props.movies) {
 			this.fetchImageUrls(this.props.movies);
 		}
-	}
-
-	render () {	  
-		// const urls = this.props.imageUrls;
-		
-		return (this.state.imageUrls !== []) ? (
-			<div className="movies-container">
-			    { this.renderMovieSummary() }
-				{ this.renderPosters() }
-				{ this.state.movieHovered && this.renderMovieDescription() }
-			</div>			
-		) : (<div></div>);
 	}
 
 	onMovieMouseOver = (movie) => {
@@ -59,12 +49,22 @@ class MovieList extends Component {
 		});
 	}
 
+	render () {		
+		return (this.state.imageUrls !== []) ? (
+			<div className="movies-container">
+			    { this.renderMovieSummary() }
+				{ this.renderPosters() }
+				{ this.state.movieHovered && this.renderMovieDescription() }
+			</div>			
+		) : (<div></div>);
+	}
+
 	renderMovieSummary() {
 		const movies = this.props.movies ? this.props.movies : [];
 		const currentActor = this.props.currentActor;
 		const directorName = (this.props.director) ? this.props.director.name : '';
 		return (
-			<p className="movies-summary">
+			<p className="movies-summarby">
 			    { currentActor ? 
                     (
                         <span>

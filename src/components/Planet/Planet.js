@@ -61,7 +61,7 @@ class Planet extends Component {
     renderActorCircles() {
         let	actorCircleDomList;
         if (this.props.mini) {
-            // for all directors View
+            // all directors View
             let actorCircleList = MoviesService.getActorCircleList(this.props.director.name, this.props.range, true);
             actorCircleDomList = actorCircleList.map((item, key) => 
                 <ActorCircle key={key} 
@@ -73,7 +73,7 @@ class Planet extends Component {
                              actorClicked={this.props.currentActor} />
             );
         } else {
-            // for single director View
+            // single director View
             actorCircleDomList = this.props.actorCircleList.map((item, key) => 
                 <ActorCircle key={key} 
                              className={item.className + ' ' + item.color} 

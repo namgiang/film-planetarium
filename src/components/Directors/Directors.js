@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
-import Columns from 'grommet/components/Columns';
 
 import { DIRECTORS } from '../../data/directors';
 
@@ -16,7 +15,7 @@ class Directors extends Component {
         const directorDomList = DIRECTORS.map((director, index) => {
             return (
                 <Link to={`/director/${director.label}`} >
-                    <div key={'mini-director-' + director.label}>
+                    <div className="planets" key={'mini-director-' + director.label}>
                         <div className="planet-container">
                             <Planet director={director}
                                     imageUrls={emptyArray}
@@ -31,26 +30,12 @@ class Directors extends Component {
                 </Link>
             )
         });
-        
-        let columnsDom; 
 
-        if ((window.innerWidth / window.innerHeight) <= 1.5 ) {
-            columnsDom = directorDomList;
-        } else {
-            columnsDom = (
-                <Columns responsive={false}
-                         size='small'
-                         justify='between'
-                         maxCount={6}>
-                    { directorDomList }
-                </Columns>
-            );
-        }
         return (
             <div>
                 <Header />
                 <div className="all-directors-container">
-                    {columnsDom}
+                    { directorDomList }
                 </div>
             </div>
         );
