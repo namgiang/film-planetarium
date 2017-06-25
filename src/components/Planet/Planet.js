@@ -28,7 +28,7 @@ class Planet extends Component {
 	}
 
 	onDirectorClicked = () => {
-		this.props.onDirectorClicked(this.props.director);
+		// this.props.onDirectorClicked(this.props.director);
         this.props.onActorClicked(null);
 	}
 

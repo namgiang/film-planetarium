@@ -31,7 +31,7 @@ class MovieList extends Component {
 
 	render () {
 		return (this.props.imageUrls !== []) ? (
-			<div className="movies-container">
+			<div className="movies-container" key={this.props.director.name}>
 			  { this.renderMovieSummary() }
 				{ this.renderPosters() }
 				{ this.state.movieHovered && this.renderMovieDescription() }

@@ -31,17 +31,13 @@ class Director extends Component {
 		this.state = {
 			imageUrls: []
 		}
-		this.handleDirectorChange = this.handleDirectorChange.bind(this);
+		// this.handleDirectorChange = this.handleDirectorChange.bind(this);
 		this.handleActorChange = this.handleActorChange.bind(this);
 		this.handlers = createHandlers(this.props.dispatch);
 	}
 
 	getCurrentDirector() {
 		return MoviesService.getDirectorByLabel(this.props.match.params.directorLabel);
-	}
-
-	handleDirectorChange(value) {
-		this.handlers.onCurrentActorChanged(null);					
 	}
 
 	handleActorChange(actor) {
@@ -82,8 +78,7 @@ class Director extends Component {
 			  <section className="left">
 			      <Planet director={currentDirector} 
 			              actorCircleList={actorCircleList}
-			              onActorClicked={this.handleActorChange}
-			              onDirectorClicked={this.handleDirectorChange} />
+			              onActorClicked={this.handleActorChange} />
 			      <div className="legend-1">
 			         <div></div><span>Actor</span>
 			      </div>

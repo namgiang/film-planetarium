@@ -123,7 +123,7 @@ class Header extends Component {
     renderMenuAnchors(): void {
     	return DIRECTORS.map((item, key) => {
     		return (
-                <Link to={`/director/${item.label}`}>
+                <Link to={`/director/${item.label}`} key={item.label}>
                     <Anchor key={item.label}                 	       	
                 		    className='active'
                             onClick={() => this.handlers.onDirectorSelected(item, this.props.range)}>

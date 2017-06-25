@@ -15,14 +15,15 @@ class Directors extends Component {
         const emptyArray = [];
         return DIRECTORS.map((director, index) => {
             return (
-                <Link to={`/director/${director.label}`} >
+                <Link to={`/director/${director.label}`} key={director.label} >
                     <div className="planets" key={'mini-director-' + director.label}>
                         <div className="planet-container">
                             <Planet director={director}
                                     imageUrls={emptyArray}
                                     actorMovies={emptyArray}
                                     mini={true}
-                                    range={this.props.range} />
+                                    range={this.props.range}
+                                    onActorClicked={null} />
                         </div>
                         <p className="mini-director-name">
                             {director.name}
