@@ -10,9 +10,10 @@ import { DIRECTORS } from '../../data/directors';
 
 
 class Directors extends Component {
-    render() {
+    
+    createDirectorList() {
         const emptyArray = [];
-        const directorDomList = DIRECTORS.map((director, index) => {
+        return DIRECTORS.map((director, index) => {
             return (
                 <Link to={`/director/${director.label}`} >
                     <div className="planets" key={'mini-director-' + director.label}>
@@ -30,12 +31,15 @@ class Directors extends Component {
                 </Link>
             )
         });
+    }
 
+    render() {
+        document.body.style.overflowY = 'auto';
         return (
             <div>
                 <Header />
                 <div className="all-directors-container">
-                    { directorDomList }
+                    { this.createDirectorList() }
                 </div>
             </div>
         );
@@ -44,7 +48,7 @@ class Directors extends Component {
 
 function mapStateToProps(state) {
   return {
-    range: state.filmApp.movies.range
+    range: state.filmApp.app.range
   };
 }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './MovieList.css';
+import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import './MovieList.css';
 
 import MoviesService from '../../services/movies.js';
-const imdb = require('imdb-api');
 
 class MovieList extends Component {
 	constructor(props) {
@@ -12,26 +12,6 @@ class MovieList extends Component {
 			movieHovered: false,
 			hoveredMovie: '',
 			imageUrls: []
-		}
-	}
-
-	async fetchImageUrls(movies) {
-		let imageUrls = [];
-		if (movies) {
-			for (let i in movies) {
-				imdb.getById(movies[i].imdbID, {apiKey: '8bb183ed'})
-				.then((res) => {
-					imageUrls.push(res.poster);
-					this.setState({imageUrls: imageUrls});
-				})
-				.catch(error => console.log(error));
-			}		  
-		}
-	}
-
-	componentDidMount(): void {
-		if (this.props.movies) {
-			this.fetchImageUrls(this.props.movies);
 		}
 	}
 
@@ -49,10 +29,10 @@ class MovieList extends Component {
 		});
 	}
 
-	render () {		
-		return (this.state.imageUrls !== []) ? (
+	render () {
+		return (this.props.imageUrls !== []) ? (
 			<div className="movies-container">
-			    { this.renderMovieSummary() }
+			  { this.renderMovieSummary() }
 				{ this.renderPosters() }
 				{ this.state.movieHovered && this.renderMovieDescription() }
 			</div>			
@@ -79,9 +59,9 @@ class MovieList extends Component {
 
 	renderPosters() {
 		const movies = this.props.movies ? this.props.movies : [];
-		const urls = this.state.imageUrls;
 		const actorMovies = this.props.actorMovies;
 		let posters = [];
+		let urls = this.props.posters;
 		for (let i in urls) {
 			let movie = movies[i];
 			let isActorMovie = false;
@@ -123,5 +103,10 @@ class MovieList extends Component {
 	    );
 	}
 }
+function mapStateToProps(state) {
+  return {
+    posters: state.filmApp.posters
+  };
+}
 
-export default MovieList;
+export default connect(mapStateToProps)(MovieList);

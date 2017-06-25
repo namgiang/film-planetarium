@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { CHANGE_RANGE, SET_DIRECTOR, SET_CURRENT_ACTOR } from '../services/actions';
+import { CHANGE_RANGE, SET_CURRENT_ACTOR, SET_POSTERS } from '../services/actions';
 
-const initialState = {
+const initialAppState = {
   range: [1955, 2010],
   currentActor: null
 };
 
-function movies(state = initialState , action) {
+function app(state = initialAppState , action) {
   switch (action.type) {
     case CHANGE_RANGE:
       return {
@@ -17,14 +17,24 @@ function movies(state = initialState , action) {
       return {
         range: state.range,
         currentActor: action.currentActor
-    };
+      };
+    default:
+      return state;
+  }
+}
+
+function posters(state = [], action) {
+  switch (action.type) {
+    case SET_POSTERS:
+      return action.posters
     default:
       return state;
   }
 }
 
 const filmApp = combineReducers({
-  movies
+  app,
+  posters
 });
 
 export default filmApp;

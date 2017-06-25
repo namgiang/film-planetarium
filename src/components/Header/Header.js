@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './Header.css';
-// import logo from '../../assets/img/planet-orbit.svg';
 
 import Logo from '../Logo/Logo';
 import {Handle, Range} from 'rc-slider';
@@ -9,14 +10,10 @@ import 'rc-slider/assets/index.css';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 
+import MoviesService from '../../services/movies';
 import { DIRECTORS } from '../../data/directors.js';
 
-import {
-  Link
-} from 'react-router-dom';
-
-import { connect } from 'react-redux';
-import { changeRange, setCurrentActor } from '../../services/actions';
+import { changeRange, setCurrentActor, setPosters } from '../../services/actions';
 
 let createHandlers = function(dispatch) {
   let onRangeChanged = function(range) {
@@ -25,10 +22,17 @@ let createHandlers = function(dispatch) {
   let onCurrentActorChanged = function(actor) {
     dispatch(setCurrentActor(actor));
   };
+  let onDirectorSelected = (director, range) => {
+    MoviesService.fetchImageUrls(MoviesService.getMovies(director, range, null))
+        .then(urls => {
+            dispatch(setPosters(urls));
+        });
+  };
 
   return {
     onRangeChanged,
-    onCurrentActorChanged
+    onCurrentActorChanged,
+    onDirectorSelected
   };
 }
 
@@ -37,19 +41,15 @@ class Header extends Component {
 		super(props);
 		const anchors = this.renderMenuAnchors();
 		this.state = {
-			defaultMinYear: 1955,      
-			dafaultMaxYear: 2010,
-			minYear: 1955,
-			maxYear: 2010, 
-			value: 1,
-			anchorList: anchors, 
-			currentDirector: null,
-			aboutOpened: false,
-			firstOpen: true
+			anchorList: anchors
 		};
 		this.onDirectorSelected = this.onDirectorSelected.bind(this);
         this.handlers = createHandlers(this.props.dispatch);
 	}
+
+    onDirectorSelected = (value) => {
+        this.handlers.onCurrentActorChanged(null);
+    }
 
 	render() {
         return (
@@ -63,13 +63,6 @@ class Header extends Component {
        	);
     }
 
-    onDirectorSelected = (value) => {
-    	this.setState({
-    		currentDirector: value
-    	});
-        this.handlers.onCurrentActorChanged(null);
-    }
-
     renderRange(): void {
     	return (
         	<div className="left">
@@ -79,7 +72,7 @@ class Header extends Component {
             	<div className="range-container">
                 	<Range min={1950}
                     	   max={2015} 
-                    	   defaultValue={[this.state.defaultMinYear, this.state.dafaultMaxYear]} 
+                    	   defaultValue={[1955, 2010]} 
                     	   tipFormatter={value => `${value}`} 
                     	   handle={this.handle}
                     	   onChange={(value) => this.handlers.onRangeChanged(value)}
@@ -133,7 +126,7 @@ class Header extends Component {
                 <Link to={`/director/${item.label}`}>
                     <Anchor key={item.label}                 	       	
                 		    className='active'
-                            onClick={() => this.onDirectorSelected(item)}>
+                            onClick={() => this.handlers.onDirectorSelected(item, this.props.range)}>
         		      {item.name}
         		    </Anchor>
                 </Link>
@@ -144,7 +137,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
     return {
-        range: state.filmApp.movies.range
+        range: state.filmApp.app.range
     };
 }
 

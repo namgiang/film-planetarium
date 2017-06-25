@@ -1,6 +1,7 @@
 import { MOVIES } from '../data/movies.js';
 import { ACTORS } from '../data/actors.js';
 import { DIRECTORS } from '../data/directors.js';
+const imdb = require('imdb-api');
 
 function MoviesService(){};
 
@@ -32,8 +33,7 @@ MoviesService.getFrequentActors = function(directorName: string, range: Array<nu
 					  }
 				  }
 			  }	
-			}
-			
+			}			
 		} 
 	}
 	
@@ -104,27 +104,34 @@ MoviesService.getMovies = (director, range, actorName) => {
 }
 
 MoviesService.getDirector = (directorName) => {
-	return DIRECTORS.filter(function(director){ 
-	  return (director.name === directorName);
-	})[0];
+	return DIRECTORS.find(director => director.name === directorName);
 }
 
 MoviesService.getDirectorByLabel = (directorLabel) => {
-	return DIRECTORS.filter(function(director){ 
-	  return (director.label === directorLabel);
-	})[0];
+	return DIRECTORS.find(director => director.label === directorLabel);
 }
 
-MoviesService.checkMovieIsInArray = (movie, array) => {
+MoviesService.checkMovieIsInArray = (movie, array) => {	
 	if (movie !== undefined) {
-		for (let i in array) {
-			if (array.filter((item) => { return item.imdbID === movie.imdbID }).length > 0) {
-				return true;
-			}
-	    }	
-	}	
+	  return array.some(item => item.imdbID === movie.imdbID);
+	}
 	return false;
 }
+
+MoviesService.fetchImageUrls = (movies) => {
+	let promises = [];
+
+	movies.forEach(movie => {
+		let promise = imdb.getById(movie.imdbID, {apiKey: '8bb183ed'})
+		.then((res) => {
+			return res.poster;					
+		})
+		.catch(error => console.log(error));
+		promises.push(promise);
+	});
+
+	return Promise.all(promises);
+	}
 
 function inRange(year, range) {
 	return year >= range[0] && year <= range[1];

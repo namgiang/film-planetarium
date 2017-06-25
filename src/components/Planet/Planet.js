@@ -105,7 +105,7 @@ class Planet extends Component {
 
 function mapStateToProps(state) {
     return {
-        currentActor: state.filmApp.movies.currentActor
+        currentActor: state.filmApp.app.currentActor
     };
 }
 

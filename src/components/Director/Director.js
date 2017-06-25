@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import './Director.css';
 import '../../../node_modules/grommet-css';
 
@@ -9,30 +8,36 @@ import Planet from '../Planet/Planet';
 import MovieList from '../MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
-import { setCurrentActor } from '../../services/actions';
+import { setCurrentActor, setPosters } from '../../services/actions';
 
 const createHandlers = function(dispatch) {
   const onCurrentActorChanged = function(actor) {
     dispatch(setCurrentActor(actor));
   };
+  const onLoaded = function(posters) {
+    dispatch(setPosters(posters));
+  };
 
   return {
-    onCurrentActorChanged
+    onCurrentActorChanged,
+    onLoaded
   };
 }
-
 
 class Director extends Component {
 
 	constructor(props: any) {
-		super(props);		
+		super(props);
+		this.state = {
+			imageUrls: []
+		}
 		this.handleDirectorChange = this.handleDirectorChange.bind(this);
 		this.handleActorChange = this.handleActorChange.bind(this);
 		this.handlers = createHandlers(this.props.dispatch);
 	}
 
 	getCurrentDirector() {
-		return this.props.match ? MoviesService.getDirectorByLabel(this.props.match.params.directorLabel) : null;
+		return MoviesService.getDirectorByLabel(this.props.match.params.directorLabel);
 	}
 
 	handleDirectorChange(value) {
@@ -41,6 +46,13 @@ class Director extends Component {
 
 	handleActorChange(actor) {
 		this.handlers.onCurrentActorChanged(actor);
+	}
+
+	componentDidMount() {
+		MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector(), this.props.range, null))
+        .then(urls => {
+            this.handlers.onLoaded(urls);
+        });
 	}
 
 	render() {
@@ -81,6 +93,7 @@ class Director extends Component {
 			  </section>
 			  <section className="right">
 			      <MovieList movies={movies}
+			      					 imageUrls={this.state.imageUrls}
 			                 actorMovies={actorMovies} 
 			                 currentActor={this.props.currentActor}
 			                 director={currentDirector} />
@@ -92,8 +105,8 @@ class Director extends Component {
 
 function mapStateToProps(state) {
   return {
-    range: state.filmApp.movies.range,
-    currentActor: state.filmApp.movies.currentActor
+    range: state.filmApp.app.range,
+    currentActor: state.filmApp.app.currentActor
   };
 }
 

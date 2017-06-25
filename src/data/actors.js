@@ -258,6 +258,9 @@ export const ACTORS = [
   {
     "name": "Charles Durning",
     "gender": "F"
-  }
-  
+  },
+  {
+    "name": "Jean-Paul Belmondo",
+    "gender": "M"
+  }  
 ];

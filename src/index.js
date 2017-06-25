@@ -2,10 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import '../node_modules/grommet-css';
-
 import 'es6-shim';
-
-import Header from './components/Header/Header';
 
 import About from './components/About/About';
 import Directors from './components/Directors/Directors';
@@ -46,9 +43,9 @@ ReactDOM.render(
 		    <div className="App">
 			    <Switch>
 				    <Route exact path="/" component={Directors} />
-					<Route path="/directors" component={Directors} />
-					<Route path="/about" component={About} />
-					<Route path="/director/:directorLabel" component={Director} />
+						<Route path="/directors" component={Directors} />
+						<Route path="/about" component={About} />
+						<Route path="/director/:directorLabel" component={Director} />
 			    </Switch>
 			  </div>
 		  </ConnectedRouter>

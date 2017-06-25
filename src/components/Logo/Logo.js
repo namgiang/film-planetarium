@@ -9,7 +9,7 @@ class Logo extends Component {
     render() {
         return (
             <div className="logo">
-                <Link to={this.props.linkTo} onClick={this.onLogoClick}>
+                <Link to={this.props.linkTo}>
                     <img src={logo}
                          alt="logo"/>
                 </Link>
