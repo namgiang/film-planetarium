@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Planet.css';
 
-import ImageService from '../../services/images.js';
+import ImageService from '../../services/images';
 import MoviesService from '../../services/movies';
 
 import ActorCircle from '../ActorCircle/ActorCircle';
@@ -28,8 +28,7 @@ class Planet extends Component {
 	}
 
 	onDirectorClicked = () => {
-		// this.props.onDirectorClicked(this.props.director);
-        this.props.onActorClicked(null);
+		this.props.onActorClicked(null);
 	}
 
 	render() {	

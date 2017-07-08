@@ -1,12 +1,6 @@
 @import "../../themes/variables.scss";
 @import "../../themes/shared.scss";
 
-/// Mixin to place items on a circle
-/// @author Hugo Giraudel
-/// @author Ana Tudor
-/// @param {Integer} $item-count - Number of items on the circle
-/// @param {Length} $circle-size - Large circle size
-/// @param {Length} $item-size - Single item size
 @mixin on-circle($circle-size, $item-size) {
     position: absolute;
     margin: auto;

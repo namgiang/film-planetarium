@@ -13,7 +13,9 @@ import Anchor from 'grommet/components/Anchor';
 import MoviesService from '../../services/movies';
 import { DIRECTORS } from '../../data/directors.js';
 
-import { changeRange, setCurrentActor, setPosters } from '../../services/actions';
+import { changeRange, setCurrentActor, setPosters } from '../../actions';
+import { fetchPosters } from '../../actions/fetch-posters';
+
 
 let createHandlers = function(dispatch) {
   let onRangeChanged = function(range) {
@@ -23,10 +25,8 @@ let createHandlers = function(dispatch) {
     dispatch(setCurrentActor(actor));
   };
   let onDirectorSelected = (director, range) => {
-    MoviesService.fetchImageUrls(MoviesService.getMovies(director, range, null))
-        .then(urls => {
-            dispatch(setPosters(urls));
-        });
+    dispatch(setPosters([]));
+    dispatch(fetchPosters(director, range));
   };
 
   return {
