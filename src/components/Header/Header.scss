@@ -97,7 +97,6 @@
 
 .grommetux-menu,
 .grommetux-menu__drop {
-	/*flex: 1;*/
 	border-radius: 0 !important;
 
 	> button {
@@ -130,8 +129,11 @@
 			padding: 1.2vh 1.4vw !important;
 		}
 	}
-}
 
+	.grommetux-anchor.active {
+		color: $yellow !important; 	
+	}
+}
 
 
 @media screen and (max-aspect-ratio: 3/2) { 

@@ -24,17 +24,8 @@ function app(state = initialAppState , action) {
   }
 }
 
-// function posters(state = [], action) {
-//   switch (action.type) {
-//     case types.SET_POSTERS:
-//       return action.posters
-//     default:
-//       return state;
-//   }
-// }
-
 const posters = (state = {
-  isFetching: false,
+  isFetching: true,
   urls: ""
 }, action) => {
   switch (action.type) {

@@ -68,7 +68,7 @@ class MovieList extends Component {
 		const currentActor = this.props.currentActor;
 		const directorName = (this.props.director) ? this.props.director.name : '';
 		return (
-			<p className="movies-summarby">
+			<p className="movies-summary">
 			    { currentActor ? 
                     (
                         <span>

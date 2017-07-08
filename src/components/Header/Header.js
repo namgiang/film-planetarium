@@ -39,10 +39,6 @@ let createHandlers = function(dispatch) {
 class Header extends Component {
 	constructor(props) {
 		super(props);
-		const anchors = this.renderMenuAnchors();
-		this.state = {
-			anchorList: anchors
-		};
 		this.onDirectorSelected = this.onDirectorSelected.bind(this);
         this.handlers = createHandlers(this.props.dispatch);
 	}
@@ -103,7 +99,8 @@ class Header extends Component {
         const currentDirector = this.props.currentDirector;
     	if (currentDirector !== undefined && currentDirector !== null) {
     		directorName = currentDirector.name
-    	} 
+    	}
+        const anchors = this.renderMenuAnchors(directorName);
     	return (
         	<Menu responsive={true}
             	  label={directorName}
@@ -111,21 +108,21 @@ class Header extends Component {
             	  className="director-dropdown"
             	  dropAlign={{right: "right"}} >
             	<Link to='/directors'>
-                    <Anchor className="active" onClick={() => this.onDirectorSelected(null)}>
+                    <Anchor className={directorName === "All directors" ? 'active' : ''} onClick={() => this.onDirectorSelected(null)}>
             	       All directors
             	   </Anchor>
                 </Link>
-            	{this.state.anchorList}
+            	{anchors}
         	</Menu>
     	);
     }
 
-    renderMenuAnchors(): void {
+    renderMenuAnchors(directorName): void {
     	return DIRECTORS.map((item, key) => {
     		return (
                 <Link to={`/director/${item.label}`} key={item.label}>
                     <Anchor key={item.label}                 	       	
-                		    className='active'
+                		    className={item.name === directorName ? 'active' : ''}
                             onClick={() => this.handlers.onDirectorSelected(item, this.props.range)}>
         		      {item.name}
         		    </Anchor>
