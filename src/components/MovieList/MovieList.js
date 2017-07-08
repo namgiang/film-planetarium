@@ -12,7 +12,7 @@ class MovieList extends Component {
 			movieHovered: false,
 			hoveredMovie: '',
 			imageUrls: []
-		}
+		};
 	}
 
 	onMovieMouseOver = (movie) => {
@@ -104,8 +104,9 @@ class MovieList extends Component {
 	}
 }
 function mapStateToProps(state) {
+	console.log(state);
   return {
-    posters: state.filmApp.posters
+    posters: state.filmApp.posters.urls
   };
 }
 

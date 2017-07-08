@@ -82,24 +82,17 @@ MoviesService.getActorCircleList = function(directorName: string, range: Array<n
 }
 
 MoviesService.getMovies = (director, range, actorName) => {
-	let movies = [];
-	
+	let movies = [];	
 	if (director === null) {
 		return [];
 	}
 
 	if (actorName === null) {
-		movies = MOVIES.filter((movie) => {
-			return movie.director.includes(director.name)
-						 && inRange(movie.year, range); 
-		});
+		movies = MOVIES.filter(movie => movie.director.includes(director.name) && inRange(movie.year, range) );
 	} else {
-		movies = MOVIES.filter((movie) => {
-			return movie.director.includes(director.name)
-						 && inRange(movie.year, range)
-						 && movie.actors.includes(actorName); 
-		});
+		movies = MOVIES.filter(movie => movie.director.includes(director.name) && inRange(movie.year, range) && movie.actors.includes(actorName) );
 	}
+
 	return movies;
 }
 

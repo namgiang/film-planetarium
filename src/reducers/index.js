@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import { CHANGE_RANGE, SET_CURRENT_ACTOR, SET_POSTERS } from '../services/actions';
+// import { CHANGE_RANGE, SET_CURRENT_ACTOR, SET_POSTERS } from '../actions/actions';
+import * as types from "../actions";
 
 const initialAppState = {
   range: [1955, 2010],
@@ -8,12 +9,12 @@ const initialAppState = {
 
 function app(state = initialAppState , action) {
   switch (action.type) {
-    case CHANGE_RANGE:
+    case types.CHANGE_RANGE:
       return {
         range: action.range,
         currentActor: state.currentActor
       };
-    case SET_CURRENT_ACTOR:
+    case types.SET_CURRENT_ACTOR:
       return {
         range: state.range,
         currentActor: action.currentActor
@@ -23,14 +24,34 @@ function app(state = initialAppState , action) {
   }
 }
 
-function posters(state = [], action) {
+// function posters(state = [], action) {
+//   switch (action.type) {
+//     case types.SET_POSTERS:
+//       return action.posters
+//     default:
+//       return state;
+//   }
+// }
+
+const posters = (state = {
+  isFetching: false,
+  urls: ""
+}, action) => {
   switch (action.type) {
-    case SET_POSTERS:
-      return action.posters
-    default:
-      return state;
+  case types.REQUEST_DATA:
+    return Object.assign({}, state, {
+      isFetching: true
+    });
+  case types.SET_POSTERS:
+  case types.RECEIVE_DATA:
+    return Object.assign({}, state, {
+      isFetching: false,
+      urls: action.urls
+    });
+  default:
+    return state;
   }
-}
+};
 
 const filmApp = combineReducers({
   app,

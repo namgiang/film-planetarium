@@ -8,7 +8,7 @@ import Planet from '../Planet/Planet';
 import MovieList from '../MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
-import { setCurrentActor, setPosters } from '../../services/actions';
+import { setCurrentActor, setPosters } from '../../actions';
 
 const createHandlers = function(dispatch) {
   const onCurrentActorChanged = function(actor) {
@@ -31,7 +31,6 @@ class Director extends Component {
 		this.state = {
 			imageUrls: []
 		}
-		// this.handleDirectorChange = this.handleDirectorChange.bind(this);
 		this.handleActorChange = this.handleActorChange.bind(this);
 		this.handlers = createHandlers(this.props.dispatch);
 	}

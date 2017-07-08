@@ -7,31 +7,15 @@ import 'es6-shim';
 import About from './components/About/About';
 import Directors from './components/Directors/Directors';
 import Director from './components/Director/Director';
-
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router';
-import { changeRange } from './services/actions';
-
 import createHistory from 'history/createHashHistory';
-
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
-
-import filmApp from './reducers/index';
+import { ConnectedRouter } from 'react-router-redux';
+import configureStore from "./store/configure-store";
 
 const history = createHistory();
 
-const middleware = routerMiddleware(history);
-
-const store = createStore(
-  combineReducers({
-    filmApp,
-    router: routerReducer
-  }),
-  applyMiddleware(middleware)
-);
-
-store.dispatch(changeRange([1955, 2010]));
+const store = configureStore();
 
 const rootEl = document.getElementById('root');
 
