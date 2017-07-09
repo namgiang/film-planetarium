@@ -44,7 +44,7 @@ class Director extends Component {
 	}
 
 	componentDidMount() {
-		MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector(), this.props.range, null))
+		MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector().name, this.props.range, null))
         .then(urls => {
             this.handlers.onLoaded(urls);
         });
@@ -64,10 +64,10 @@ class Director extends Component {
 
 	renderDirector(currentDirector) {
 		const actorCircleList = MoviesService.getActorCircleList(currentDirector.name, this.props.range, false);
-		const movies = MoviesService.getMovies(currentDirector, this.props.range, null);
+		const movies = MoviesService.getMovies(currentDirector.name, this.props.range, null);
 		let actorMovies;
 		if (this.props.currentActor) {
-			actorMovies = MoviesService.getMovies(currentDirector, this.props.range, this.props.currentActor.name);	
+			actorMovies = MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name);	
 		} else {
 			actorMovies = [];
 		}

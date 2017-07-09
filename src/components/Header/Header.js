@@ -13,8 +13,7 @@ import Anchor from 'grommet/components/Anchor';
 import MoviesService from '../../services/movies';
 import { DIRECTORS } from '../../data/directors.js';
 
-import { changeRange, setCurrentActor, setPosters } from '../../actions';
-import { fetchPosters } from '../../actions/fetch-posters';
+import { changeRange, setCurrentActor, setPosters, fetchPosters } from '../../actions';
 
 
 let createHandlers = function(dispatch) {
@@ -24,9 +23,9 @@ let createHandlers = function(dispatch) {
   let onCurrentActorChanged = function(actor) {
     dispatch(setCurrentActor(actor));
   };
-  let onDirectorSelected = (director, range) => {
+  let onDirectorSelected = (directorName, range) => {
     dispatch(setPosters([]));
-    dispatch(fetchPosters(director, range));
+    dispatch(fetchPosters(directorName, range));
   };
 
   return {
@@ -105,10 +104,10 @@ class Header extends Component {
         	<Menu responsive={true}
             	  label={directorName}
             	  direction="row"
-            	  className="director-dropdown"
-            	  dropAlign={{right: "right"}} >
+            	  className="director-dropdown" >
             	<Link to='/directors'>
-                    <Anchor className={directorName === "All directors" ? 'active' : ''} onClick={() => this.onDirectorSelected(null)}>
+                    <Anchor className={directorName === "All directors" ? 'active' : ''}
+                            onClick={() => this.onDirectorSelected(null) }>
             	       All directors
             	   </Anchor>
                 </Link>
@@ -123,7 +122,7 @@ class Header extends Component {
                 <Link to={`/director/${item.label}`} key={item.label}>
                     <Anchor key={item.label}                 	       	
                 		    className={item.name === directorName ? 'active' : ''}
-                            onClick={() => this.handlers.onDirectorSelected(item, this.props.range)}>
+                            onClick={() => this.handlers.onDirectorSelected(item.name, this.props.name)}>
         		      {item.name}
         		    </Anchor>
                 </Link>

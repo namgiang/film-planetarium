@@ -81,16 +81,16 @@ MoviesService.getActorCircleList = function(directorName: string, range: Array<n
 	return temp;
 }
 
-MoviesService.getMovies = (director, range, actorName) => {
+MoviesService.getMovies = (directorName, range, actorName) => {
 	let movies = [];	
-	if (director === null) {
+	if (directorName === null) {
 		return [];
 	}
 
 	if (actorName === null) {
-		movies = MOVIES.filter(movie => movie.director.includes(director.name) && inRange(movie.year, range) );
+		movies = MOVIES.filter(movie => movie.director.includes(directorName) && inRange(movie.year, range) );
 	} else {
-		movies = MOVIES.filter(movie => movie.director.includes(director.name) && inRange(movie.year, range) && movie.actors.includes(actorName) );
+		movies = MOVIES.filter(movie => movie.director.includes(directorName) && inRange(movie.year, range) && movie.actors.includes(actorName) );
 	}
 
 	return movies;
@@ -128,6 +128,10 @@ MoviesService.fetchImageUrls = (movies) => {
 
 function inRange(year, range) {
 	return year >= range[0] && year <= range[1];
+}
+
+MoviesService.getMovieByID = (id) => {
+	return MOVIES.find(movie => movie.imdbID === id);
 }
 
 export default MoviesService;

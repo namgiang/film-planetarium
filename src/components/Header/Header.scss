@@ -108,7 +108,11 @@
 		height: 6vh;
 		display: flex;
 		align-items: center;
-		font-family: 'Rajdhani', sans-serif;		
+		font-family: 'Rajdhani', sans-serif;
+
+		&:active {
+			outline: none !important;
+		}
 
 		.grommetux-button__icon {
 			color: white;
@@ -135,6 +139,11 @@
 	}
 }
 
+.grommetux-button,
+.grommetux-button:active,
+.grommetux-button:focus {
+	outline: none !important;
+	}
 
 @media screen and (max-aspect-ratio: 3/2) { 
 	.header {		

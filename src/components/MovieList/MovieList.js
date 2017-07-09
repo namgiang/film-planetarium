@@ -32,20 +32,18 @@ class MovieList extends Component {
 		super(props);
 		this.state = {
 			movieHovered: false,
-			hoveredMovie: '',
-			imageUrls: []
+			hoveredMovieID: ''
 		};
 	}
 
-	onMovieMouseOver = (movie) => {
+	onMovieMouseOver = (e) => {
 		this.setState({
 			movieHovered: true,
-			hoveredMovieID: movie.imdbID,
-			hoveredMovie: movie
+			hoveredMovieID: e.target.id
 		});
 	}
 
-	onMovieMouseOut = (movie) => {
+	onMovieMouseOut = () => {
 		this.setState({
 			movieHovered: false
 		});
@@ -56,7 +54,10 @@ class MovieList extends Component {
 			<div className="movies-container" key={this.props.director.name}>
 			  { this.renderMovieSummary() }
 			  <Loader loaded={this.props.loaded} options={spinnerOptions} className="spinner">
-				  { this.renderPosters() }
+			    <section onMouseOver={(e) => this.onMovieMouseOver(e)}
+			   			     onMouseOut={() => this.onMovieMouseOut()} >	
+				    { this.renderPosters() }
+				  </section>
 				</Loader>
 				{ this.state.movieHovered && this.renderMovieDescription() }
 			</div>			
@@ -69,13 +70,11 @@ class MovieList extends Component {
 		const directorName = (this.props.director) ? this.props.director.name : '';
 		return (
 			<p className="movies-summary">
-			    { currentActor ? 
-                    (
-                        <span>
-			    	        <label className="highlighted">{currentActor.name}</label> starred in <label>{this.props.actorMovies.length}/</label>
-					    </span>
-                    ) : <span></span> 
-                }
+			    { currentActor ? <span>
+			    	        				 <label className="highlighted">{currentActor.name}</label> starred in <label>{this.props.actorMovies.length}/</label>
+					    						 </span>
+                         : <span></span> 
+          }
 			    <label>{ movies.length }</label> movies directed by <label>{directorName}</label>
 			</p>
 		);
@@ -92,18 +91,20 @@ class MovieList extends Component {
 			if (actorMovies.length > 0) {
 				isActorMovie = MoviesService.checkMovieIsInArray(movie, actorMovies);	
 			}
+
+			let overlayClass = "overlay ";
+			overlayClass += urls[i] === 'N/A' ? "no-poster" : "poster";
+			overlayClass += isActorMovie ? " opacity-0" : "";
+
 			if (movie) {
 				let el = (
 			   	    <div key={movie.imdbID}
 			   			 className="poster-container"
-			   			 data-tip data-for={movie.imdbID}
-			   			 onMouseOver={() => this.onMovieMouseOver(movie)}
-			   			 onMouseOut={() => this.onMovieMouseOut(movie)} >
-			   	        {(urls[i] === 'N/A') ? (<span>{movie.title}</span>) 
-				                             : (<img src={urls[i]} alt={movie.title}/>)}
-	    			    { !isActorMovie && (urls[i] === 'N/A') && <div className="overlay no-poster"></div> }
-	    			    { !isActorMovie && (urls[i] !== 'N/A') && <div className="overlay poster"></div> }
-		 		    </div>
+			   			 data-tip data-for={movie.imdbID}>
+			   	        {(urls[i] === 'N/A') ? <span>{movie.title}</span>
+				                               : <img src={urls[i]} alt={movie.title}/> }
+	    			    <div id={movie.imdbID} className={overlayClass}></div>
+		 		      </div>
 	    	    );
 			    posters.push(el);	
 			}			
@@ -113,23 +114,23 @@ class MovieList extends Component {
 	}
 
 	renderMovieDescription() {
-		const hoveredMovie = this.state.hoveredMovie;
+		const movieID = this.state.hoveredMovieID;
+		const hoveredMovie = MoviesService.getMovieByID(movieID);
 		
 		return (
-		    <ReactTooltip id={this.state.hoveredMovieID}
-		  	     		  className="movie-tooltip"
-						  place="left" >
-		        <p className="title">{hoveredMovie.title}</p>
-			 	<p className="year">{hoveredMovie.year}</p>
-			 	<p className="actors">Starred: {hoveredMovie.actors}</p>
-			 	<p className="plot">{hoveredMovie.plot}</p>
+		    <ReactTooltip id={movieID}
+		  	     		  		className="movie-tooltip"
+						  				place="left" >
+		      <p className="title">{hoveredMovie.title}</p>
+				 	<p className="year">{hoveredMovie.year}</p>
+				 	<p className="actors">Starred: {hoveredMovie.actors}</p>
+				 	<p className="plot">{hoveredMovie.plot}</p>
 			</ReactTooltip>
 	    );
 	}
 }
 function mapStateToProps(state) {
-	console.log(state);
-  return {
+	return {
   	loaded: !state.filmApp.posters.isFetching,
     posters: state.filmApp.posters.urls
   };

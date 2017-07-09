@@ -44,10 +44,10 @@ export const receiveData = (data: Object): Object => {
   };
 };
 
-export const fetchPosters = (director, range): Function => {
+export const fetchPosters = (directorName, range): Function => {
   return (dispatch) => {
     dispatch(requestData());
-    return MoviesService.fetchImageUrls(MoviesService.getMovies(director, range, null))
+    return MoviesService.fetchImageUrls(MoviesService.getMovies(directorName, range, null))
         .then(urls => {
             dispatch(receiveData(urls));
         });
