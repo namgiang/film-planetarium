@@ -51,7 +51,7 @@ class MovieList extends Component {
 
 	render () {
 		return (this.props.imageUrls !== []) ? (
-			<div className="movies-container" key={this.props.director.name}>
+			<section className="movies-container" key={this.props.director.name}>
 			  { this.renderMovieSummary() }
 			  <Loader loaded={this.props.loaded} options={spinnerOptions} className="spinner">
 			    <section onMouseOver={(e) => this.onMovieMouseOver(e)}
@@ -60,8 +60,8 @@ class MovieList extends Component {
 				  </section>
 				</Loader>
 				{ this.state.movieHovered && this.renderMovieDescription() }
-			</div>			
-		) : (<div></div>);
+			</section>			
+		) : (<section></section>);
 	}
 
 	renderMovieSummary() {
@@ -69,13 +69,13 @@ class MovieList extends Component {
 		const currentActor = this.props.currentActor;
 		const directorName = (this.props.director) ? this.props.director.name : '';
 		return (
-			<p className="movies-summary">
+			<p className="summary">
 			    { currentActor ? <span>
-			    	        				 <label className="highlighted">{currentActor.name}</label> starred in <label>{this.props.actorMovies.length}/</label>
+			    	        				 <label className="summary__label">{currentActor.name}</label> starred in <label className="summary__label">{this.props.actorMovies.length}/</label>
 					    						 </span>
                          : <span></span> 
           }
-			    <label>{ movies.length }</label> movies directed by <label>{directorName}</label>
+			    <label className="summary__label">{ movies.length }</label> movies directed by <label className="summary__label">{directorName}</label>
 			</p>
 		);
 	}
@@ -92,8 +92,8 @@ class MovieList extends Component {
 				isActorMovie = MoviesService.checkMovieIsInArray(movie, actorMovies);	
 			}
 
-			let overlayClass = "overlay ";
-			overlayClass += urls[i] === 'N/A' ? "no-poster" : "poster";
+			let overlayClass = "poster-container__overlay ";
+			overlayClass += urls[i] === 'N/A' ? "poster-container__overlay--no-poster" : "poster-container__overlay--poster";
 			overlayClass += isActorMovie ? " opacity-0" : "";
 
 			if (movie) {
@@ -101,14 +101,13 @@ class MovieList extends Component {
 			   	    <div key={movie.imdbID}
 			   			 className="poster-container"
 			   			 data-tip data-for={movie.imdbID}>
-			   	        {(urls[i] === 'N/A') ? <span>{movie.title}</span>
-				                               : <img src={urls[i]} alt={movie.title}/> }
+			   	        {(urls[i] === 'N/A') ? <span className="poster-container__title">{movie.title}</span>
+				                               : <img src={urls[i]} className="poster-container__img-poster" alt={movie.title}/> }
 	    			    <div id={movie.imdbID} className={overlayClass}></div>
 		 		      </div>
 	    	    );
 			    posters.push(el);	
-			}			
-		    
+			}		    
 		}
 		return posters;
 	}
@@ -121,10 +120,10 @@ class MovieList extends Component {
 		    <ReactTooltip id={movieID}
 		  	     		  		className="movie-tooltip"
 						  				place="left" >
-		      <p className="title">{hoveredMovie.title}</p>
-				 	<p className="year">{hoveredMovie.year}</p>
-				 	<p className="actors">Starred: {hoveredMovie.actors}</p>
-				 	<p className="plot">{hoveredMovie.plot}</p>
+		      <p className="movie-tooltip__title">{hoveredMovie.title}</p>
+				 	<p className="movie-tooltip__year">{hoveredMovie.year}</p>
+				 	<p className="movie-tooltip__actors">Starred: {hoveredMovie.actors}</p>
+				 	<p className="movie-tooltip__plot">{hoveredMovie.plot}</p>
 			</ReactTooltip>
 	    );
 	}

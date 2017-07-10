@@ -73,26 +73,26 @@ class Director extends Component {
 		}
 
 		return (
-			<div className="visuals">	
-			  <section className="left">
+			<article className="director-view">
+			  <section className="director-view__left">
 			      <Planet director={currentDirector} 
 			              actorCircleList={actorCircleList}
 			              onActorClicked={this.handleActorChange} />
-			      <div className="legend-1">
-			         <div></div><span>Actor</span>
+			      <div className="legend legend--1">
+			         <div className="legend__square"></div><span className="legend__label">Actor</span>
 			      </div>
-			      <div className="legend-2">
-			         <div></div><span>Actress</span>
+			      <div className="legend legend--2">
+			         <div className="legend__square"></div><span className="legend__label">Actress</span>
 			      </div>
 			  </section>
-			  <section className="right">
+			  <section className="director-view__right">
 			      <MovieList movies={movies}
 			      					 imageUrls={this.state.imageUrls}
 			                 actorMovies={actorMovies} 
 			                 currentActor={this.props.currentActor}
 			                 director={currentDirector} />
 			  </section>
-			</div>
+			</article>
 		);
 	}
 }

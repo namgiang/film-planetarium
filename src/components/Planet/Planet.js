@@ -42,9 +42,9 @@ class Planet extends Component {
     }
 
     renderDirectorImage() {
-        let directorClass = 'director-img center';
+        let directorClass = 'img-director center';
         if (this.props.mini) {
-            directorClass = 'mini-director-img center';
+            directorClass = 'img-director--mini center';
         }
         const director = this.props.director;
         const img = (director) ? ImageService.getDirectorImage(director.label) : '';
@@ -92,8 +92,8 @@ class Planet extends Component {
             <div>
                 <div className="times-container center"></div>
                 <div className="times center" >
-                    <span>
-                        <label>{this.state.times}</label>
+                    <span className="times__span">
+                        <label className="times__span__label">{this.state.times}</label>
                         <br/> movies
                     </span>
                 </div>

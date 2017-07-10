@@ -4,19 +4,19 @@
 .movies-container {
 	padding: 2vh 2vw 0 5vw;
 
-	.movies-summary {
+	.summary {
 	  color: gray;
 	  margin-left: .2vw;
+	}
 
-	  label {
-			color: white !important;
-			font-weight: 600;
-		}
+	.summary__label {
+		color: white !important;
+		font-weight: 600;
 	}
 
 	.loader {
 		margin-top: 10vh;
-	}
+	}	
 
 	.poster-container {
 		animation: easing .5s ease-in-out;
@@ -26,132 +26,124 @@
 		display: inline-block;
 		vertical-align: middle;
 		text-align: center;
-		margin: .2vw;
+		margin: .2vw;	
+	}
 
-		img {
-			animation: easing .5s ease-in-out;
-			width: 5vw;
-			height: 7vw;
-		}
+	.poster-container__title {
+		color: $alto;
+		position: relative;
+		font-size: .8vw;
+		top: 1.8vw;
+		width: 5vw;
+		height: 7vw;
+	}	
 
-		span {
-			color: $alto;
-			position: relative;
-			font-size: .8vw;
-			top: 1.8vw;
-			width: 5vw;
-			height: 7vw;
+	.poster-container__img-poster {
+		animation: easing .5s ease-in-out;
+		width: 5vw;
+		height: 7vw;
+	}
 
-			label {
-				color: white !important;
-			}
+	.poster-container__overlay {
+		background-color: black; 
+		position: relative;
+		top: -7.4vw;
+		height: 7.2vw;
+		opacity: .6;
+		width: 5.4vw;
 
-			&:hover {
-				cursor: default;
-			}
-		}
+		&.opacity-0 {
+		  opacity: 0 !important;
+	  }		
+	}
 
-		.overlay {
-			background-color: black; 
-			position: relative;
-			top: -7.4vw;
-			height: 7.2vw;
-			opacity: .6;
-			width: 5.4vw;
-
-			&.no-poster {
-				top: -5.6vh;
-			}
-
-			&.opacity-0 {
-				opacity: 0 !important;
-			}
-		}
+	.poster-container__overlay--no-poster {
+		top: -5.6vh;
 	}
 
 	.movie-tooltip {
 		max-height: 50vh;
-		width: 20vw;
+		width: 20vw;		
+	}
 
-		.title {
-			font-size: 1.5vw;
-			margin-bottom: 1vh !important;
-		}
+	.movie-tooltip__title {
+		font-size: 1.5vw;
+		margin-bottom: 1vh !important;
+	}
 
-		.title, 
-		.year {
-			margin-bottom: 1vh;
-		}
+	.movie-tooltip__title, 
+	.movie-tooltip__year {
+		margin-bottom: 1vh;
+	}
 
-
-		.year,
-		.actors,
-		.plot {
-			font-size: 1vw;
-		}
-	}	
+	.movie-tooltip__year,
+	.movie-tooltip__actors,
+	.movie-tooltip__plot {
+		font-size: 1vw;
+	}
 }
+
 
 @media screen and (max-aspect-ratio: 3/2) { 
 	.movies-container {
 		padding: 8vh 4vw 0 !important;
-	}
-	.movies-summary {
-		margin-bottom: 8vh !important;
-	}
 
-	.poster-container {
-		width: 40vw !important;
-		height: 50vw !important;
+		.summary {
+		  margin-bottom: 8vh !important;
+	  }
 
-		img {		
+	  .poster-container {
+			width: 40vw !important;
+			height: 50vw !important;		
+		}
+
+		.poster-container__img-poster {		
 			width: 40vw !important;
 			height: 50vw !important;
 		}
 
-		span {
+		.poster-container__title {
 			font-size: 4vw !important;
 			top: 14vw !important;
 			width: 40vw !important;
 			height: 50vw !important;
 		}
 
-		.overlay {
+		.poster-container__overlay {
 			top: -52vw !important;
 			height: 50.4vw !important;
 			opacity: .4 !important;
 			width: 40.2vw !important;
-
-			&.no-poster {
-				top: -5.5vw !important;
-			}
 		}
-	}
 
-	.movie-tooltip {
-		left: 7vw !important;
-		max-height: 80vh !important;
-		position: fixed !important;
-		top: 15vh !important;
-		width: 80vw !important;
-		z-index: 100 !important;
+		.poster-container__overlay--no-poster {
+			top: -5.5vw !important;
+		}
 
-		.title {
+		.movie-tooltip {
+			left: 7vw !important;
+			max-height: 80vh !important;
+			position: fixed !important;
+			top: 15vh !important;
+			width: 80vw !important;
+			z-index: 100 !important;		
+		}
+
+		.movie-tooltip__title {
 			font-size: 5vw !important;
 			margin-bottom: 1vh !important;
 		}
 
-		.title, 
-		.year {
+		.movie-tooltip__title, 
+		.movie-tooltip__year {
 			margin-bottom: 1vh !important;
 		}
 
-
-		.year,
-		.actors,
-		.plot {
+		.movie-tooltip__year,
+		.movie-tooltip__actors,
+		.movie-tooltip__plot {
 			font-size: 4vw !important;
 		}
-	}	
+	}
 }
 

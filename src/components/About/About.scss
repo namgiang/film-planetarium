@@ -10,109 +10,99 @@
 	top: 0;
 	width: 92vw;	
 	overflow-y: hidden;
-	
-	p {
-		&:first-of-type {
-			font-family: 'Rubik Mono One', sans-serif;
-			font-size: 5vw;
-			font-weight: 800;
-			margin-bottom: 0;
-		}
+}
 
-		&:nth-of-type(2) {
-			margin-bottom: 8vh;
-		}
+.about__title {
+	font-family: 'Rubik Mono One', sans-serif;
+	font-size: 5vw;
+	font-weight: 800;
+	margin-bottom: 0;
+}
 
-		&:nth-of-type(3),
-		&:nth-of-type(4) {
-			font-size: 1.3vw;
-			margin: .6vh 0; 
-		}
+.about__description {
+	margin-bottom: 8vh;
+}
+
+.about__sub-description {
+	font-size: 1.3vw;
+	margin: .6vh 0;
+}
+
+.about__img-container {
+	-webkit-animation: Moving 20s linear 1s infinite alternate;
+	-moz-animation: Moving 20s linear 1s infinite alternate;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 5vw;
+	height: 5vw;		
+}	
+
+.about__img-container__img {
+  position: relative;
+	top: 65vh;
+	left: -5vw;
+	width: 5vw;
+	-webkit-animation: Floatingx 3s ease-in-out infinite alternate;
+	-moz-animation: Floating 3s infinite ease-in-out;
+
+	&:hover {
+		-webkit-animation: FloatingFastx 1s ease-in-out infinite alternate;
+		-moz-animation: FloatingFast 1s infinite ease-in-out;
 	}
+}
 
-	.planet-img-container {
-		-webkit-animation: Moving 20s linear 1s infinite alternate;
-		-moz-animation: Moving 20s linear 1s infinite alternate;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 5vw;
-		height: 5vw;		
+@-webkit-keyframes Floatingx {
+	from {-webkit-transform:translate(0, 0px);}
+	65% {-webkit-transform:translate(0, 15px);}
+	to {-webkit-transform: translate(0, -0px);    }    
+}
 
-		img {
-			position: relative;
-			top: 65vh;
-			left: -5vw;
-			width: 5vw;
-			-webkit-animation: Floatingx 3s ease-in-out infinite alternate;
-			-moz-animation: Floating 3s infinite ease-in-out;
+@-moz-keyframes Floating {
+	from {-moz-transform:translate(0, 0px);}
+	65% {-moz-transform:translate(0, 15px);}
+	to {-moz-transform: translate(0, -0px);}    
+}
 
-			&:hover {
-				-webkit-animation: FloatingFastx 1s ease-in-out infinite alternate;
-				-moz-animation: FloatingFast 1s infinite ease-in-out;
-			}
-		}
-	}	
+@-webkit-keyframes FloatingFastx {
+	from {-webkit-transform:translate(0, 0px);}
+	65% {-webkit-transform:translate(0, 30px);}
+	to {-webkit-transform: translate(0, -15px);    }    
+}
 
-	@-webkit-keyframes Floatingx {
-		from {-webkit-transform:translate(0, 0px);}
-		65% {-webkit-transform:translate(0, 15px);}
-		to {-webkit-transform: translate(0, -0px);    }    
-	}
+@-moz-keyframes FloatingFast {
+	from {-moz-transform:translate(0, 0px);}
+	65% {-moz-transform:translate(0, 30px);}
+	to {-moz-transform: translate(0, -15px);}    
+}
 
-	@-moz-keyframes Floating {
-		from {-moz-transform:translate(0, 0px);}
-		65% {-moz-transform:translate(0, 15px);}
-		to {-moz-transform: translate(0, -0px);}    
-	}
+@-webkit-keyframes Moving {
+	from { -webkit-transform: translate(0, 0);}
+	20% { -webkit-transform: translate(20vw, 0);}
+	50% { -webkit-transform: translate(50vw, 0);}
+	to { -webkit-transform: translate(105vw, 0);}    
+}
 
-	@-webkit-keyframes FloatingFastx {
-		from {-webkit-transform:translate(0, 0px);}
-		65% {-webkit-transform:translate(0, 30px);}
-		to {-webkit-transform: translate(0, -15px);    }    
-	}
-
-	@-moz-keyframes FloatingFast {
-		from {-moz-transform:translate(0, 0px);}
-		65% {-moz-transform:translate(0, 30px);}
-		to {-moz-transform: translate(0, -15px);}    
-	}
-
-	@-webkit-keyframes Moving {
-		from { -webkit-transform: translate(0, 0);}
-		20% { -webkit-transform: translate(20vw, 0);}
-		50% { -webkit-transform: translate(50vw, 0);}
-		to { -webkit-transform: translate(105vw, 0);}    
-	}
-
-	@-moz-keyframes Moving {
-		from { -moz-transform: translate(0, 0);}
-		20% { -moz-transform: translate(20vw, 0);}
-		50% { -moz-transform: translate(50vw, 0);}
-		to { -moz-transform: translate(105vw, 0);}    
-	}
-
+@-moz-keyframes Moving {
+	from { -moz-transform: translate(0, 0);}
+	20% { -moz-transform: translate(20vw, 0);}
+	50% { -moz-transform: translate(50vw, 0);}
+	to { -moz-transform: translate(105vw, 0);}    
 }
 
 @media screen and (max-aspect-ratio: 3/2) { 
-	.about {	
-		p {
-			&:first-of-type {
-				font-size: 10vw;
-				font-weight: 300 !important;
-				margin-bottom: 2vh;				
-			}
-
-			&:nth-of-type(2) {
-				font-size: 5vw !important;
-				margin-bottom: 8vh;
-			}
-
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				font-size: 5vw; 
-			}
-		}
+	.about__title {
+		font-size: 10vw;
+		font-weight: 300 !important;
+		margin-bottom: 2vh;				
 	}
 
+	.about__description {
+		font-size: 5vw !important;
+		margin-bottom: 8vh;
+	}
+
+	.about__sub-description {
+		font-size: 5vw; 			
+	}
 }

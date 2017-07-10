@@ -1,54 +1,50 @@
 @import "../../themes/variables.scss";
 @import "../../themes/shared.scss";
 
-.header {
+.app-header {
 	align-items: center;
 	display: flex;
 	height: 6vh;
 	margin-top: 2vh;
-	text-align: left;
-
-	.left {
-		align-items: center;
-		width: 46vw;
-		display: flex;
-		justify-content: center;
-
-		.range-container {
-			width: 38vw;
-		}
-
-		.period {
-			display: none;
-			width: 10vw;
-		}
-
-		.min-year,
-		.max-year {
-			width: 4vw;
-		}
-
-		.min-year {
-			text-align: right;
-			margin-right: 2vw;
-		}
-
-		.max-year {
-			margin-left: 2vw;
-		}
-	}
-
-	.right {
-		text-align: left !important;
-		width: 46vw;
-
-		.director-dropdown {
-			width: 20vw;
-			margin-left: 5.2vw;
-		}   
-	}
+	text-align: left;	
 }
 
+.app-header__left {
+	align-items: center;
+	width: 46vw;
+	display: flex;
+	justify-content: center;
+}
+
+.range-container {
+  width: 38vw;
+}
+
+.label--min-year,
+.label--max-year {
+	width: 4vw;
+}
+
+.label--min-year {
+	text-align: right;
+	margin-right: 2vw;
+}
+
+.label--max-year {
+	margin-left: 2vw;
+}
+
+.app-header__right {
+	text-align: left !important;
+	width: 46vw;   
+}
+
+.menu-director {
+	width: 20vw;
+	margin-left: 5.2vw;
+}
+
+// slider
 .rc-slider {
 	height: 6vh !important;
 	width: 100% !important;
@@ -95,11 +91,12 @@
 	font-size: 1vw !important;
 }
 
+// dropdown menu
 .grommetux-menu,
 .grommetux-menu__drop {
 	border-radius: 0 !important;
 
-	> button {
+	.grommetux-button {
 		background-color: $boulder;
 		color: white;
 		border-radius: 0 !important;
@@ -112,13 +109,13 @@
 
 		&:active {
 			outline: none !important;
-		}
+		}		
+	}
 
-		.grommetux-button__icon {
-			color: white;
-			padding: 0 1vw;
-			fill: white !important;
-		}
+	.grommetux-button__icon {
+		color: white;
+		padding: 0 1vw;
+		fill: white !important;
 	}
 
 	.grommetux-menu__contents {
@@ -126,7 +123,7 @@
 		font-size: 1vw;
 		text-align: left !important;
 
-		a {
+		.grommetux-anchor {
 			background-color: $silver !important;
 			color: white !important;
 			text-align: left !important;
@@ -139,75 +136,44 @@
 	}
 }
 
-.grommetux-button,
-.grommetux-button:active,
-.grommetux-button:focus {
-	outline: none !important;
-	}
-
 @media screen and (max-aspect-ratio: 3/2) { 
-	.header {		
+	.app-header {		
 		align-items: flex-end !important;
 		display: block !important;
-		margin-top: 10vh !important;
+		margin-top: 10vh !important;		
 
-		.left {
-			// display: block !important;
-			// margin-left: 4vw !important;
-			width: 92vw;
-
-			.min-year,
-			.max-year {
-				// display: none;
-				margin: 0 !important;
-				flex: 1;
-			}
-
-			.range-container {
-				flex: 6;
-				margin: 0 !important;
-				
-				.rc-slider {
-					margin: auto !important;
-					width: 80% !important;
-				}
-			}
+		.grommetux-menu,
+		.grommetux-menu__drop {
+			width: 60vw !important;
 		}
+
+		.grommetux-button {					
+			font-size: 4vw !important;
+			margin: auto !important;
+		}
+
 		.grommetux-menu__contents {
-			a {
-				font-size: 4vw !important;	
-			}
+			font-size: 4vw !important;
 		}
 
-		.right {
-			text-align: center;
-			width: 92vw !important;
-
-			.director-dropdown {
-				width: 60vw !important;
-				margin-top: 4vh !important;
-				margin-left: 16vw !important;
-			}
-
-			.grommetux-menu,
-			.grommetux-menu__drop {
-				width: 60vw !important;
-
-				> button {					
-					font-size: 4vw !important;
-					margin: auto !important;
-				}
-				.grommetux-menu__contents {
-					font-size: 4vw !important;
-				}
-
-			}
+		.grommetux-anchor {
+			font-size: 4vw !important;	
 		}
 	}
 
-	.rc-slider {
-		margin-left: 4.4vw !important;
+	.app-header__left {
+		width: 92vw;
+	}
+
+	.range-container {
+		flex: 6;
+		margin: 0 !important;
 		
+		.rc-slider {
+			margin: auto !important;
+			width: 80% !important;
+		}
+
 		.rc-slider-handle {
 			width: 5vw !important;
 
@@ -215,17 +181,33 @@
 				margin-left: -5vw !important;
 			}
 		}
+
+		.rc-slider-tooltip-inner {
+			font-size: 4vw !important;
+		}
 	}
 
-	.rc-slider-tooltip-inner {
-		font-size: 4vw !important;
+	.label--min-year,
+	.label--max-year {
+		margin: 0 !important;
+		flex: 1;
 	}
+	
+	.app-header__right {
+		text-align: center;
+		width: 92vw !important;			
+	}
+
+	.menu-director {
+		width: 60vw !important;
+		margin-top: 4vh !important;
+		margin-left: 16vw !important;
+	}	
 }
 
 @media screen and (max-width: 44.9375em) {
-	.grommetux-menu,
-	.grommetux-menu__drop {
-		> button {
+	.app-header {
+		.grommetux-button {
 			font-size: 4vw !important;
 		}
 
@@ -235,24 +217,22 @@
 	}	
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (max-aspect-ratio: 3/2) {
-	.grommetux-menu__contents {
-		a {
+@media screen and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
+	.app-header {
+		.grommetux-anchor {
 			font-size: 5vw !important;	
 		}
-	}
 
-	.grommetux-menu,
-	.grommetux-menu__drop {
-		> button {
+		.grommetux-button {
 			font-size: 5vw !important;
 		}
+
 		.grommetux-menu__contents {
 			font-size: 4vw !important;
 		}
-	}
 
-	.grommetux-menu__drop {
-		left: 70vw !important;
+		.grommetux-menu__drop {
+		  left: 70vw !important;
+	  }
 	}
 }

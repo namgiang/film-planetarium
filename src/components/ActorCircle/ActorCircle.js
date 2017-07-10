@@ -16,34 +16,34 @@ class ActorCircle extends Component {
 
 	render() {
 		const actorSelected = this.props.actorClicked;
-		let actorDots = [];
+		let actorCircles = [];
 		let actors = this.props.actors;
 		for (let i = 0; i < this.props.itemCount; i++) {
 			const actor = actors[i];
-			let dotClassName = actor.color;
+			let circleClassName = "actor-container__circle " + "actor-container__circle--" + actor.color;
 			if (actorSelected !== null && actorSelected.name === actor.name) {
-				dotClassName += ' selected';
+				circleClassName += ' selected';
 			}
-			actorDots.push(
-				<li key={i}>				  
-                    <a onClick={() => this.onActorClicked(actor)}
-                       onMouseOver={() => this.onActorMouseOver(actor)}
-                       onMouseOut={() => this.onActorMouseOut(actor)} >			      
-                        <div className={dotClassName } ></div>
-                        <span className="actor-name">
-                            {actors[i].name}
-                        </span>				  
-                    </a>
-                </li>
+			actorCircles.push(
+				<li key={i} className="actor-container">				  
+          <a onClick={() => this.onActorClicked(actor)}
+             onMouseOver={() => this.onActorMouseOver(actor)}
+             onMouseOut={() => this.onActorMouseOut(actor)} >			      
+              <div className={circleClassName} ></div>
+              <span className="actor-name">
+                  {actors[i].name}
+              </span>				  
+          </a>
+        </li>
             );
 		}
 		
 		return (
 			<ul className={this.props.className} >
-                {actorDots}
-            </ul>
-        );
-    }
+        {actorCircles}
+      </ul>
+    );
+  }
 
 }
 

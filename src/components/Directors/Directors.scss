@@ -1,49 +1,45 @@
-.all-directors-container {
+.directors-container {
   display: flex;
   flex-wrap: wrap;
   margin-top: 4vh;
   width: 92vw;
-
-  .planet-container {
-    width: 22vw;
-    padding-bottom: 15.5vw;
-    padding-top: 2vw;  
-  }
 }
 
-a {
+.directors-container__director {
   text-decoration: none;
   color: white;
 }
 
-@media screen and (max-aspect-ratio: 3/2) { 
-  .all-directors-container {
-    margin-top: 16vh;
+.directors-container__director__planet {
+  width: 22vw;
+  padding-bottom: 15.5vw;
+  padding-top: 2vw;  
+}
 
-    .planet-container {
-      width: 92vw;
-      padding-bottom: 14vh;
-      padding-top: 10vh;  
-    }
+@media screen and (max-aspect-ratio: 3/2) { 
+  .directors-container {
+    margin-top: 16vh;
   }
 
-  .mini-director-name {
+  .directors-container__director__planet {
+    width: 92vw;
+    padding-bottom: 14vh;
+    padding-top: 10vh;  
+  }
+
+  .directors-container__director__name {
     margin: 12vh 0 8vh;
   }
-
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (max-aspect-ratio: 3/2) {
-  .all-directors-container {
-   
-    .planet-container {
-      width: 100%;
-      padding-bottom: 20vh !important;
-      padding-top: 10vh;  
-    }
+  .directors-container__director__planet {
+    width: 100%;
+    padding-bottom: 20vh !important;
+    padding-top: 10vh;  
   }
 
-  .mini-director-name {
+  .directors-container__director__name {
     margin: 16vh 0 10vh !important;
   }
 }

@@ -32,13 +32,13 @@
     list-style: none;
     top: (13vw - $circle-size) / 2;
 
-    > li {
+    .actor-container {
         display: none;
     }
 }
 
 @mixin on-circle-dots($item-count, $circle-size, $item-size) {
-    > li {
+    .actor-container {
         display: block;
         position: absolute;
         top:  50%;
@@ -72,7 +72,7 @@
             $unit: 15vh;
             @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
 
-            div { 
+            .actor-container__circle { 
                 width: 3vh;
                 height: 3vh; 
             }
@@ -82,11 +82,11 @@
             $unit: 4vw;
             @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-            div { 
+            .actor-container__circle { 
                 width: 0;
                 height: 0; 
             }
-            span {
+            .actor-name {
                 display: none;
             }
         }
@@ -108,11 +108,11 @@
         border: solid 2px $alto;
     }
 
-    li {
+    .actor-container {
         animation: easing 1s ease-in-out; 
     }
 
-    div { 
+    .actor-container__circle { 
         border-radius: 50%;
         transition: .15s;
         
@@ -155,7 +155,7 @@
         }
     }
 
-    span {
+    .actor-name {
         background: black;
         position: absolute;
         margin-top: 1vh;
@@ -193,12 +193,12 @@
                 $unit: 18vw;
                 @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-                div { 
+                .actor-container__circle { 
                     width: 0;
                     height: 0; 
                 }
                 
-                span {
+                .actor-name {
                   display: none;
                 }
             }
@@ -219,11 +219,12 @@
                 $unit: 10vw;
                 @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-                div { 
+                .actor-container__circle { 
                   width: 0;
                   height: 0; 
                 }
-                span {
+                
+                .actor-name {
                   display: none;
                 }
             }

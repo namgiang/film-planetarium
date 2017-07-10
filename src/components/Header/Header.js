@@ -48,20 +48,20 @@ class Header extends Component {
 
 	render() {
         return (
-        	<div className="header">
+        	<header className="app-header">
             	{ this.renderRange() }
-            	<div className="right">  
+            	<div className="app-header__right">  
                 	<Logo linkTo='/about' />
                 	{ this.renderMenu() }
             	</div>                
-        	</div>
+        	</header>
        	);
     }
 
     renderRange(): void {
     	return (
-        	<div className="left">
-            	<label className="min-year">
+        	<div className="app-header__left">
+            	<label className="label--min-year">
             	   {this.props.range[0]}
             	</label>
             	<div className="range-container">
@@ -73,7 +73,7 @@ class Header extends Component {
                     	   onChange={(value) => this.handlers.onRangeChanged(value)}
                     	   pushable={true} />            
             	</div>
-            	<label className="max-year">
+            	<label className="label--max-year">
             	   {this.props.range[1]}
             	</label>
         	</div>
@@ -104,7 +104,7 @@ class Header extends Component {
         	<Menu responsive={true}
             	  label={directorName}
             	  direction="row"
-            	  className="director-dropdown" >
+            	  className="menu-director" >
             	<Link to='/directors'>
                     <Anchor className={directorName === "All directors" ? 'active' : ''}
                             onClick={() => this.onDirectorSelected(null) }>
