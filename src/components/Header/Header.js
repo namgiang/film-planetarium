@@ -50,7 +50,7 @@ class Header extends Component {
         return (
         	<header className="app-header">
             	{ this.renderRange() }
-            	<div className="app-header__right">  
+            	<div className="app-header_right">  
                 	<Logo linkTo='/about' />
                 	{ this.renderMenu() }
             	</div>                
@@ -60,7 +60,7 @@ class Header extends Component {
 
     renderRange(): void {
     	return (
-        	<div className="app-header__left">
+        	<div className="app-header_left">
             	<label className="label--min-year">
             	   {this.props.range[0]}
             	</label>

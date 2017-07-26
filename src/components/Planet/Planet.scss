@@ -1,5 +1,3 @@
-@import "../../themes/variables.scss";
-
 .planet {
 	height: 100%;
 	position: relative;
@@ -48,11 +46,11 @@
 	top: 41.5vh;	
 }
 
-.times__span {
+.times_span {
 	font-size: .8vw;
 }
 
-.times__span__label {
+.times_span_label {
 	font-size: 1.5vw !important;
 }
 
@@ -69,11 +67,11 @@
 		top: 42vh !important;
 	}
 
-	.times__span {
+	.times_span {
 		font-size: 3.6vw !important;
 	}
 
-	.times__span__label {
+	.times_span_label {
 		font-size: 4.8vw !important;
 	}
 

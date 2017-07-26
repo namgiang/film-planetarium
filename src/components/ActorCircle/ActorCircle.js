@@ -20,7 +20,7 @@ class ActorCircle extends Component {
 		let actors = this.props.actors;
 		for (let i = 0; i < this.props.itemCount; i++) {
 			const actor = actors[i];
-			let circleClassName = "actor-container__circle " + "actor-container__circle--" + actor.color;
+			let circleClassName = "actor-container_circle " + "actor-container_circle--" + actor.color;
 			if (actorSelected !== null && actorSelected.name === actor.name) {
 				circleClassName += ' selected';
 			}

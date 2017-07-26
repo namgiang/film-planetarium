@@ -1,5 +1,4 @@
-@import '../../themes/shared.scss';
-@import '../../themes/variables.scss';
+@import '../../assets/scss/variables.scss';
 
 .movies-container {
 	padding: 2vh 2vw 0 5vw;
@@ -9,7 +8,7 @@
 	  margin-left: .2vw;
 	}
 
-	.summary__label {
+	.summary_label {
 		color: white !important;
 		font-weight: 600;
 	}
@@ -29,7 +28,7 @@
 		margin: .2vw;	
 	}
 
-	.poster-container__title {
+	.poster-container_title {
 		color: $alto;
 		position: relative;
 		font-size: .8vw;
@@ -38,13 +37,13 @@
 		height: 7vw;
 	}	
 
-	.poster-container__img-poster {
+	.poster-container_img-poster {
 		animation: easing .5s ease-in-out;
 		width: 5vw;
 		height: 7vw;
 	}
 
-	.poster-container__overlay {
+	.poster-container_overlay {
 		background-color: black; 
 		position: relative;
 		top: -7.4vw;
@@ -57,7 +56,7 @@
 	  }		
 	}
 
-	.poster-container__overlay--no-poster {
+	.poster-container_overlay--no-poster {
 		top: -5.6vh;
 	}
 
@@ -66,19 +65,19 @@
 		width: 20vw;		
 	}
 
-	.movie-tooltip__title {
+	.movie-tooltip_title {
 		font-size: 1.5vw;
 		margin-bottom: 1vh !important;
 	}
 
-	.movie-tooltip__title, 
-	.movie-tooltip__year {
+	.movie-tooltip_title, 
+	.movie-tooltip_year {
 		margin-bottom: 1vh;
 	}
 
-	.movie-tooltip__year,
-	.movie-tooltip__actors,
-	.movie-tooltip__plot {
+	.movie-tooltip_year,
+	.movie-tooltip_actors,
+	.movie-tooltip_plot {
 		font-size: 1vw;
 	}
 }
@@ -97,26 +96,26 @@
 			height: 50vw !important;		
 		}
 
-		.poster-container__img-poster {		
+		.poster-container_img-poster {		
 			width: 40vw !important;
 			height: 50vw !important;
 		}
 
-		.poster-container__title {
+		.poster-container_title {
 			font-size: 4vw !important;
 			top: 14vw !important;
 			width: 40vw !important;
 			height: 50vw !important;
 		}
 
-		.poster-container__overlay {
+		.poster-container_overlay {
 			top: -52vw !important;
 			height: 50.4vw !important;
 			opacity: .4 !important;
 			width: 40.2vw !important;
 		}
 
-		.poster-container__overlay--no-poster {
+		.poster-container_overlay--no-poster {
 			top: -5.5vw !important;
 		}
 
@@ -129,19 +128,19 @@
 			z-index: 100 !important;		
 		}
 
-		.movie-tooltip__title {
+		.movie-tooltip_title {
 			font-size: 5vw !important;
 			margin-bottom: 1vh !important;
 		}
 
-		.movie-tooltip__title, 
-		.movie-tooltip__year {
+		.movie-tooltip_title, 
+		.movie-tooltip_year {
 			margin-bottom: 1vh !important;
 		}
 
-		.movie-tooltip__year,
-		.movie-tooltip__actors,
-		.movie-tooltip__plot {
+		.movie-tooltip_year,
+		.movie-tooltip_actors,
+		.movie-tooltip_plot {
 			font-size: 4vw !important;
 		}
 	}

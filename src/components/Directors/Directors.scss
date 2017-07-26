@@ -1,3 +1,5 @@
+@import '../../assets/scss/variables.scss';
+
 .directors-container {
   display: flex;
   flex-wrap: wrap;
@@ -5,12 +7,12 @@
   width: 92vw;
 }
 
-.directors-container__director {
+.directors-container_director {
   text-decoration: none;
   color: white;
 }
 
-.directors-container__director__planet {
+.directors-container_director_planet {
   width: 22vw;
   padding-bottom: 15.5vw;
   padding-top: 2vw;  
@@ -21,25 +23,25 @@
     margin-top: 16vh;
   }
 
-  .directors-container__director__planet {
+  .directors-container_director_planet {
     width: 92vw;
     padding-bottom: 14vh;
     padding-top: 10vh;  
   }
 
-  .directors-container__director__name {
+  .directors-container_director_name {
     margin: 12vh 0 8vh;
   }
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (max-aspect-ratio: 3/2) {
-  .directors-container__director__planet {
+  .directors-container_director_planet {
     width: 100%;
     padding-bottom: 20vh !important;
     padding-top: 10vh;  
   }
 
-  .directors-container__director__name {
+  .directors-container_director_name {
     margin: 16vh 0 10vh !important;
   }
 }

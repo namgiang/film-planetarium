@@ -71,11 +71,11 @@ class MovieList extends Component {
 		return (
 			<p className="summary">
 			    { currentActor ? <span>
-			    	        				 <label className="summary__label">{currentActor.name}</label> starred in <label className="summary__label">{this.props.actorMovies.length}/</label>
+			    	        				 <label className="summary_label">{currentActor.name}</label> starred in <label className="summary_label">{this.props.actorMovies.length}/</label>
 					    						 </span>
                          : <span></span> 
           }
-			    <label className="summary__label">{ movies.length }</label> movies directed by <label className="summary__label">{directorName}</label>
+			    <label className="summary_label">{ movies.length }</label> movies directed by <label className="summary_label">{directorName}</label>
 			</p>
 		);
 	}
@@ -92,8 +92,8 @@ class MovieList extends Component {
 				isActorMovie = MoviesService.checkMovieIsInArray(movie, actorMovies);	
 			}
 
-			let overlayClass = "poster-container__overlay ";
-			overlayClass += urls[i] === 'N/A' ? "poster-container__overlay--no-poster" : "poster-container__overlay--poster";
+			let overlayClass = "poster-container_overlay ";
+			overlayClass += urls[i] === 'N/A' ? "poster-container_overlay--no-poster" : "poster-container_overlay--poster";
 			overlayClass += isActorMovie ? " opacity-0" : "";
 
 			if (movie) {
@@ -101,8 +101,8 @@ class MovieList extends Component {
 			   	    <div key={movie.imdbID}
 			   			 className="poster-container"
 			   			 data-tip data-for={movie.imdbID}>
-			   	        {(urls[i] === 'N/A') ? <span className="poster-container__title">{movie.title}</span>
-				                               : <img src={urls[i]} className="poster-container__img-poster" alt={movie.title}/> }
+			   	        {(urls[i] === 'N/A') ? <span className="poster-container_title">{movie.title}</span>
+				                               : <img src={urls[i]} className="poster-container_img-poster" alt={movie.title}/> }
 	    			    <div id={movie.imdbID} className={overlayClass}></div>
 		 		      </div>
 	    	    );
@@ -120,10 +120,10 @@ class MovieList extends Component {
 		    <ReactTooltip id={movieID}
 		  	     		  		className="movie-tooltip"
 						  				place="left" >
-		      <p className="movie-tooltip__title">{hoveredMovie.title}</p>
-				 	<p className="movie-tooltip__year">{hoveredMovie.year}</p>
-				 	<p className="movie-tooltip__actors">Starred: {hoveredMovie.actors}</p>
-				 	<p className="movie-tooltip__plot">{hoveredMovie.plot}</p>
+		      <p className="movie-tooltip_title">{hoveredMovie.title}</p>
+				 	<p className="movie-tooltip_year">{hoveredMovie.year}</p>
+				 	<p className="movie-tooltip_actors">Starred: {hoveredMovie.actors}</p>
+				 	<p className="movie-tooltip_plot">{hoveredMovie.plot}</p>
 			</ReactTooltip>
 	    );
 	}

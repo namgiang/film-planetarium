@@ -1,15 +1,15 @@
-@import "../../themes/variables.scss";
+@import '../../assets/scss/variables.scss';
 
 .director-view {
 	display: flex;
 	height: 80vh;
 }
 
-.director-view__left {
+.director-view_left {
   width: 46vw;
 }
 
-.director-view__right {
+.director-view_right {
   width: 46vw;
   text-align: left;
 }
@@ -23,21 +23,21 @@
   display: flex;
 }
 
-.legend__square {
+.legend_square {
   width: 1vw;
   height: 1vw;
   background-color: $blue;
   margin: 1vh 0;
 }  
 
-.legend__label {
+.legend_label {
   margin-left: 1vw;
 }
 
 .legend--2 {
   bottom: 4vw;
 
-  .legend__square {
+  .legend_square {
     background-color: $pink;
   }
 }
@@ -47,12 +47,12 @@
     display: block !important;
   }
 
-  .director-view__left {
+  .director-view_left {
     width: 90vw;
     margin-top: -4vh !important;
   }
 
-  .director-view__right {
+  .director-view_right {
     width: 90vw;
     margin-top: 75vh;
   }
@@ -62,13 +62,13 @@
     width: 20vw;  
   }
 
-  .legend__square {
+  .legend_square {
     width: 3vw;
     height: 3vw;
     margin: 1vh 0;
   }
 
-  .legend__label {
+  .legend_label {
     margin-left: 3vw;
   }
 

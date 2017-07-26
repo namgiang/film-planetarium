@@ -15,9 +15,9 @@ class Directors extends Component {
         const emptyArray = [];
         return DIRECTORS.map((director, index) => {
             return (
-                <Link to={`/director/${director.label}`} key={director.label} className="directors-container__director" >
+                <Link to={`/director/${director.label}`} key={director.label} className="directors-container_director" >
                     <div key={'mini-director-' + director.label}>
-                        <div className="directors-container__director__planet">
+                        <div className="directors-container_director_planet">
                             <Planet director={director}
                                     imageUrls={emptyArray}
                                     actorMovies={emptyArray}
@@ -25,7 +25,7 @@ class Directors extends Component {
                                     range={this.props.range}
                                     onActorClicked={null} />
                         </div>
-                        <p className="directors-container__director__name">
+                        <p className="directors-container_director_name">
                             {director.name}
                         </p>
                     </div>

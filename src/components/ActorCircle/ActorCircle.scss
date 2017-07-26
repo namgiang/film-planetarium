@@ -1,5 +1,5 @@
-@import "../../themes/variables.scss";
-@import "../../themes/shared.scss";
+// @import '../../assets/scss/shared.css';
+@import '../../assets/scss/variables.scss';
 
 @mixin on-circle($circle-size, $item-size) {
     position: absolute;
@@ -72,7 +72,7 @@
             $unit: 15vh;
             @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
 
-            .actor-container__circle { 
+            .actor-container_circle { 
                 width: 3vh;
                 height: 3vh; 
             }
@@ -82,7 +82,7 @@
             $unit: 4vw;
             @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-            .actor-container__circle { 
+            .actor-container_circle { 
                 width: 0;
                 height: 0; 
             }
@@ -112,7 +112,7 @@
         animation: easing 1s ease-in-out; 
     }
 
-    .actor-container__circle { 
+    .actor-container_circle { 
         border-radius: 50%;
         transition: .15s;
         
@@ -193,7 +193,7 @@
                 $unit: 18vw;
                 @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-                .actor-container__circle { 
+                .actor-container_circle { 
                     width: 0;
                     height: 0; 
                 }
@@ -219,7 +219,7 @@
                 $unit: 10vw;
                 @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
 
-                .actor-container__circle { 
+                .actor-container_circle { 
                   width: 0;
                   height: 0; 
                 }

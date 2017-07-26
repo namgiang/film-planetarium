@@ -25,7 +25,6 @@ const createHandlers = function(dispatch) {
 }
 
 class Director extends Component {
-
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -74,18 +73,18 @@ class Director extends Component {
 
 		return (
 			<article className="director-view">
-			  <section className="director-view__left">
+			  <section className="director-view_left">
 			      <Planet director={currentDirector} 
 			              actorCircleList={actorCircleList}
 			              onActorClicked={this.handleActorChange} />
 			      <div className="legend legend--1">
-			         <div className="legend__square"></div><span className="legend__label">Actor</span>
+			         <div className="legend_square"></div><span className="legend_label">Actor</span>
 			      </div>
 			      <div className="legend legend--2">
-			         <div className="legend__square"></div><span className="legend__label">Actress</span>
+			         <div className="legend_square"></div><span className="legend_label">Actress</span>
 			      </div>
 			  </section>
-			  <section className="director-view__right">
+			  <section className="director-view_right">
 			      <MovieList movies={movies}
 			      					 imageUrls={this.state.imageUrls}
 			                 actorMovies={actorMovies} 

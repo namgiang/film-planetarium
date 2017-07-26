@@ -1,18 +1,21 @@
-@import "../../themes/variables.scss";
-@import "../../themes/shared.scss";
+@import '../../assets/scss/variables.scss';
+$width-header-part: 46vw;
 
-.app-header {
+%flex-display {
 	align-items: center;
 	display: flex;
+}
+
+.app-header {
+	@extend %flex-display;
 	height: 6vh;
 	margin-top: 2vh;
 	text-align: left;	
 }
 
-.app-header__left {
-	align-items: center;
-	width: 46vw;
-	display: flex;
+.app-header_left {
+	@extend %flex-display;
+	width: $width-header-part;
 	justify-content: center;
 }
 
@@ -34,9 +37,9 @@
 	margin-left: 2vw;
 }
 
-.app-header__right {
+.app-header_right {
 	text-align: left !important;
-	width: 46vw;   
+	width: $width-header-part;   
 }
 
 .menu-director {
@@ -93,7 +96,7 @@
 
 // dropdown menu
 .grommetux-menu,
-.grommetux-menu__drop {
+.grommetux-menu_drop {
 	border-radius: 0 !important;
 
 	.grommetux-button {
@@ -112,13 +115,13 @@
 		}		
 	}
 
-	.grommetux-button__icon {
+	.grommetux-button_icon {
 		color: white;
 		padding: 0 1vw;
 		fill: white !important;
 	}
 
-	.grommetux-menu__contents {
+	.grommetux-menu_contents {
 		font-family: 'Rajdhani', sans-serif;		
 		font-size: 1vw;
 		text-align: left !important;
@@ -143,7 +146,7 @@
 		margin-top: 10vh !important;		
 
 		.grommetux-menu,
-		.grommetux-menu__drop {
+		.grommetux-menu_drop {
 			width: 60vw !important;
 		}
 
@@ -152,7 +155,7 @@
 			margin: auto !important;
 		}
 
-		.grommetux-menu__contents {
+		.grommetux-menu_contents {
 			font-size: 4vw !important;
 		}
 
@@ -161,7 +164,7 @@
 		}
 	}
 
-	.app-header__left {
+	.app-header_left {
 		width: 92vw;
 	}
 
@@ -193,7 +196,7 @@
 		flex: 1;
 	}
 	
-	.app-header__right {
+	.app-header_right {
 		text-align: center;
 		width: 92vw !important;			
 	}
@@ -211,7 +214,7 @@
 			font-size: 4vw !important;
 		}
 
-		.grommetux-menu__contents {
+		.grommetux-menu_contents {
 			font-size: 4vw !important;
 		}
 	}	
@@ -227,11 +230,11 @@
 			font-size: 5vw !important;
 		}
 
-		.grommetux-menu__contents {
+		.grommetux-menu_contents {
 			font-size: 4vw !important;
 		}
 
-		.grommetux-menu__drop {
+		.grommetux-menu_drop {
 		  left: 70vw !important;
 	  }
 	}

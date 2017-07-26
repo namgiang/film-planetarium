@@ -92,8 +92,8 @@ class Planet extends Component {
             <div>
                 <div className="times-container center"></div>
                 <div className="times center" >
-                    <span className="times__span">
-                        <label className="times__span__label">{this.state.times}</label>
+                    <span className="times_span">
+                        <label className="times_span_label">{this.state.times}</label>
                         <br/> movies
                     </span>
                 </div>

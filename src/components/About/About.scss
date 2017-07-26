@@ -12,23 +12,23 @@
 	overflow-y: hidden;
 }
 
-.about__title {
+.about_title {
 	font-family: 'Rubik Mono One', sans-serif;
 	font-size: 5vw;
 	font-weight: 800;
 	margin-bottom: 0;
 }
 
-.about__description {
+.about_description {
 	margin-bottom: 8vh;
 }
 
-.about__sub-description {
+.about_sub-description {
 	font-size: 1.3vw;
 	margin: .6vh 0;
 }
 
-.about__img-container {
+.about_img-container {
 	-webkit-animation: Moving 20s linear 1s infinite alternate;
 	-moz-animation: Moving 20s linear 1s infinite alternate;
 	position: absolute;
@@ -38,7 +38,7 @@
 	height: 5vw;		
 }	
 
-.about__img-container__img {
+.about_img-container_img {
   position: relative;
 	top: 65vh;
 	left: -5vw;
@@ -91,18 +91,18 @@
 }
 
 @media screen and (max-aspect-ratio: 3/2) { 
-	.about__title {
+	.about_title {
 		font-size: 10vw;
 		font-weight: 300 !important;
 		margin-bottom: 2vh;				
 	}
 
-	.about__description {
+	.about_description {
 		font-size: 5vw !important;
 		margin-bottom: 8vh;
 	}
 
-	.about__sub-description {
+	.about_sub-description {
 		font-size: 5vw; 			
 	}
 }

@@ -1,4 +1,22 @@
+// ------------------------------------
+// FONTS
+// ------------------------------------
+
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500|Source+Sans+Pro|Rubik+Mono+One|Rajdhani');
+
+// ------------------------------------
+// SHARED
+// ------------------------------------
+
+@import './assets/scss/shared.css';
+@import './assets/scss/variables.scss';
+
+// ------------------------------------
+// PARTIALS
+// ------------------------------------
+
+@import './assets/scss/responsive.css';
+
 body {
   background: black; 
   color: white;
@@ -10,12 +28,6 @@ body {
 
 ::-webkit-scrollbar { 
   display: none; 
-}
-
-@media screen and (max-aspect-ratio: 3/2) { 
-	body {
-		font-size: 4vw;
-	}
 }
 
 .App {
