@@ -1,19 +1,21 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunkMiddleware from "redux-thunk";
-import filmApp from '../reducers/index';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import filmApp from './reducers';
 import createHistory from 'history/createHashHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 const history = createHistory();
 
 const routeMiddleware = routerMiddleware(history);
 
-const createStoreWithMiddleware = applyMiddleware(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const createStoreWithMiddleware = composeEnhancers(applyMiddleware(
   thunkMiddleware,
   routeMiddleware
-)(createStore);
+))(createStore);
 
-const configureStore = function (initialState: Object = {}): Function {
+const configureStore = function (initialState = {}) {
   return createStoreWithMiddleware(combineReducers({
     filmApp,
     router: routerReducer

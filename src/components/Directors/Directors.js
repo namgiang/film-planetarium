@@ -2,14 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Directors.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 
-import { DIRECTORS } from '../../data/directors';
+import { DIRECTORS } from '../../assets/data/directors';
+import { setCurrentDirector } from '../../store/actions';
 
+const createHandlers = function (dispatch) {
+    const onCurrentDirectorChanged = function () {
+        dispatch(setCurrentDirector(null));
+    };
+
+    return {
+        onCurrentDirectorChanged,
+    };
+}
 
 class Directors extends Component {
+    constructor(props) {
+		super(props);	
+		this.handlers = createHandlers(this.props.dispatch);
+		this.handlers.onCurrentDirectorChanged();
+    }
     
     createDirectorList() {
         const emptyArray = [];
@@ -19,11 +35,11 @@ class Directors extends Component {
                     <div key={'mini-director-' + director.label}>
                         <div className="directors-container_director_planet">
                             <Planet director={director}
-                                    imageUrls={emptyArray}
-                                    actorMovies={emptyArray}
-                                    mini={true}
-                                    range={this.props.range}
-                                    onActorClicked={null} />
+                                imageUrls={emptyArray}
+                                actorMovies={emptyArray}
+                                mini={true}
+                                range={this.props.range}
+                                onActorClicked={() => { }} />
                         </div>
                         <p className="directors-container_director_name">
                             {director.name}
@@ -38,19 +54,24 @@ class Directors extends Component {
         document.body.style.overflowY = 'auto';
         return (
             <div>
-                <Header />
+
                 <div className="directors-container">
-                    { this.createDirectorList() }
+                    {this.createDirectorList()}
                 </div>
             </div>
         );
     }
 }
 
+Directors.propTypes = {
+    range: PropTypes.arrayOf(PropTypes.number),
+    dispatch: PropTypes.func
+}
+
 function mapStateToProps(state) {
-  return {
-    range: state.filmApp.app.range
-  };
+    return {
+        range: state.filmApp.app.range
+    };
 }
 
 export default connect(mapStateToProps)(Directors);

@@ -21,7 +21,7 @@ const IMAGES = [pic_1, pic_2, pic_3, pic_4, pic_5, pic_6, pic_7, pic_8, pic_9, p
 
 function ImageService() {}
 
-ImageService.getDirectorImage = (label: string) => {
+ImageService.getDirectorImage = (label) => {
 	for (let i in IMAGES) {  	
   	if (IMAGES[i].includes(label)) {
   		return IMAGES[i];

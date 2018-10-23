@@ -1,140 +1,145 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Header.css';
 
 import Logo from '../Logo/Logo';
-import {Handle, Range} from 'rc-slider';
+import { Handle, Range } from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 
-import MoviesService from '../../services/movies';
-import { DIRECTORS } from '../../data/directors.js';
+import { DIRECTORS } from '../../assets/data/directors.js';
+import { changeRange, setCurrentActor, setPosters, fetchPosters } from '../../store/actions';
+import { Director } from '../../models/director';
 
-import { changeRange, setCurrentActor, setPosters, fetchPosters } from '../../actions';
 
+const createHandlers = (dispatch) => {
+	const onRangeChanged = (range) => {
+		dispatch(changeRange(range));
+	};
+	const onCurrentActorChanged = (actor) => {
+		dispatch(setCurrentActor(actor));
+	};
+	const onDirectorSelected = async (directorName, range) => {
+		await dispatch(setPosters([]));
+		dispatch(fetchPosters(directorName, range));
+	};
 
-let createHandlers = function(dispatch) {
-  let onRangeChanged = function(range) {
-    dispatch(changeRange(range));
-  };
-  let onCurrentActorChanged = function(actor) {
-    dispatch(setCurrentActor(actor));
-  };
-  let onDirectorSelected = (directorName, range) => {
-    dispatch(setPosters([]));
-    dispatch(fetchPosters(directorName, range));
-  };
-
-  return {
-    onRangeChanged,
-    onCurrentActorChanged,
-    onDirectorSelected
-  };
+	return {
+		onRangeChanged,
+		onCurrentActorChanged,
+		onDirectorSelected
+	};
 }
 
 class Header extends Component {
 	constructor(props) {
 		super(props);
-		this.onDirectorSelected = this.onDirectorSelected.bind(this);
-        this.handlers = createHandlers(this.props.dispatch);
+		this.handlers = createHandlers(this.props.dispatch);
 	}
 
-    onDirectorSelected = (value) => {
-        this.handlers.onCurrentActorChanged(null);
-    }
+	onDirectorSelected = (value) => {
+		this.handlers.onCurrentActorChanged(null);
+	}
 
 	render() {
-        return (
-        	<header className="app-header">
-            	{ this.renderRange() }
-            	<div className="app-header_right">  
-                	<Logo linkTo='/about' />
-                	{ this.renderMenu() }
-            	</div>                
-        	</header>
-       	);
-    }
+		return (
+			<header className="app-header">
+				{this.renderRange()}
+				<div className="app-header_right">
+					<Logo linkTo='/about' />
+					{this.renderMenu()}
+				</div>
+			</header>
+		);
+	}
 
-    renderRange(): void {
-    	return (
-        	<div className="app-header_left">
-            	<label className="label--min-year">
-            	   {this.props.range[0]}
-            	</label>
-            	<div className="range-container">
-                	<Range min={1950}
-                    	   max={2015} 
-                    	   defaultValue={[1955, 2010]} 
-                    	   tipFormatter={value => `${value}`} 
-                    	   handle={this.handle}
-                    	   onChange={(value) => this.handlers.onRangeChanged(value)}
-                    	   pushable={true} />            
-            	</div>
-            	<label className="label--max-year">
-            	   {this.props.range[1]}
-            	</label>
-        	</div>
-    	);
-    }
+	renderRange() {
+		return (
+			<div className="app-header_left">
+				<label className="label--min-year">
+					{this.props.range[0]}
+				</label>
+				<div className="range-container">
+					<Range min={1950}
+						max={2015}
+						defaultValue={[1955, 2010]}
+						tipFormatter={value => `${value}`}
+						handle={this.handle}
+						onChange={(value) => this.handlers.onRangeChanged(value)}
+						pushable={true} />
+				</div>
+				<label className="label--max-year">
+					{this.props.range[1]}
+				</label>
+			</div>
+		);
+	}
 
-    handle(props) {
-    	const { value, dragging, index, ...restProps } = props;
-    	return (
-        	<Tooltip prefixCls="rc-slider-tooltip"
-                	 overlay={value}
-                	 visible={dragging}
-                	 placement="top"
-                	 key={index} >
-        	   <Handle {...restProps} />
-        	</Tooltip>
-    	);
-    }
+	handle(props) {
+		const { value, dragging, index, ...restProps } = props;
+		return (
+			<Tooltip prefixCls="rc-slider-tooltip"
+				overlay={value}
+				visible={dragging}
+				placement="top"
+				key={index} >
+				<Handle {...restProps} />
+			</Tooltip>
+		);
+	}
 
-    renderMenu(): void {
-    	let directorName = 'All directors';
-        const currentDirector = this.props.currentDirector;
-    	if (currentDirector !== undefined && currentDirector !== null) {
-    		directorName = currentDirector.name
-    	}
-        const anchors = this.renderMenuAnchors(directorName);
-    	return (
-        	<Menu responsive={true}
-            	  label={directorName}
-            	  direction="row"
-            	  className="menu-director" >
-            	<Link to='/directors'>
-                    <Anchor className={directorName === "All directors" ? 'active' : ''}
-                            onClick={() => this.onDirectorSelected(null) }>
-            	       All directors
+	renderMenu() {
+		let directorName = 'All directors';
+		const currentDirector = this.props.currentDirector;
+		if (currentDirector !== undefined && currentDirector !== null) {
+			directorName = currentDirector.name
+		}
+		const anchors = this.renderMenuAnchors(directorName);
+		return (
+			<Menu responsive={true}
+				size='small'
+				label={directorName}
+				direction="row"
+				className="menu-director" >
+				<Anchor
+					href='/directors'
+					className={directorName === "All directors" ? 'active' : ''}
+					onClick={() => this.onDirectorSelected(null)}>
+					All directors
             	   </Anchor>
-                </Link>
-            	{anchors}
-        	</Menu>
-    	);
-    }
+				{anchors}
+			</Menu>
+		);
+	}
 
-    renderMenuAnchors(directorName): void {
-    	return DIRECTORS.map((item, key) => {
-    		return (
-                <Link to={`/director/${item.label}`} key={item.label}>
-                    <Anchor key={item.label}                 	       	
-                		    className={item.name === directorName ? 'active' : ''}
-                            onClick={() => this.handlers.onDirectorSelected(item.name, this.props.name)}>
-        		      {item.name}
-        		    </Anchor>
-                </Link>
-            )
-    	});
-    } 
-  }
+	renderMenuAnchors(directorName) {
+		return DIRECTORS.map((item, key) => {
+			return (
+				<Anchor
+					href={'/director/' + item.label}
+					key={item.label}
+					className={item.name === directorName ? 'active' : ''}
+					onClick={() => this.handlers.onDirectorSelected(item.name, this.props.range)}>
+					{item.name}
+				</Anchor>
+			)
+		});
+	}
+}
+
+Header.propTypes = {
+	range: PropTypes.arrayOf(PropTypes.number),
+	currentDirector: Director
+}
 
 function mapStateToProps(state) {
-    return {
-        range: state.filmApp.app.range
-    };
+	return {
+		range: state.filmApp.app.range,
+		currentDirector: state.filmApp.app.currentDirector,
+	};
 }
 
 export default connect(mapStateToProps)(Header);

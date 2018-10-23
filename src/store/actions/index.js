@@ -1,8 +1,8 @@
-import MoviesService from '../services/movies';
+import MoviesService from '../../services/movies';
 
 export const CHANGE_RANGE = 'CHANGE_RANGE';
 export const GET_RANGE = 'GET_RANGE';
-export const SET_DIRECTOR = 'SET_DIRECTOR';
+export const SET_CURRENT_DIRECTOR = 'SET_CURRENT_DIRECTOR';
 export const SET_CURRENT_ACTOR = 'SET_CURRENT_ACTOR';
 export const SET_POSTERS = 'SET_POSTERS';
 
@@ -14,8 +14,8 @@ export function getRange() {
   return { type: GET_RANGE };
 }
 
-export function setDirector(director) {
-	return { type: SET_DIRECTOR, director: director };
+export function setCurrentDirector(director) {
+	return { type: SET_CURRENT_DIRECTOR, currentDirector: director };
 }
 
 export function setCurrentActor(actor) {
@@ -31,20 +31,20 @@ export function setPosters(urls) {
 export const REQUEST_DATA = "REQUEST_DATA";
 export const RECEIVE_DATA = "RECEIVE_DATA";
 
-export const requestData = (): Object => {
+export const requestData = () => {
   return {
     type: REQUEST_DATA
   };
 };
 
-export const receiveData = (data: Object): Object => {
+export const receiveData = (data) => {
   return {
     type: RECEIVE_DATA,
     data
   };
 };
 
-export const fetchPosters = (directorName, range): Function => {
+export const fetchPosters = (directorName, range) => {
   return (dispatch) => {
     dispatch(requestData());
     return MoviesService.fetchImageUrls(MoviesService.getMovies(directorName, range, null))

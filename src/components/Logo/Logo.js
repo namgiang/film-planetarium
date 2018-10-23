@@ -8,12 +8,9 @@ import { Link } from 'react-router-dom';
 class Logo extends Component {
     render() {
         return (
-            <div className="logo">
-                <Link to={this.props.linkTo}>
-                    <img src={logo}
-                         alt="logo"/>
-                </Link>
-            </div>
+            <Link to={this.props.linkTo} className="logo">
+                <img src={logo} alt="logo"/>
+            </Link>
         );
     }
 }

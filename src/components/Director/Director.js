@@ -2,36 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Director.css';
 import '../../../node_modules/grommet-css';
+import PropTypes from 'prop-types';
 
 import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 import MovieList from '../MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
-import { setCurrentActor, setPosters } from '../../actions';
+import { setCurrentActor, setCurrentDirector, setPosters } from '../../store/actions';
+import { Actor } from '../../models/actor';
 
 const createHandlers = function(dispatch) {
   const onCurrentActorChanged = function(actor) {
     dispatch(setCurrentActor(actor));
+	};
+	const onCurrentDirectorChanged = function(director) {
+    dispatch(setCurrentDirector(director));
   };
   const onLoaded = function(posters) {
     dispatch(setPosters(posters));
   };
 
   return {
-    onCurrentActorChanged,
+		onCurrentActorChanged,
+		onCurrentDirectorChanged,
     onLoaded
   };
 }
 
 class Director extends Component {
-	constructor(props: any) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			imageUrls: []
 		}
+		
 		this.handleActorChange = this.handleActorChange.bind(this);
 		this.handlers = createHandlers(this.props.dispatch);
+		this.handlers.onCurrentDirectorChanged(this.getCurrentDirector());
 	}
 
 	getCurrentDirector() {
@@ -55,7 +63,6 @@ class Director extends Component {
 		
 		return (
 			<div>
-			    <Header currentDirector={currentDirector} />
 			    { this.renderDirector(currentDirector) }
 			</div>
 		);
@@ -94,6 +101,12 @@ class Director extends Component {
 			</article>
 		);
 	}
+}
+
+Director.propTypes = {
+	range: PropTypes.arrayOf(PropTypes.number),
+	dispatch: PropTypes.func,
+	currentActor: Actor
 }
 
 function mapStateToProps(state) {

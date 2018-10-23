@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Planet.css';
 
 import ImageService from '../../services/images';
 import MoviesService from '../../services/movies';
-
 import ActorCircle from '../ActorCircle/ActorCircle';
+import { Actor, ActorCircleItem, Director } from '../../models';
 
 class Planet extends Component {
 	constructor(props) {
@@ -100,6 +101,13 @@ class Planet extends Component {
             </div>
         );
     }
+}
+
+Planet.propTypes = {
+    currentActor: Actor, 
+    director: Director,
+    mini: PropTypes.bool,
+    actorCircleList: PropTypes.arrayOf(ActorCircleItem)
 }
 
 function mapStateToProps(state) {

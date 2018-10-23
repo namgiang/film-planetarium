@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import Loader from 'react-loader';
 import './MovieList.css';
 
 import MoviesService from '../../services/movies.js';
+import { Director } from '../../models/director';
 
 const spinnerOptions = {
     lines: 8,
@@ -70,10 +72,10 @@ class MovieList extends Component {
 		const directorName = (this.props.director) ? this.props.director.name : '';
 		return (
 			<p className="summary">
-			    { currentActor ? <span>
-			    	        				 <label className="summary_label">{currentActor.name}</label> starred in <label className="summary_label">{this.props.actorMovies.length}/</label>
-					    						 </span>
-                         : <span></span> 
+			    {   currentActor ?  <span>
+										<label className="summary_label">{currentActor.name}</label> starred in <label className="summary_label">{this.props.actorMovies.length}/</label>
+								 	</span>
+                    :   <span></span> 
           }
 			    <label className="summary_label">{ movies.length }</label> movies directed by <label className="summary_label">{directorName}</label>
 			</p>
@@ -98,7 +100,7 @@ class MovieList extends Component {
 
 			if (movie) {
 				let el = (
-			   	    <div key={movie.imdbID}
+			   	    <div key={movie.imdbID + i}
 			   			 className="poster-container"
 			   			 data-tip data-for={movie.imdbID}>
 			   	        {(urls[i] === 'N/A') ? <span className="poster-container_title">{movie.title}</span>
@@ -117,10 +119,11 @@ class MovieList extends Component {
 		const hoveredMovie = MoviesService.getMovieByID(movieID);
 		
 		return (
-		    <ReactTooltip id={movieID}
-		  	     		  		className="movie-tooltip"
-						  				place="left" >
-		      <p className="movie-tooltip_title">{hoveredMovie.title}</p>
+			<ReactTooltip 
+				id={movieID}
+		  	    className="movie-tooltip"
+				place="left" >
+		      	<p className="movie-tooltip_title">{hoveredMovie.title}</p>
 				 	<p className="movie-tooltip_year">{hoveredMovie.year}</p>
 				 	<p className="movie-tooltip_actors">Starred: {hoveredMovie.actors}</p>
 				 	<p className="movie-tooltip_plot">{hoveredMovie.plot}</p>
@@ -128,6 +131,15 @@ class MovieList extends Component {
 	    );
 	}
 }
+
+MovieList.propTypes = {
+	imageUrls: PropTypes.arrayOf(PropTypes.string),
+	director: Director,
+	loaded: PropTypes.bool,
+	movies: PropTypes.array
+}
+
+
 function mapStateToProps(state) {
 	return {
   	loaded: !state.filmApp.posters.isFetching,

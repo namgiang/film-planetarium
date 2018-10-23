@@ -1,11 +1,11 @@
-import { MOVIES } from '../data/movies.js';
-import { ACTORS } from '../data/actors.js';
-import { DIRECTORS } from '../data/directors.js';
+import { MOVIES } from '../assets/data/movies.js';
+import { ACTORS } from '../assets/data/actors.js';
+import { DIRECTORS } from '../assets/data/directors.js';
 const imdb = require('imdb-api');
 
 function MoviesService(){};
 
-MoviesService.getFrequentActors = function(directorName: string, range: Array<number>) {
+MoviesService.getFrequentActors = function(directorName, range) {
 	let movies = MOVIES.filter(function(movie) {
 	  return ((movie.director) ? movie.director.includes(directorName) : false)
 	  			 && movie.year >= range[0] 
@@ -48,7 +48,7 @@ MoviesService.getFrequentActors = function(directorName: string, range: Array<nu
 	});
 };
 
-MoviesService.getActorCircleList = function(directorName: string, range: Array<number>, mini: boolean){
+MoviesService.getActorCircleList = function(directorName, range, mini){
 	let frequentActors = MoviesService.getFrequentActors(directorName, range);
 	let size = 0;
 	let actorList = frequentActors.map((item, key) => {
