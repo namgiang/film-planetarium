@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Logo.css';
-
 import logo from '../../assets/img/planet-orbit.svg';
 
-import { Link } from 'react-router-dom';
 
 class Logo extends Component {
     render() {

@@ -15,7 +15,7 @@ const createStoreWithMiddleware = composeEnhancers(applyMiddleware(
   routeMiddleware
 ))(createStore);
 
-const configureStore = function (initialState = {}) {
+const configureStore = (initialState = {}) => {
   return createStoreWithMiddleware(combineReducers({
     filmApp,
     router: routerReducer

@@ -12,21 +12,21 @@ import { setCurrentActor, setCurrentDirector, setPosters } from '../../store/act
 import { Actor } from '../../models/actor';
 
 const createHandlers = dispatch => {
-  const onCurrentActorChanged = actor => {
-    dispatch(setCurrentActor(actor));
+	const onCurrentActorChanged = actor => {
+		dispatch(setCurrentActor(actor));
 	};
 	const onCurrentDirectorChanged = director => {
-    dispatch(setCurrentDirector(director));
-  };
-  const onLoaded = posters => {
-    dispatch(setPosters(posters));
-  };
+		dispatch(setCurrentDirector(director));
+	};
+	const onLoaded = posters => {
+		dispatch(setPosters(posters));
+	};
 
-  return {
+	return {
 		onCurrentActorChanged,
 		onCurrentDirectorChanged,
-    onLoaded
-  };
+		onLoaded
+	};
 }
 
 class Director extends Component {
@@ -35,7 +35,7 @@ class Director extends Component {
 		this.state = {
 			imageUrls: []
 		}
-		
+
 		this.handleActorChange = this.handleActorChange.bind(this);
 		this.handlers = createHandlers(this.props.dispatch);
 		this.handlers.onCurrentDirectorChanged(this.getCurrentDirector());
@@ -49,18 +49,18 @@ class Director extends Component {
 		this.handlers.onCurrentActorChanged(actor);
 	}
 
-	componentDidMount() {
-		MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector().name, this.props.range, null))
-        .then(urls => this.handlers.onLoaded(urls));
+	async componentDidMount() {
+		const urls = await MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector().name, this.props.range, null))
+		this.handlers.onLoaded(urls);
 	}
 
 	render() {
 		const currentDirector = this.getCurrentDirector();
 		document.body.style.overflowY = 'auto';
-		
+
 		return (
 			<div>
-			    { this.renderDirector(currentDirector) }
+				{this.renderDirector(currentDirector)}
 			</div>
 		);
 	}
@@ -70,31 +70,31 @@ class Director extends Component {
 		const movies = MoviesService.getMovies(currentDirector.name, this.props.range, null);
 		let actorMovies;
 		if (this.props.currentActor) {
-			actorMovies = MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name);	
+			actorMovies = MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name);
 		} else {
 			actorMovies = [];
 		}
 
 		return (
 			<article className="director-view">
-			  <section className="director-view_left">
-			      <Planet director={currentDirector} 
-			              actorCircleList={actorCircleList}
-			              onActorClicked={this.handleActorChange} />
-			      <div className="legend legend--1">
-			         <div className="legend_square"></div><span className="legend_label">Actor</span>
-			      </div>
-			      <div className="legend legend--2">
-			         <div className="legend_square"></div><span className="legend_label">Actress</span>
-			      </div>
-			  </section>
-			  <section className="director-view_right">
-			      <MovieList movies={movies}
-			      					 imageUrls={this.state.imageUrls}
-			                 actorMovies={actorMovies} 
-			                 currentActor={this.props.currentActor}
-			                 director={currentDirector} />
-			  </section>
+				<section className="director-view_left">
+					<Planet director={currentDirector}
+						actorCircleList={actorCircleList}
+						onActorClicked={this.handleActorChange} />
+					<div className="legend legend--1">
+						<div className="legend_square"></div><span className="legend_label">Actor</span>
+					</div>
+					<div className="legend legend--2">
+						<div className="legend_square"></div><span className="legend_label">Actress</span>
+					</div>
+				</section>
+				<section className="director-view_right">
+					<MovieList movies={movies}
+						imageUrls={this.state.imageUrls}
+						actorMovies={actorMovies}
+						currentActor={this.props.currentActor}
+						director={currentDirector} />
+				</section>
 			</article>
 		);
 	}
@@ -106,11 +106,11 @@ Director.propTypes = {
 	currentActor: Actor
 }
 
-const mapStateToProps = (state) => {
-  return {
-    range: state.filmApp.app.range,
-    currentActor: state.filmApp.app.currentActor
-  };
+const mapStateToProps = state => {
+	return {
+		range: state.filmApp.app.range,
+		currentActor: state.filmApp.app.currentActor
+	};
 }
 
 export default connect(mapStateToProps)(Director);

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Directors.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import './Directors.css';
 import Planet from '../Planet/Planet';
-
 import { DIRECTORS } from '../../assets/data/directors';
 import { setCurrentDirector } from '../../store/actions';
 
@@ -20,11 +18,11 @@ const createHandlers = dispatch => {
 
 class Directors extends Component {
     constructor(props) {
-		super(props);	
-		this.handlers = createHandlers(this.props.dispatch);
-		this.handlers.onCurrentDirectorChanged();
+        super(props);
+        this.handlers = createHandlers(this.props.dispatch);
+        this.handlers.onCurrentDirectorChanged();
     }
-    
+
     createDirectorList() {
         const emptyArray = [];
         return DIRECTORS.map((director, index) => {
@@ -66,7 +64,7 @@ Directors.propTypes = {
     dispatch: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         range: state.filmApp.app.range
     };

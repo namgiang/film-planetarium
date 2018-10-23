@@ -107,9 +107,7 @@ export default class MoviesService {
 
 		movies.forEach(movie => {
 			let promise = imdb.getById(movie.imdbID, { apiKey: '8bb183ed' })
-				.then((res) => {
-					return res.poster;
-				})
+				.then(res => res.poster)
 				.catch(error => console.log(error));
 			promises.push(promise);
 		});

@@ -111,7 +111,7 @@ Planet.propTypes = {
     actorCircleList: PropTypes.arrayOf(ActorCircleItem)
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         currentActor: state.filmApp.app.currentActor
     };

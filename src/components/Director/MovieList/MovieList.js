@@ -139,7 +139,7 @@ MovieList.propTypes = {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		loaded: !state.filmApp.posters.isFetching,
 		posters: state.filmApp.posters.urls
