@@ -5,8 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import Loader from 'react-loader';
 import './MovieList.css';
 
-import MoviesService from '../../services/movies.js';
-import { Director } from '../../models/director';
+import MoviesService from '../../../services/movies.js';
+import { Director } from '../../../models/director';
 
 const spinnerOptions = {
     lines: 8,
@@ -140,7 +140,7 @@ MovieList.propTypes = {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
   	loaded: !state.filmApp.posters.isFetching,
     posters: state.filmApp.posters.urls

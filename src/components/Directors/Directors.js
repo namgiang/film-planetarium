@@ -68,7 +68,7 @@ Directors.propTypes = {
     dispatch: PropTypes.func
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         range: state.filmApp.app.range
     };

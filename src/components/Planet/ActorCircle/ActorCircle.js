@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ActorCircle.css';
-import { Actor } from '../../models/actor';
+import { Actor } from '../../../models/actor';
 
 class ActorCircle extends Component {
 	onActorClicked = (actor) => {

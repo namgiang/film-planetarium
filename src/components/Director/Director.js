@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
-import MovieList from '../MovieList/MovieList';
+import MovieList from './MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
 import { setCurrentActor, setCurrentDirector, setPosters } from '../../store/actions';
@@ -109,7 +109,7 @@ Director.propTypes = {
 	currentActor: Actor
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     range: state.filmApp.app.range,
     currentActor: state.filmApp.app.currentActor

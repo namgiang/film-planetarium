@@ -5,7 +5,7 @@ import './Planet.css';
 
 import ImageService from '../../services/images';
 import MoviesService from '../../services/movies';
-import ActorCircle from '../ActorCircle/ActorCircle';
+import ActorCircle from './ActorCircle/ActorCircle';
 import { Actor, ActorCircleItem, Director } from '../../models';
 
 class Planet extends Component {
@@ -110,7 +110,7 @@ Planet.propTypes = {
     actorCircleList: PropTypes.arrayOf(ActorCircleItem)
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         currentActor: state.filmApp.app.currentActor
     };

@@ -135,7 +135,7 @@ Header.propTypes = {
 	currentDirector: Director
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		range: state.filmApp.app.range,
 		currentDirector: state.filmApp.app.currentDirector,
