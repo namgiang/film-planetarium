@@ -1,5 +1,4 @@
-// @import '../../assets/scss/shared.css';
-@import '../../assets/scss/variables.scss';
+@import '../../../assets/scss/variables.scss';
 
 @mixin on-circle($circle-size, $item-size) {
     position: absolute;

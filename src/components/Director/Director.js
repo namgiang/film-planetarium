@@ -4,7 +4,6 @@ import './Director.css';
 import '../../../node_modules/grommet-css';
 import PropTypes from 'prop-types';
 
-import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 import MovieList from './MovieList/MovieList';
 

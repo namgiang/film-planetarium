@@ -4,7 +4,6 @@ import './Directors.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Header from '../Header/Header';
 import Planet from '../Planet/Planet';
 
 import { DIRECTORS } from '../../assets/data/directors';

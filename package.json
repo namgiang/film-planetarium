@@ -9,7 +9,6 @@
     "grommet": "^1.11.0",
     "grommet-css": "^1.6.0",
     "imdb-api": "^3.1.1",
-    "material-ui": "^0.17.2",
     "prop-types": "^15.6.2",
     "rc-slider": "^8.6.3",
     "rc-tooltip": "^3.4.2",
