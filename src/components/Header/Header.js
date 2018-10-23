@@ -15,11 +15,11 @@ import { changeRange, setCurrentActor, setPosters, fetchPosters } from '../../st
 import { Director } from '../../models/director';
 
 
-const createHandlers = (dispatch) => {
-	const onRangeChanged = (range) => {
+const createHandlers = dispatch => {
+	const onRangeChanged = range => {
 		dispatch(changeRange(range));
 	};
-	const onCurrentActorChanged = (actor) => {
+	const onCurrentActorChanged = actor => {
 		dispatch(setCurrentActor(actor));
 	};
 	const onDirectorSelected = async (directorName, range) => {
@@ -40,7 +40,7 @@ class Header extends Component {
 		this.handlers = createHandlers(this.props.dispatch);
 	}
 
-	onDirectorSelected = (value) => {
+	onDirectorSelected = value => {
 		this.handlers.onCurrentActorChanged(null);
 	}
 

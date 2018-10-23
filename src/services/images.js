@@ -19,15 +19,12 @@ import pic_18 from '../assets/img/directors/brian_palma.png';
 
 const IMAGES = [pic_1, pic_2, pic_3, pic_4, pic_5, pic_6, pic_7, pic_8, pic_9, pic_10, pic_11, pic_12, pic_13, pic_14, pic_15, pic_16, pic_17, pic_18];
 
-function ImageService() {}
-
-ImageService.getDirectorImage = (label) => {
-	for (let i in IMAGES) {  	
-  	if (IMAGES[i].includes(label)) {
-  		return IMAGES[i];
-  	}
-  }
-  return '';
-};
-
-export default ImageService;
+export default class ImageService {
+	static getDirectorImage(label) {
+		const img = IMAGES.find(img => img.match(label));
+		if (img) {
+			return img;
+		}
+		return '';
+	};
+}

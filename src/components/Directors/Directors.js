@@ -9,11 +9,10 @@ import Planet from '../Planet/Planet';
 import { DIRECTORS } from '../../assets/data/directors';
 import { setCurrentDirector } from '../../store/actions';
 
-const createHandlers = function (dispatch) {
-    const onCurrentDirectorChanged = function () {
+const createHandlers = dispatch => {
+    const onCurrentDirectorChanged = () => {
         dispatch(setCurrentDirector(null));
     };
-
     return {
         onCurrentDirectorChanged,
     };

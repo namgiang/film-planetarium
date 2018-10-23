@@ -11,14 +11,14 @@ import MoviesService from '../../services/movies';
 import { setCurrentActor, setCurrentDirector, setPosters } from '../../store/actions';
 import { Actor } from '../../models/actor';
 
-const createHandlers = function(dispatch) {
-  const onCurrentActorChanged = function(actor) {
+const createHandlers = dispatch => {
+  const onCurrentActorChanged = actor => {
     dispatch(setCurrentActor(actor));
 	};
-	const onCurrentDirectorChanged = function(director) {
+	const onCurrentDirectorChanged = director => {
     dispatch(setCurrentDirector(director));
   };
-  const onLoaded = function(posters) {
+  const onLoaded = posters => {
     dispatch(setPosters(posters));
   };
 
@@ -51,9 +51,7 @@ class Director extends Component {
 
 	componentDidMount() {
 		MoviesService.fetchImageUrls(MoviesService.getMovies(this.getCurrentDirector().name, this.props.range, null))
-        .then(urls => {
-            this.handlers.onLoaded(urls);
-        });
+        .then(urls => this.handlers.onLoaded(urls));
 	}
 
 	render() {

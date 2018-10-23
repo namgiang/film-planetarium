@@ -4,15 +4,15 @@ import './ActorCircle.css';
 import { Actor } from '../../../models/actor';
 
 class ActorCircle extends Component {
-	onActorClicked = (actor) => {
+	onActorClicked = actor => {
 		this.props.onActorClicked(actor);				
 	};
 
-	onActorMouseOver = (actor) => {
+	onActorMouseOver = actor => {
 		this.props.onActorHovered(actor);
 	}
 
-	onActorMouseOut = (actor) => {
+	onActorMouseOut = actor => {
 		this.props.onActorHovered(actor);
 	}
 

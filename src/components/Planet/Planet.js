@@ -17,11 +17,11 @@ class Planet extends Component {
 		};
 	}
 
-	onActorClicked = (actor) => {
+	onActorClicked = actor => {
 		this.props.onActorClicked(actor);
 	}
 
-	onActorHovered = (actor) => {
+	onActorHovered = actor => {
 		this.setState((prevState, props) => ({
 			actorHovered: !prevState.actorHovered,
 			times: actor.times
@@ -43,18 +43,19 @@ class Planet extends Component {
     }
 
     renderDirectorImage() {
+        if (!this.props.director) {
+            return null;
+        }
         let directorClass = 'img-director center';
         if (this.props.mini) {
             directorClass = 'img-director--mini center';
         }
-        const director = this.props.director;
-        const img = (director) ? ImageService.getDirectorImage(director.label) : '';
-
+        const img = ImageService.getDirectorImage(this.props.director.label);
         return (
             <img src={img} 
                  className={directorClass}
                  onClick={() => this.onDirectorClicked()}
-                 alt={director.label} />
+                 alt={this.props.director.label} />
         );
      }
 
