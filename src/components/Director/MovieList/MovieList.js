@@ -118,7 +118,7 @@ class MovieList extends Component {
 		const movieID = this.state.hoveredMovieID;
 		const hoveredMovie = MoviesService.getMovieByID(movieID);
 
-		return (
+		return ( hoveredMovie &&
 			<ReactTooltip
 				id={movieID}
 				className="movie-tooltip"
@@ -137,7 +137,6 @@ MovieList.propTypes = {
 	loaded: PropTypes.bool,
 	movies: PropTypes.array
 }
-
 
 const mapStateToProps = state => {
 	return {

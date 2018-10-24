@@ -102,11 +102,20 @@ export default class MoviesService {
 		return false;
 	}
 
+	static async fetchImageUrl(movie) {
+	    try {
+			const movieItem = await imdb.get({id: movie.imdbID}, { apiKey: '8bb183ed' })
+			return movieItem.poster;
+		} catch (error) {
+			throw error;
+		}
+	}
+
 	static fetchImageUrls(movies) {
 		let promises = [];
 
 		movies.forEach(movie => {
-			let promise = imdb.getById(movie.imdbID, { apiKey: '8bb183ed' })
+			let promise = imdb.get({id: movie.imdbID}, { apiKey: '8bb183ed' })
 				.then(res => res.poster)
 				.catch(error => console.log(error));
 			promises.push(promise);
@@ -114,8 +123,6 @@ export default class MoviesService {
 
 		return Promise.all(promises);
 	}
-
-
 
 	static getMovieByID(id) {
 		return MOVIES.find(movie => movie.imdbID === id);
