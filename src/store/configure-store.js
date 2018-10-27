@@ -1,25 +1,24 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import filmApp from './reducers';
-import createHistory from 'history/createHashHistory';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
 
-const history = createHistory();
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 
-const routeMiddleware = routerMiddleware(history);
-
+export const history = createBrowserHistory();
+const initialState = {};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const createStoreWithMiddleware = composeEnhancers(applyMiddleware(
-  thunkMiddleware,
-  routeMiddleware
-))(createStore);
 
-const configureStore = (initialState = {}) => {
-  return createStoreWithMiddleware(combineReducers({
-    filmApp,
-    router: routerReducer
-  }), initialState);
-};
+const store = createStore(
+  connectRouter(history)(filmApp),
+  initialState,
+  composeEnhancers(
+    applyMiddleware(
+      routerMiddleware(history), // for dispatching history actions
+      thunkMiddleware
+    ),
+  ),
+)
 
-export default configureStore;
+export default store;

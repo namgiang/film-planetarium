@@ -52,7 +52,7 @@ class MovieList extends Component {
 	}
 
 	render() {
-		return (this.props.posters.length > 0) ? (
+		return (this.props.posters && this.props.posters.length > 0) ? (
 			<section className="movies-container" key={this.props.director.name}>
 				{this.renderMovieSummary()}
 				<Loader loaded={this.props.loaded} options={spinnerOptions} className="spinner">
@@ -140,8 +140,8 @@ MovieList.propTypes = {
 
 const mapStateToProps = state => {
 	return {
-		loaded: !state.filmApp.posters.isFetching,
-		posters: state.filmApp.posters.urls
+		loaded: !state.posters.isFetching,
+		posters: state.posters.urls
 	};
 }
 

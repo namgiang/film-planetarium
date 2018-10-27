@@ -39,7 +39,7 @@ export const requestData = () => {
 export const receiveData = data => {
   return {
     type: RECEIVE_DATA,
-    data
+    urls: data
   };
 };
 

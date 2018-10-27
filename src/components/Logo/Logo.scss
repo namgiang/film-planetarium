@@ -1,9 +1,9 @@
 .logo {
 	height: 6vh;
 	position: absolute;
-	right: 7.5vw;
-	top: 2vh;
+	right: 0;
 	width: 6vh;
+	z-index: 1000;
 
 	&:hover {
 		cursor: pointer;
@@ -12,9 +12,9 @@
 
 @media screen and (max-aspect-ratio: 3/2) { 
 	.logo {
-		height: 7vw !important;
-		right: 7vw !important;
-		top: 1.3vh !important;
-		width: 7vw !important;
+		height: 7vw;
+		right: 7vw;
+		top: 1.3vh;
+		width: 7vw;
 	}
 }

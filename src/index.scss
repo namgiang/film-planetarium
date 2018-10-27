@@ -21,7 +21,7 @@ body {
   background: black; 
   color: white;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 1vw;
+  font-size: 16px;
   margin: 0;
   padding: 2vh 4vw;
 }
@@ -31,6 +31,14 @@ body {
 }
 
 .App {
-  margin-left: 4vw;
+  margin: 0 4vw;
   text-align: center;
+}
+
+.main-content {
+  position: fixed;
+  top: 8vh;
+  overflow: auto;
+  bottom: 2vh;
+  width: 92vw;
 }

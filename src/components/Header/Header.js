@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import './Header.css';
 
 import Logo from '../Logo/Logo';
@@ -11,7 +12,7 @@ import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 
 import { DIRECTORS } from '../../assets/data/directors.js';
-import { changeRange, setCurrentActor, setPosters, fetchPosters } from '../../store/actions';
+import { changeRange, setCurrentActor, setPosters, fetchPosters, setCurrentDirector } from '../../store/actions';
 import { Director } from '../../models/director';
 
 
@@ -22,9 +23,11 @@ const createHandlers = dispatch => {
 	const onCurrentActorChanged = actor => {
 		dispatch(setCurrentActor(actor));
 	};
-	const onDirectorSelected = async (directorName, range) => {
+	const onDirectorSelected = async (director, range) => {
 		await dispatch(setPosters([]));
-		dispatch(fetchPosters(directorName, range));
+		console.log('[1]', director);
+		dispatch(setCurrentDirector(director));
+		await dispatch(fetchPosters(director.name, range));
 	};
 
 	return {
@@ -40,38 +43,38 @@ class Header extends Component {
 		this.handlers = createHandlers(this.props.dispatch);
 	}
 
-	onDirectorSelected = value => {
+	onDirectorSelected = () => {
 		this.handlers.onCurrentActorChanged(null);
 	}
 
 	render() {
 		return (
-			<header className="app-header">
-				{this.renderRange()}
-				<div className="app-header_right">
-					<Logo linkTo='/about' />
-					{this.renderMenu()}
+			<header className='app-header'>
+				{!this.props.onlyLogo && this.renderRange()}
+				<div className='app-header_right'>
+					{!this.props.onlyLogo && this.renderMenu()}
 				</div>
+				<Logo linkTo={this.props.onlyLogo ? '/directors' : '/about'}/>
 			</header>
 		);
 	}
 
 	renderRange() {
 		return (
-			<div className="app-header_left">
-				<label className="label--min-year">
+			<div className='app-header_left'>
+				<label className='label--min-year'>
 					{this.props.range[0]}
 				</label>
-				<div className="range-container">
+				<div className='range-container'>
 					<Range min={1950}
 						max={2015}
-						defaultValue={[1955, 2010]}
+						defaultValue={this.props.range}
 						tipFormatter={value => `${value}`}
 						handle={this.handle}
 						onChange={(value) => this.handlers.onRangeChanged(value)}
 						pushable={true} />
 				</div>
-				<label className="label--max-year">
+				<label className='label--max-year'>
 					{this.props.range[1]}
 				</label>
 			</div>
@@ -81,10 +84,10 @@ class Header extends Component {
 	handle(props) {
 		const { value, dragging, index, ...restProps } = props;
 		return (
-			<Tooltip prefixCls="rc-slider-tooltip"
+			<Tooltip prefixCls='rc-slider-tooltip'
 				overlay={value}
 				visible={dragging}
-				placement="top"
+				placement='top'
 				key={index} >
 				<Handle {...restProps} />
 			</Tooltip>
@@ -102,14 +105,16 @@ class Header extends Component {
 			<Menu responsive={true}
 				size='small'
 				label={directorName}
-				direction="row"
-				className="menu-director" >
-				<Anchor
-					href='/directors'
-					className={directorName === "All directors" ? 'active' : ''}
-					onClick={() => this.onDirectorSelected(null)}>
-					All directors
-            	   </Anchor>
+				direction='row'
+				className='menu-director' >
+				<Link to='/directors'>
+				    <Anchor
+						tag='span'
+						className={directorName === 'All directors' ? 'active' : ''}
+						onClick={() => this.onDirectorSelected()}>
+						All directors
+            	    </Anchor>
+				</Link>
 				{anchors}
 			</Menu>
 		);
@@ -118,13 +123,15 @@ class Header extends Component {
 	renderMenuAnchors(directorName) {
 		return DIRECTORS.map((item, key) => {
 			return (
-				<Anchor
-					href={'/director/' + item.label}
-					key={item.label}
-					className={item.name === directorName ? 'active' : ''}
-					onClick={() => this.handlers.onDirectorSelected(item.name, this.props.range)}>
-					{item.name}
-				</Anchor>
+				<Link to={'/director/' + item.label} key={item.label}>
+					<Anchor
+						tag='span'
+						key={item.label}
+						className={item.name === directorName ? 'active' : ''}
+						onClick={() => this.handlers.onDirectorSelected(item, this.props.range)}>
+						{item.name}
+					</Anchor>
+				</Link>
 			)
 		});
 	}
@@ -137,9 +144,10 @@ Header.propTypes = {
 
 const mapStateToProps = state => {
 	return {
-		range: state.filmApp.app.range,
-		currentDirector: state.filmApp.app.currentDirector,
+		range: state.app.range,
+		currentDirector: state.app.currentDirector,
+		onlyLogo: state.router.location.pathname === '/about'
 	};
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));

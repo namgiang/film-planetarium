@@ -11,6 +11,8 @@ $width-header-part: 46vw;
 	height: 6vh;
 	margin-top: 2vh;
 	text-align: left;	
+	position: fixed;
+    width: 92vw;
 }
 
 .app-header_left {
@@ -38,7 +40,6 @@ $width-header-part: 46vw;
 }
 
 .app-header_right {
-	text-align: left !important;
 	width: $width-header-part;   
 }
 
@@ -91,20 +92,18 @@ $width-header-part: 46vw;
 	border-radius: 0 !important;
 	box-shadow: none !important;
 	color: black !important;
-	font-size: 1vw !important;
 }
 
 // dropdown menu
 .grommetux-menu,
-.grommetux-menu_drop {
-	border-radius: 0 !important;
+.grommetux-menu__drop {
 
 	.grommetux-button {
 		background-color: $boulder;
 		color: white;
 		border-radius: 0 !important;
 		display: flex;
-		font-size: 1vw !important;
+		font-size: 1rem;
 		height: 6vh;
 		display: flex;
 		align-items: center;
@@ -120,23 +119,19 @@ $width-header-part: 46vw;
 		padding: 0 1vw;
 		fill: white !important;
 	}
-
-	.grommetux-menu_contents {
-		font-family: 'Rajdhani', sans-serif;		
-		font-size: 1vw;
-		text-align: left !important;
-
 		.grommetux-anchor {
 			background-color: $silver !important;
 			color: white !important;
 			text-align: left !important;
 			padding: 1.2vh 1.4vw !important;
-		}
-	}
+			font-family: 'Rajdhani', sans-serif;
+			text-align: left !important;
 
-	.grommetux-anchor.active {
-		color: $yellow !important; 	
-	}
+			&.active {
+				color: $yellow !important; 	
+			}
+		}
+	
 }
 
 @media screen and (max-aspect-ratio: 3/2) { 
@@ -151,16 +146,7 @@ $width-header-part: 46vw;
 		}
 
 		.grommetux-button {					
-			font-size: 4vw !important;
 			margin: auto !important;
-		}
-
-		.grommetux-menu_contents {
-			font-size: 4vw !important;
-		}
-
-		.grommetux-anchor {
-			font-size: 4vw !important;	
 		}
 	}
 
@@ -184,10 +170,6 @@ $width-header-part: 46vw;
 				margin-left: -5vw !important;
 			}
 		}
-
-		.rc-slider-tooltip-inner {
-			font-size: 4vw !important;
-		}
 	}
 
 	.label--min-year,
@@ -206,36 +188,4 @@ $width-header-part: 46vw;
 		margin-top: 4vh !important;
 		margin-left: 16vw !important;
 	}	
-}
-
-@media screen and (max-width: 44.9375em) {
-	.app-header {
-		.grommetux-button {
-			font-size: 4vw !important;
-		}
-
-		.grommetux-menu_contents {
-			font-size: 4vw !important;
-		}
-	}	
-}
-
-@media screen and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
-	.app-header {
-		.grommetux-anchor {
-			font-size: 5vw !important;	
-		}
-
-		.grommetux-button {
-			font-size: 5vw !important;
-		}
-
-		.grommetux-menu_contents {
-			font-size: 4vw !important;
-		}
-
-		.grommetux-menu_drop {
-		  left: 70vw !important;
-	  }
-	}
 }

@@ -1,0 +1,77 @@
+@import '../../../assets/scss/variables.scss';
+
+.movies-container {
+	padding: 2vh 2vw 0 5vw;
+
+	.summary {
+	  color: gray;
+	  margin-left: .2vw;
+	}
+
+	.summary_label {
+		color: white !important;
+		font-weight: 600;
+	}
+
+	.loader {
+		margin-top: 10vh;
+	}	
+
+	.poster-container {
+		animation: easing .5s ease-in-out;
+		border: 0 !important;
+		width: 5vw;
+		height: 7vw;
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		margin: .2vw;	
+	}
+
+	.poster-container_title {
+		color: $alto;
+		position: relative;
+		top: 1.8vw;
+		width: 5vw;
+		height: 7vw;
+	}	
+
+	.poster-container_img-poster {
+		animation: easing .5s ease-in-out;
+		width: 5vw;
+		height: 7vw;
+	}
+
+	.poster-container_overlay {
+		background-color: black; 
+		position: relative;
+		top: -7.4vw;
+		height: 7.2vw;
+		opacity: .6;
+		width: 5.4vw;
+
+		&.opacity-0 {
+		  opacity: 0 !important;
+	  }		
+	}
+
+	.poster-container_overlay--no-poster {
+		top: -5.6vh;
+	}
+
+	.movie-tooltip {
+		max-height: 400px;
+		max-width: 320px;
+		min-width: 300px;		
+	}
+
+	.movie-tooltip_title {
+		font-size: 1.2rem;
+	}
+
+	.movie-tooltip_title, 
+	.movie-tooltip_year {
+		margin-bottom: .8rem;
+	}
+}
+

@@ -113,7 +113,7 @@ Planet.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        currentActor: state.filmApp.app.currentActor
+        currentActor: state.app.currentActor
     };
 }
 

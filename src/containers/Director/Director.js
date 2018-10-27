@@ -4,7 +4,7 @@ import './Director.css';
 import '../../../node_modules/grommet-css';
 import PropTypes from 'prop-types';
 
-import Planet from '../Planet/Planet';
+import Planet from '../../components/Planet/Planet';
 import MovieList from './MovieList/MovieList';
 
 import MoviesService from '../../services/movies';
@@ -68,6 +68,7 @@ class Director extends Component {
 	renderDirector(currentDirector) {
 		const actorCircleList = MoviesService.getActorCircleList(currentDirector.name, this.props.range, false);
 		const movies = MoviesService.getMovies(currentDirector.name, this.props.range, null);
+		console.log('[2]', movies);
 		let actorMovies;
 		if (this.props.currentActor) {
 			actorMovies = MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name);
@@ -90,7 +91,6 @@ class Director extends Component {
 				</section>
 				<section className="director-view_right">
 					<MovieList movies={movies}
-						imageUrls={this.state.imageUrls}
 						actorMovies={actorMovies}
 						currentActor={this.props.currentActor}
 						director={currentDirector} />
@@ -108,8 +108,8 @@ Director.propTypes = {
 
 const mapStateToProps = state => {
 	return {
-		range: state.filmApp.app.range,
-		currentActor: state.filmApp.app.currentActor
+		range: state.app.range,
+		currentActor: state.app.currentActor
 	};
 }
 

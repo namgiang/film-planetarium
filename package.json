@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "connected-react-router": "^4.1.0",
+    "connected-react-router": "^4.5.0",
     "create-react-app": "^2.0.4",
     "es6-shim": "^0.35.3",
     "grommet": "^1.11.0",
@@ -16,9 +16,7 @@
     "react-dom": "^16.5.2",
     "react-loader": "2.4.2",
     "react-redux": "^5.0.4",
-    "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-router-redux": "^5.0.0-alpha.6",
     "react-tap-event-plugin": "^2.0.1",
     "react-tooltip": "^3.2.10",
     "redux": "^3.6.0",

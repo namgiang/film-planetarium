@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import * as types from '../actions';
 
 const initialAppState = {
-  range: [1955, 2010],
+  range: [1952, 2013],
   currentActor: null,
   currentDirector: null
 };
@@ -43,6 +43,7 @@ const posters = (state = initialPostersState, action) => {
       };
     case types.SET_POSTERS:
     case types.RECEIVE_DATA:
+      console.log('[3]', action);
       return {
         isFetching: false,
         urls: action.urls

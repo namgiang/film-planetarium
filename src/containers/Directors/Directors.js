@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Directors.css';
-import Planet from '../Planet/Planet';
+import Planet from '../../components/Planet/Planet';
 import { DIRECTORS } from '../../assets/data/directors';
 import { setCurrentDirector } from '../../store/actions';
 
@@ -66,7 +66,7 @@ Directors.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        range: state.filmApp.app.range
+        range: state.app.range
     };
 }
 
