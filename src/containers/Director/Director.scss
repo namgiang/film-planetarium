@@ -1,23 +1,25 @@
 @import '../../assets/scss/variables.scss';
 
 .director-view {
-	display: flex;
-	height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  // height: calc(100vh - 5rem);
 }
 
 .director-view_left {
   width: 46vw;
+  height: 46vw;
 }
 
 .director-view_right {
   width: 46vw;
   text-align: left;
+  margin-top: 1.5rem;
 }
 
 .legend {
   position: absolute;
-  left: 5.5vw;
-  bottom: 6vw;
+  bottom: 3rem;
   width: 10vw;
   align-items: center;
   display: flex;
@@ -31,13 +33,74 @@
 }  
 
 .legend_label {
-  margin-left: 1vw;
+  margin-left: .5rem;
 }
 
 .legend--2 {
-  bottom: 4vw;
+  bottom: 1rem;
 
   .legend_square {
     background-color: $pink;
+  }
+}
+
+section:not(.grommetux-section) {
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .director-view_left {
+    // min-width: 725px; 
+  }
+  
+  .director-view_right {
+    // min-width: 725px;
+  }
+
+  .legend {
+    position: relative;
+    bottom: 1rem;
+  }
+  
+}
+
+@media screen and (max-width: 1024px) and (min-width: 769px) and (min-height: 1000px) {
+  .director-view {
+    // display: block;
+    align-items: center;
+  }
+  
+  .director-view_right {
+    margin-top: 0;
+  }
+
+  .legend {
+    position: relative;
+    bottom: 1rem;
+  }
+  
+}
+
+@media screen and (max-width: 420px) {
+
+  .director-view {
+    // height: calc(100vh-10rem);
+    display: block;
+  }
+
+  .director-view_left, .director-view_right {
+    width: 92vw;
+    height: 92vw;
+  }
+
+  .legend_square {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+  }
+
+  .legend_label {
+    margin-left: 1.5rem;
   }
 }

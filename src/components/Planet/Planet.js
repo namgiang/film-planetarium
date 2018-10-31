@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import './Planet.css';
 
 import ImageService from '../../services/images';
@@ -46,10 +47,10 @@ class Planet extends Component {
         if (!this.props.director) {
             return null;
         }
-        let directorClass = 'img-director center';
-        if (this.props.mini) {
-            directorClass = 'img-director--mini center';
-        }
+        const directorClass = classNames('center', {
+            'img-director': !this.props.mini,
+            'img-director--mini': this.props.mini
+        })
         const img = ImageService.getDirectorImage(this.props.director.label);
         return (
             <img src={img} 
@@ -66,7 +67,7 @@ class Planet extends Component {
             let actorCircleList = MoviesService.getActorCircleList(this.props.director.name, this.props.range, true);
             actorCircleDomList = actorCircleList.map((item, key) => 
                 <ActorCircle key={key} 
-                             className={item.className + ' mini' + item.color} 
+                             className={`${item.className} mini${item.color}`} 
                              itemCount={item.itemCount} 
                              actors={item.actors}
                              onActorClicked={this.onActorClicked}
@@ -77,7 +78,7 @@ class Planet extends Component {
             // single director View
             actorCircleDomList = this.props.actorCircleList.map((item, key) => 
                 <ActorCircle key={key} 
-                             className={item.className + ' ' + item.color} 
+                             className={`${item.className} ${item.color}`} 
                              itemCount={item.itemCount} 
                              actors={item.actors}
                              onActorClicked={this.onActorClicked}
@@ -91,7 +92,7 @@ class Planet extends Component {
 
     renderCollaboratedTimes() {
         return (
-            <div>
+            <React.Fragment>
                 <div className="times-container center"></div>
                 <div className="times center" >
                     <span className="times_span">
@@ -99,7 +100,7 @@ class Planet extends Component {
                         <br/> movies
                     </span>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

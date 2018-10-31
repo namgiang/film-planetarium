@@ -262,5 +262,41 @@ export const ACTORS = [
   {
     "name": "Jean-Paul Belmondo",
     "gender": "M"
-  }  
+  },
+  {
+    "name": "Judy Davis",
+    "gender": "F"
+  },
+  {
+    "name": "Diahnne Abbott",
+    "gender": "F"
+  },
+  {
+    "name": "Ben Kingsley",
+    "gender": "M"
+  },
+  {
+    "name": "Barry Primus",
+    "gender": "M"
+  },
+  {
+    "name": "Daniel Day-Lewis",
+    "gender": "M"
+  },
+  {
+    "name": "Marty Feldman",
+    "gender": "M"
+  },
+  {
+    "name": "Amy Yasbeck",
+    "gender": "F"
+  },
+  {
+    "name": "Marty Feldman",
+    "gender": "M"
+  },
+  {
+    "name": "Marty Feldman",
+    "gender": "M"
+  }
 ];

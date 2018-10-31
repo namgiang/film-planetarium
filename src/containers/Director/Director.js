@@ -45,7 +45,7 @@ class Director extends Component {
 		return MoviesService.getDirectorByLabel(this.props.match.params.directorLabel);
 	}
 
-	handleActorChange(actor) {
+	handleActorChange = actor => {
 		this.handlers.onCurrentActorChanged(actor);
 	}
 
@@ -57,25 +57,9 @@ class Director extends Component {
 	render() {
 		const currentDirector = this.getCurrentDirector();
 		document.body.style.overflowY = 'auto';
-
-		return (
-			<div>
-				{this.renderDirector(currentDirector)}
-			</div>
-		);
-	}
-
-	renderDirector(currentDirector) {
 		const actorCircleList = MoviesService.getActorCircleList(currentDirector.name, this.props.range, false);
 		const movies = MoviesService.getMovies(currentDirector.name, this.props.range, null);
-		console.log('[2]', movies);
-		let actorMovies;
-		if (this.props.currentActor) {
-			actorMovies = MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name);
-		} else {
-			actorMovies = [];
-		}
-
+		const actorMovies = this.props.currentActor ? MoviesService.getMovies(currentDirector.name, this.props.range, this.props.currentActor.name) : [];
 		return (
 			<article className="director-view">
 				<section className="director-view_left">

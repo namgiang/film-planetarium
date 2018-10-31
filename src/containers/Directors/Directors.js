@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import './Directors.css';
 import Planet from '../../components/Planet/Planet';
 import { DIRECTORS } from '../../assets/data/directors';
@@ -24,23 +25,20 @@ class Directors extends Component {
     }
 
     createDirectorList() {
-        const emptyArray = [];
         return DIRECTORS.map((director, index) => {
             return (
-                <Link to={`/director/${director.label}`} key={director.label} className="directors-container_director" >
-                    <div key={'mini-director-' + director.label}>
-                        <div className="directors-container_director_planet">
+                <Link to={`/director/${director.label}`} key={director.label} className="directors-container--director" >
+                    <div className="directors-container--director-planet" key={`mini-director-${director.label}`}>
                             <Planet director={director}
-                                imageUrls={emptyArray}
-                                actorMovies={emptyArray}
+                                imageUrls={[]}
+                                actorMovies={[]}
                                 mini={true}
                                 range={this.props.range}
                                 onActorClicked={() => { }} />
                         </div>
-                        <p className="directors-container_director_name">
+                        <p className="directors-container--director-name">
                             {director.name}
                         </p>
-                    </div>
                 </Link>
             )
         });
@@ -49,11 +47,8 @@ class Directors extends Component {
     render() {
         document.body.style.overflowY = 'auto';
         return (
-            <div>
-
-                <div className="directors-container">
-                    {this.createDirectorList()}
-                </div>
+            <div className="directors-container">
+                {this.createDirectorList()}
             </div>
         );
     }

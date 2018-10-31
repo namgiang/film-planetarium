@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ActorCircle.css';
 import { Actor } from '../../../models/actor';
+import classNames from 'classnames';
 
 class ActorCircle extends Component {
 	onActorClicked = actor => {
@@ -18,28 +19,23 @@ class ActorCircle extends Component {
 
 	render() {
 		const actorSelected = this.props.actorClicked;
-		let actorCircles = [];
-		let actors = this.props.actors;
-		for (let i = 0; i < this.props.itemCount; i++) {
-			const actor = actors[i];
-			let circleClassName = "actor-container_circle actor-container_circle--" + actor.color;
-			if (actorSelected !== null && actorSelected.name === actor.name) {
-				circleClassName += ' selected';
-			}
-			actorCircles.push(
-				<li key={i} className="actor-container">				  
+		const actorCircles = this.props.actors.map(actor => {
+			const circleClassName = classNames("actor-container_circle actor-container_circle--" + actor.color, {
+				'selected': actorSelected && actorSelected.name === actor.name
+			}) ;
+			return (
+				<li key={actor.name} className="actor-container">				  
 					<div onClick={() => this.onActorClicked(actor)}
 						onMouseOver={() => this.onActorMouseOver(actor)}
 						onMouseOut={() => this.onActorMouseOut(actor)} >			      
 						<div className={circleClassName} ></div>
 						<span className="actor-name">
-							{actors[i].name}
+							{actor.name}
 						</span>				  
 					</div>
 				</li>
-            );
-		}
-		
+			)
+		})
 		return (
 			<ul className={this.props.className} >
 				{actorCircles}

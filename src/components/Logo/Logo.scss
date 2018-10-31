@@ -1,20 +1,17 @@
 .logo {
-	height: 6vh;
-	position: absolute;
-	right: 0;
-	width: 6vh;
+	height: 3rem;
+	width: 3rem;
 	z-index: 1000;
+	right: 1rem;
+	top: 1rem;
+    position: fixed;	
 
 	&:hover {
 		cursor: pointer;
-	} 
-}
+	}
 
-@media screen and (max-aspect-ratio: 3/2) { 
-	.logo {
-		height: 7vw;
-		right: 7vw;
-		top: 1.3vh;
-		width: 7vw;
+	img {
+		height: 100%;
+		width: 100%;
 	}
 }

@@ -1,4 +1,7 @@
 .planet {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	height: 100%;
 	position: relative;
 	top: 0;
@@ -16,9 +19,9 @@
 .times,
 .times-container, 
 .img-director {
-	height: 10vh;
-	width: 10vh;
-	top: 40vh;
+	height: 5vw;
+	width: 5vw;
+	// top: 40vh;
 	border-radius: 50%;
 }
 
@@ -30,7 +33,6 @@
 	border-radius: 50%;
 	height: 3vw;
 	width: 3vw;
-	top: 5.1vw;
 }
 
 .times-container {
@@ -43,31 +45,26 @@
 	font-weight: 600;
 	height: 8vh;
 	width: 8vh;
-	top: 41.5vh;	
 }
 
 .times_span_label {
 	font-size: 1.6rem;
 }
 
-@media screen and (max-aspect-ratio: 3/2) { 
-  .times,
+@media screen and (max-width: 420px) {
+	.planet {
+		width: 92vw;
+	}
+
+	.times,
 	.times-container, 
 	.img-director {
-		height: 8vh;
-		width: 8vh;
-		top: 41vh;
+		width: 14vw;
+		height: 14vw;
 	}
 
-	.times {
-		top: 42vh !important;
-	}
-	
 	.img-director--mini {
-	  border-radius: 50%;
-	  height: 12vw;
-	  width: 12vw;
-	  top: 1vw;
-  }
-
+		width: 14vw;
+		height: 14vw;
+	}
 }

@@ -8,49 +8,61 @@ $width-header-part: 46vw;
 
 .app-header {
 	@extend %flex-display;
-	height: 6vh;
-	margin-top: 2vh;
-	text-align: left;	
-	position: fixed;
+	height: 3rem;
+    margin-top: 1rem;
+    text-align: left;
+    position: fixed;
     width: 92vw;
+	justify-content: center;
+	align-items: flex-end;
+	flex-wrap: wrap;
 }
 
 .app-header_left {
 	@extend %flex-display;
-	width: $width-header-part;
-	justify-content: center;
+	width: 100%;
+	min-width: 350px;
+	flex: 4;
+}
+
+.logo-container {
+	// flex: 1;
+	height: 3rem;
 }
 
 .range-container {
-  width: 38vw;
+  width: 100%;
 }
 
-.label--min-year,
-.label--max-year {
-	width: 4vw;
+.label-min-year,
+.label-max-year {
+	width: 4rem;
+	font-size: 1rem;
 }
 
-.label--min-year {
+.label-min-year {
 	text-align: right;
-	margin-right: 2vw;
+	margin-right: 1rem;
 }
 
-.label--max-year {
-	margin-left: 2vw;
+.label-max-year {
+	margin-left: 1rem;
 }
 
 .app-header_right {
-	width: $width-header-part;   
+	flex: 3;
+	min-width: 350px;
+	width: 100%;   
 }
 
 .menu-director {
-	width: 20vw;
-	margin-left: 5.2vw;
+	width: 100%;
+	margin-left: 1rem;
 }
 
 // slider
 .rc-slider {
-	height: 6vh !important;
+	height: 3rem !important;
 	width: 100% !important;
 	padding: 0 !important;
 
@@ -58,7 +70,7 @@ $width-header-part: 46vw;
 		background-color: $light-yellow !important;
 		border: solid 1px $light-yellow !important;
 		border-radius: 0 !important;
-		height: 6vh !important;
+		height: 3rem !important;
 		margin-top: 0 !important;
 		width: 1vw !important;	
 	}
@@ -73,13 +85,13 @@ $width-header-part: 46vw;
 
 	.rc-slider-rail {
 		background-color: $boulder !important;
-		height: 6vh !important;
+		height: 3rem !important;
 	}
 
 	.rc-slider-track {
 		background-color: $yellow !important;
 		border-radius: 0 !important;
-		height: 6vh !important;
+		height: 3rem !important;
 	}
 }
 
@@ -97,6 +109,7 @@ $width-header-part: 46vw;
 // dropdown menu
 .grommetux-menu,
 .grommetux-menu__drop {
+	margin: 0;
 
 	.grommetux-button {
 		background-color: $boulder;
@@ -104,8 +117,7 @@ $width-header-part: 46vw;
 		border-radius: 0 !important;
 		display: flex;
 		font-size: 1rem;
-		height: 6vh;
-		display: flex;
+		height: 3rem;
 		align-items: center;
 		font-family: 'Rajdhani', sans-serif;
 
@@ -134,58 +146,24 @@ $width-header-part: 46vw;
 	
 }
 
-@media screen and (max-aspect-ratio: 3/2) { 
-	.app-header {		
-		align-items: flex-end !important;
-		display: block !important;
-		margin-top: 10vh !important;		
-
-		.grommetux-menu,
-		.grommetux-menu_drop {
-			width: 60vw !important;
-		}
-
-		.grommetux-button {					
-			margin: auto !important;
-		}
+@media screen and (max-width: 420px) {
+	.app-header {
+		height: 9rem;
+		align-items: flex-start;
 	}
 
 	.app-header_left {
-		width: 92vw;
+		order: 1;
 	}
-
-	.range-container {
-		flex: 6;
-		margin: 0 !important;
-		
-		.rc-slider {
-			margin: auto !important;
-			width: 80% !important;
-		}
-
-		.rc-slider-handle {
-			width: 5vw !important;
-
-			&.rc-slider-handle-2 {
-				margin-left: -5vw !important;
-			}
-		}
-	}
-
-	.label--min-year,
-	.label--max-year {
-		margin: 0 !important;
-		flex: 1;
-	}
-	
 	.app-header_right {
-		text-align: center;
-		width: 92vw !important;			
+		order: 0;
 	}
 
-	.menu-director {
-		width: 60vw !important;
-		margin-top: 4vh !important;
-		margin-left: 16vw !important;
-	}	
+	.logo-container {
+		order: 1;
+	}
+
+	.grommetux-menu .grommetux-button {
+		margin: auto;
+	}
 }

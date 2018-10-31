@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './About.css';
 
 import planet1 from '../../assets/img/planet-1.svg';
-import Logo from '../../components/Logo/Logo';
 
 class About extends Component {
     render() {

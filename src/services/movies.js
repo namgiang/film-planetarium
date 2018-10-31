@@ -30,7 +30,7 @@ export default class MoviesService {
 			}
 		}
 
-		// filter only actors who collaborated with the director at least 2 times
+		// filter only actors who collaborated with the director at least 3 times
 		let frequentActors = collaborators.filter(collaborator => collaborator.times >= 3);
 
 		// sort the list in the decreasing order of collaborating times
@@ -47,7 +47,7 @@ export default class MoviesService {
 				size++;
 			}
 			let itemCount = key - size + 1;
-			let actors = ACTORS.filter(function (actor) { return actor.name === item.name });
+			let actors = ACTORS.filter(actor => actor.name === item.name);
 			let actor = (actors.length > 0) ? actors[0] : null;
 			let color = (actor) ? ((actor.gender === 'M') ? 'blue' : 'pink') : 'gray';
 			let sizePrefix = (mini) ? 'size-mini-' : 'size-';
@@ -64,8 +64,6 @@ export default class MoviesService {
 					actorList[i].color = 'gray';
 				}
 				temp.splice(0, 1);
-				// actorList.splice(i-1, 1);
-				// i--;
 			}
 			temp.unshift(actorList[i]);
 		}

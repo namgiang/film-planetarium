@@ -45,7 +45,7 @@
 	.poster-container_overlay {
 		background-color: black; 
 		position: relative;
-		top: -7.4vw;
+		top: -7.6vw;
 		height: 7.2vw;
 		opacity: .6;
 		width: 5.4vw;
@@ -74,4 +74,11 @@
 		margin-bottom: .8rem;
 	}
 }
+
+// @media screen and (max-width: 768px) {
+// 	.poster-container { 
+// 		width: 10vw;
+
+// 	}
+// }
 

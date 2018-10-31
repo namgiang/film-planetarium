@@ -3,15 +3,12 @@
 @mixin on-circle($circle-size, $item-size) {
     position: absolute;
     margin: auto;
-    left: 0;
-    right: 0;
     width:  $circle-size;
     height: $circle-size;
     padding: 0;
     border-radius: 50%; 
     list-style: none;
-    top: (90vh - $circle-size) / 2;
-
+    
     @for $i from 1 through 30 {
         &.count-#{$i} {
             @include on-circle-dots($item-count: $i, $circle-size: $circle-size, $item-size: $item-size);
@@ -22,14 +19,11 @@
 @mixin on-circle-mini($circle-size, $item-size) {
     position: absolute;
     margin: auto;
-    left: 0;
-    right: 0;
     width:  $circle-size;
     height: $circle-size;
     padding: 0;
     border-radius: 50%; 
     list-style: none;
-    top: (13vw - $circle-size) / 2;
 
     .actor-container {
         display: none;
@@ -64,16 +58,17 @@
 
 .circle-container {
     margin: auto;
-    animation: easing .5s ease-in-out; 
+    animation: easing .5s ease-in-out;
+    $actor-circle-size: 2vw;
 
     @for $i from 0 through 4 {
         &.size-#{$i} {
-            $unit: 15vh;
-            @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
+            $unit: 8vw;
+            @include on-circle($circle-size: ($i + 1) * $unit, $item-size: $actor-circle-size);
 
             .actor-container_circle { 
-                width: 3vh;
-                height: 3vh; 
+                width: $actor-circle-size;
+                height: $actor-circle-size; 
             }
         }
 
@@ -178,48 +173,42 @@
     }
 }
 
-@media screen and (max-aspect-ratio: 3/2) { 
+@media screen and (max-width: 768px) {
+    $actor-circle-size: 4vw;
     .circle-container {
         @for $i from 0 through 4 {
             &.size-#{$i} {
-                $unit: 12vh;
-                @include on-circle($circle-size: ($i + 1) * $unit, $item-size: 3vh);
-            }
-
-            &.size-mini-#{$i} {
-                $unit: 18vw;
-                @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
-
-                .actor-container_circle { 
-                    width: 0;
-                    height: 0; 
-                }
+                $unit: 10vw;
+                @include on-circle($circle-size: ($i + 1) * $unit, $item-size: $actor-circle-size);
                 
-                .actor-name {
-                  display: none;
+                .actor-container_circle { 
+                    width: $actor-circle-size;
+                    height: $actor-circle-size; 
                 }
             }
         }
     }
-
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (max-aspect-ratio: 3/2) {
+@media screen and (max-width: 420px) { 
+    $actor-circle-size: 6vw;
     .circle-container {
         @for $i from 0 through 4 {
-            &.size-mini-#{$i} {
-                $unit: 10vw;
-                @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
-
-                .actor-container_circle { 
-                  width: 0;
-                  height: 0; 
-                }
+            &.size-#{$i} {
+                $unit: 20vw;
+                @include on-circle($circle-size: ($i + 1) * $unit, $item-size: $actor-circle-size);
                 
-                .actor-name {
-                  display: none;
+                .actor-container_circle { 
+                    width: $actor-circle-size;
+                    height: $actor-circle-size; 
                 }
+            }
+
+            &.size-mini-#{$i} {
+                $unit: 20vw;
+                @include on-circle-mini($circle-size: ($i + 1) * $unit, $item-size: 1vw);
             }
         }
     }
+
 }

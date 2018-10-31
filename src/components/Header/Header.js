@@ -25,7 +25,6 @@ const createHandlers = dispatch => {
 	};
 	const onDirectorSelected = async (director, range) => {
 		await dispatch(setPosters([]));
-		console.log('[1]', director);
 		dispatch(setCurrentDirector(director));
 		await dispatch(fetchPosters(director.name, range));
 	};
@@ -49,20 +48,25 @@ class Header extends Component {
 
 	render() {
 		return (
-			<header className='app-header'>
-				{!this.props.onlyLogo && this.renderRange()}
-				<div className='app-header_right'>
-					{!this.props.onlyLogo && this.renderMenu()}
-				</div>
+			<React.Fragment>
+				<header className='app-header'>
+					{!this.props.onlyLogo && this.renderRange()}
+					{
+						!this.props.onlyLogo &&
+						<div className='app-header_right'>
+							{this.renderMenu()}
+						</div>
+					}
+				</header>
 				<Logo linkTo={this.props.onlyLogo ? '/directors' : '/about'}/>
-			</header>
+			</React.Fragment>
 		);
 	}
 
 	renderRange() {
 		return (
-			<div className='app-header_left'>
-				<label className='label--min-year'>
+			<section className='app-header_left'>
+				<label className='label-min-year'>
 					{this.props.range[0]}
 				</label>
 				<div className='range-container'>
@@ -74,10 +78,10 @@ class Header extends Component {
 						onChange={(value) => this.handlers.onRangeChanged(value)}
 						pushable={true} />
 				</div>
-				<label className='label--max-year'>
+				<label className='label-max-year'>
 					{this.props.range[1]}
 				</label>
-			</div>
+			</section>
 		);
 	}
 
@@ -95,14 +99,11 @@ class Header extends Component {
 	}
 
 	renderMenu() {
-		let directorName = 'All directors';
-		const currentDirector = this.props.currentDirector;
-		if (currentDirector !== undefined && currentDirector !== null) {
-			directorName = currentDirector.name
-		}
+		const directorName = this.props.currentDirector ? this.props.currentDirector.name : 'All directors';
 		const anchors = this.renderMenuAnchors(directorName);
 		return (
-			<Menu responsive={true}
+			<Menu 
+				responsive={true}
 				size='small'
 				label={directorName}
 				direction='row'
@@ -123,7 +124,7 @@ class Header extends Component {
 	renderMenuAnchors(directorName) {
 		return DIRECTORS.map((item, key) => {
 			return (
-				<Link to={'/director/' + item.label} key={item.label}>
+				<Link to={`/director/${item.label}`} key={item.label}>
 					<Anchor
 						tag='span'
 						key={item.label}

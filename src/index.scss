@@ -37,8 +37,14 @@ body {
 
 .main-content {
   position: fixed;
-  top: 8vh;
+  top: 4rem;
   overflow: auto;
-  bottom: 2vh;
+  bottom: 1rem;
   width: 92vw;
+}
+
+@media screen and (max-width: 420px) {
+  .main-content {
+    top: 10rem;
+  }
 }
